@@ -18,10 +18,7 @@ ul {
     padding: 0;
     font-weight: normal;
 }
-html,
-*,
-*:before,
-*:after {
+* {
     box-sizing: border-box;
 }
 a,
