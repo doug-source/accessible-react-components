@@ -6,7 +6,7 @@ import { TabList_ } from './style';
 type TabListBtnTextProps = ComponentPropsWithoutRef<typeof TabListBtnText>;
 type StyledProps = Omit<
     ComponentPropsWithoutRef<typeof TabList_>,
-    'onClick' | '$rightAdded' | '$leftAdded' | '$borderBottomWidth'
+    'onClick' | '$borderBottomWidth'
 >;
 
 type TabListProps = {

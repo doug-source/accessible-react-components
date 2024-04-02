@@ -7,7 +7,7 @@ type TabListBtnProps = {
     'aria-selected': BtnProps['aria-selected'];
     'aria-controls': BtnProps['aria-controls'];
     tabIndex: BtnProps['tabIndex'];
-} & Omit<BtnProps, '$paddingBlock' | '$paddingInline'>;
+} & BtnProps;
 
 export const TabListBtn = ({
     id,
