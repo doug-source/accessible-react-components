@@ -1,23 +1,33 @@
 import { css, styled } from 'styled-components';
 import { CSS } from 'styled-components/dist/types';
+import { orientationAxis } from '../../../types/css-props';
 
-export const TabListBtnText_ = styled.span<{
+type Props_ = {
+    $orientation: orientationAxis;
     $paddingBlock: CSS.PropertyValue<CSS.PropertiesHyphen['padding']>;
     $borderBottomWidth: CSS.PropertyValue<
         CSS.PropertiesHyphen['border-bottom-width']
     >;
     $selected?: boolean;
-}>`
+};
+
+export const TabListBtnText_ = styled.span<Props_>`
     display: inline-block;
     width: 100%;
     text-transform: capitalize;
     position: relative;
     z-index: 1;
-    ${({ $paddingBlock, $borderBottomWidth, $selected = false }) => {
+    ${({
+        $paddingBlock,
+        $borderBottomWidth,
+        $orientation,
+        $selected = false,
+    }) => {
+        const side = $orientation === 'vertical' ? 'left' : 'bottom';
         return css`
-            border-bottom-width: ${$borderBottomWidth};
-            border-bottom-style: solid;
-            border-bottom-color: ${$selected ? '#000' : 'transparent'};
+            border-${side}-width: ${$borderBottomWidth};
+            border-${side}-style: solid;
+            border-${side}-color: ${$selected ? '#000' : 'transparent'};
             font-weight: ${$selected ? '700' : 'normal'};
             padding: ${$paddingBlock} 0.75rem;
         `;

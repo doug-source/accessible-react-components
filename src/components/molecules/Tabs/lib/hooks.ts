@@ -1,11 +1,16 @@
 import { RefObject, useCallback, useEffect } from 'react';
 import { actArrow, pickEndId, pickHomeId, pickNextId, pickPreviousId } from '.';
+import { orientationAxis } from '../../../../types/css-props';
 
 export type KeydownHandler = Parameters<
     typeof document.addEventListener<'keydown'>
 >[1];
 
-export const useKeydown = (ref: RefObject<HTMLDivElement>, manual: boolean) => {
+export const useKeydown = (
+    ref: RefObject<HTMLDivElement>,
+    orientation: orientationAxis,
+    manual: boolean
+) => {
     const keydownHandler: KeydownHandler = useCallback(
         (evt) => {
             const { current: $tablist } = ref;
@@ -19,19 +24,52 @@ export const useKeydown = (ref: RefObject<HTMLDivElement>, manual: boolean) => {
             }
             let flag = false;
             switch (evt.key) {
+                case 'ArrowUp': {
+                    if (orientation === 'vertical') {
+                        flag = true;
+                        actArrow(
+                            manual,
+                            pickPreviousId,
+                            parentElement,
+                            activeElement
+                        );
+                    }
+                    break;
+                }
                 case 'ArrowLeft': {
-                    flag = true;
-                    actArrow(
-                        manual,
-                        pickPreviousId,
-                        parentElement,
-                        activeElement
-                    );
+                    if (orientation === 'horizontal') {
+                        flag = true;
+                        actArrow(
+                            manual,
+                            pickPreviousId,
+                            parentElement,
+                            activeElement
+                        );
+                    }
                     break;
                 }
                 case 'ArrowRight': {
-                    flag = true;
-                    actArrow(manual, pickNextId, parentElement, activeElement);
+                    if (orientation === 'horizontal') {
+                        flag = true;
+                        actArrow(
+                            manual,
+                            pickNextId,
+                            parentElement,
+                            activeElement
+                        );
+                    }
+                    break;
+                }
+                case 'ArrowDown': {
+                    if (orientation === 'vertical') {
+                        flag = true;
+                        actArrow(
+                            manual,
+                            pickNextId,
+                            parentElement,
+                            activeElement
+                        );
+                    }
                     break;
                 }
                 case 'Home': {
@@ -49,7 +87,7 @@ export const useKeydown = (ref: RefObject<HTMLDivElement>, manual: boolean) => {
                 evt.preventDefault();
             }
         },
-        [ref, manual]
+        [ref, orientation, manual]
     );
 
     useEffect(() => {

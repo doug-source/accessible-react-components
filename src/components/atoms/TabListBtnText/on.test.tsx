@@ -5,7 +5,7 @@ import { ComponentPropsWithoutRef } from 'react';
 import { TabListBtnText } from './index';
 
 type BtnTextProps = ComponentPropsWithoutRef<typeof TabListBtnText>;
-type keys = 'children' | 'paddingBlock' | 'borderBottomWidth';
+type keys = 'children' | 'paddingBlock' | 'borderBottomWidth' | 'orientation';
 type Props = Omit<BtnTextProps, keys> & Partial<Pick<BtnTextProps, keys>>;
 
 const buildComponent = ({
@@ -14,6 +14,7 @@ const buildComponent = ({
     children = 'some content',
     paddingBlock = '0.25rem',
     borderBottomWidth = '0.25rem',
+    orientation = 'horizontal',
 }: Props = {}) => {
     return render(
         <TabListBtnText
@@ -21,11 +22,46 @@ const buildComponent = ({
             selected={selected}
             className={className}
             borderBottomWidth={borderBottomWidth}
+            orientation={orientation}
         >
             {children}
         </TabListBtnText>
     );
 };
+
+function testRerender(
+    {
+        orientation = 'horizontal',
+        borderWidth = '0.25rem',
+        borderColor = 'transparent',
+        fontWeight = 'normal',
+        selected = false,
+    }: {
+        borderWidth?: string;
+        orientation?: BtnTextProps['orientation'];
+        borderColor?: 'transparent' | '#000';
+        fontWeight?: '700' | 'normal';
+        selected?: boolean;
+    } = {},
+    rerender: (ui: React.ReactNode) => void,
+    $btn: HTMLElement
+) {
+    rerender(
+        <TabListBtnText
+            orientation={orientation}
+            borderBottomWidth={borderWidth}
+            paddingBlock="0.25rem"
+            selected={selected}
+        >
+            some content
+        </TabListBtnText>
+    );
+    const borderWidthKey = orientation === 'horizontal' ? 'bottom' : 'left';
+
+    expect($btn).toHaveStyleRule(`border-${borderWidthKey}-width`, borderWidth);
+    expect($btn).toHaveStyleRule(`border-${borderWidthKey}-color`, borderColor);
+    expect($btn).toHaveStyleRule('font-weight', fontWeight);
+}
 
 describe('<TabListBtnText /> component', () => {
     test('renders correctly', () => {
@@ -36,16 +72,49 @@ describe('<TabListBtnText /> component', () => {
     test('changes the style when selected prop changes', () => {
         const { rerender } = buildComponent();
         const $btn = screen.getByText('some content');
+        // horizontal and not selected
+        expect($btn).toHaveStyleRule('border-bottom-width', '0.25rem');
         expect($btn).toHaveStyleRule('border-bottom-color', 'transparent');
         expect($btn).toHaveStyleRule('font-weight', 'normal');
-        const props = {
-            selected: true,
-            paddingBlock: '0.25rem',
-            borderBottomWidth: '0.25rem',
-        };
-        rerender(<TabListBtnText {...props}>some content</TabListBtnText>);
-        expect($btn).toHaveStyleRule('border-bottom-color', '#000');
-        expect($btn).toHaveStyleRule('font-weight', '700');
+        // just border-width change
+        testRerender(
+            {
+                borderWidth: '0.5rem',
+            },
+            rerender,
+            $btn
+        );
+        // horizontal and selected
+        testRerender(
+            {
+                selected: true,
+                borderColor: '#000',
+                fontWeight: '700',
+            },
+            rerender,
+            $btn
+        );
+        // vertical and not selected
+        testRerender(
+            {
+                orientation: 'vertical',
+                borderColor: 'transparent',
+                fontWeight: 'normal',
+            },
+            rerender,
+            $btn
+        );
+        // vertical and selected
+        testRerender(
+            {
+                selected: true,
+                orientation: 'vertical',
+                borderColor: '#000',
+                fontWeight: '700',
+            },
+            rerender,
+            $btn
+        );
     });
     test('uses the remain properties passed', () => {
         const prop = {

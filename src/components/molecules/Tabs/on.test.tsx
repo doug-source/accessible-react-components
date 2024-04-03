@@ -5,7 +5,7 @@ import 'jest-styled-components';
 import { Tabs } from './index';
 
 function buildComponent() {
-    render(
+    return render(
         <Tabs title="main title" titles={['tab-1', 'tab-2']}>
             <div>Text 1</div>
             <div>Text 2</div>
@@ -33,6 +33,22 @@ describe('<Tabs /> component', () => {
             expect($panel).toBeVisible();
             expect($panel).toHaveAttribute('id', `tabpanel-${i + 1}`);
         });
+    });
+    test('renders when orientation property changes correctly', () => {
+        const { rerender } = buildComponent();
+        const $el = screen.getByTitle('tabs');
+        expect($el).toHaveStyleRule('flex-direction', 'column');
+        rerender(
+            <Tabs
+                title="main title"
+                titles={['tab-1', 'tab-2']}
+                orientation="vertical"
+            >
+                <div>Text 1</div>
+                <div>Text 2</div>
+            </Tabs>
+        );
+        expect($el).toHaveStyleRule('flex-direction', 'row');
     });
     test('changes the active tab after user click', async () => {
         buildComponent();

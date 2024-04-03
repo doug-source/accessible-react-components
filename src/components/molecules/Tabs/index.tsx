@@ -3,11 +3,13 @@ import { TabTitle } from '../../atoms/TabTitle';
 import { TabList } from '../TabList';
 import { TabPanel } from '../TabPanel';
 import { useKeydown } from './lib/hooks';
+import { Tabs_ } from './style';
 
 let orderCache = 1;
 
 type TabListProps = ComponentPropsWithoutRef<typeof TabList>;
 type TabPanelProps = ComponentPropsWithoutRef<typeof TabPanel>;
+type TabsStyledProps = ComponentPropsWithoutRef<typeof Tabs_>;
 
 type TabsProps = {
     // h3 tag is a terminal-block element. Just text contents!
@@ -16,6 +18,7 @@ type TabsProps = {
     titles: TabListProps['titles'];
     children: TabPanelProps['children'];
     manual?: boolean;
+    orientation?: TabsStyledProps['$orientation'];
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>;
 
 export const Tabs = ({
@@ -23,15 +26,16 @@ export const Tabs = ({
     titles,
     children,
     manual = false,
+    orientation = 'horizontal',
 }: TabsProps) => {
     const [tabSelected, setTabSelected] = useState(0);
     const [order] = useState(orderCache++);
     const ref = useRef<HTMLDivElement>(null);
 
-    useKeydown(ref, manual);
+    useKeydown(ref, orientation, manual);
 
     return (
-        <div className="tabs" title="tabs">
+        <Tabs_ className="tabs" title="tabs" $orientation={orientation}>
             <TabTitle order={order}>{title}</TabTitle>
             <TabList
                 ref={ref}
@@ -42,8 +46,9 @@ export const Tabs = ({
                 order={order}
                 paddingBlockBtnText="0.5rem"
                 borderBottomWidth="0.25rem"
+                orientation={orientation}
             />
             <TabPanel tabSelected={tabSelected}>{children}</TabPanel>
-        </div>
+        </Tabs_>
     );
 };

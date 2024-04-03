@@ -7,13 +7,15 @@ type TabListBtnProps = {
     'aria-selected': BtnProps['aria-selected'];
     'aria-controls': BtnProps['aria-controls'];
     tabIndex: BtnProps['tabIndex'];
-} & BtnProps;
+    orientation: BtnProps['$orientation'];
+} & Omit<BtnProps, '$orientation'>;
 
 export const TabListBtn = ({
     id,
     tabIndex,
     'aria-selected': ariaSelected,
     'aria-controls': ariaControls,
+    orientation,
     onClick,
     ...remain
 }: TabListBtnProps) => {
@@ -25,6 +27,7 @@ export const TabListBtn = ({
             aria-selected={ariaSelected}
             aria-controls={ariaControls}
             tabIndex={tabIndex}
+            $orientation={orientation}
             onClick={onClick}
             {...remain}
         />

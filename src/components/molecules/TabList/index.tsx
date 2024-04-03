@@ -4,9 +4,10 @@ import { TabListBtnText } from '../../atoms/TabListBtnText';
 import { TabList_ } from './style';
 
 type TabListBtnTextProps = ComponentPropsWithoutRef<typeof TabListBtnText>;
+type TabListStyledProps = ComponentPropsWithoutRef<typeof TabList_>;
 type StyledProps = Omit<
-    ComponentPropsWithoutRef<typeof TabList_>,
-    'onClick' | '$borderBottomWidth'
+    TabListStyledProps,
+    'onClick' | '$borderBottomWidth' | '$orientation'
 >;
 
 type TabListProps = {
@@ -16,6 +17,7 @@ type TabListProps = {
     onClick?: (itemIndex: number) => void;
     paddingBlockBtnText?: TabListBtnTextProps['paddingBlock'];
     borderBottomWidth?: TabListBtnTextProps['borderBottomWidth'];
+    orientation: TabListStyledProps['$orientation'];
 } & StyledProps;
 
 export const TabList = forwardRef<HTMLDivElement, TabListProps>(
@@ -27,6 +29,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
             onClick,
             paddingBlockBtnText = '0.5rem',
             borderBottomWidth = '0.25rem',
+            orientation,
             ...remain
         }: TabListProps,
         ref
@@ -40,6 +43,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
                 role="tablist"
                 aria-labelledby={`tablist-${order}`}
                 $borderBottomWidth={borderBottomWidth}
+                $orientation={orientation}
                 {...remain}
             >
                 {titles.map((title, i) => (
@@ -49,10 +53,12 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
                         aria-selected={tabSelected === i ? 'true' : 'false'}
                         aria-controls={`tabpanel-${i + 1}`}
                         tabIndex={i === tabSelected ? undefined : -1}
+                        orientation={orientation}
                         onClick={() => onClick && onClick(i)}
                     >
                         <TabListBtnText
                             className="focus"
+                            orientation={orientation}
                             selected={tabSelected === i}
                             paddingBlock={paddingBlockBtnText}
                             borderBottomWidth={borderBottomWidth}

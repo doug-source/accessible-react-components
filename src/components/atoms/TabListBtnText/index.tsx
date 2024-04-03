@@ -7,12 +7,17 @@ type TabListBtnTextProps = {
     selected?: BtnTextProps['$selected'];
     paddingBlock: BtnTextProps['$paddingBlock'];
     borderBottomWidth: BtnTextProps['$borderBottomWidth'];
-} & Omit<BtnTextProps, '$selected' | '$paddingBlock' | '$borderBottomWidth'>;
+    orientation: BtnTextProps['$orientation'];
+} & Omit<
+    BtnTextProps,
+    '$selected' | '$paddingBlock' | '$borderBottomWidth' | '$orientation'
+>;
 
 export const TabListBtnText = ({
     selected,
     paddingBlock,
     borderBottomWidth,
+    orientation,
     ...remain
 }: TabListBtnTextProps) => {
     return (
@@ -20,6 +25,7 @@ export const TabListBtnText = ({
             $paddingBlock={paddingBlock}
             $borderBottomWidth={borderBottomWidth}
             $selected={selected}
+            $orientation={orientation}
             {...remain}
         />
     );

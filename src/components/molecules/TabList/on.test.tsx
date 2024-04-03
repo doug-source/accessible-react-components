@@ -6,13 +6,14 @@ import { ComponentPropsWithoutRef } from 'react';
 import { TabList } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof TabList>;
-type keys = 'tabSelected' | 'titles' | 'order';
+type keys = 'tabSelected' | 'titles' | 'order' | 'orientation';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
 const buildComponent = ({
     tabSelected = 0,
     titles = ['Tab-1', 'Tab-2'],
     order = 1,
+    orientation = 'horizontal',
     onClick,
 }: Props = {}) => {
     return render(
@@ -20,6 +21,7 @@ const buildComponent = ({
             tabSelected={tabSelected}
             titles={titles}
             order={order}
+            orientation={orientation}
             onClick={onClick}
         />
     );
@@ -30,6 +32,51 @@ describe('<TabList /> component', () => {
         buildComponent();
         const $el = screen.getByRole('tablist');
         expect($el).toBeVisible();
+    });
+    test('renders changing properties correctly', () => {
+        const { rerender } = buildComponent();
+        const $el = screen.getByRole('tablist');
+        expect($el).toHaveStyleRule('flex-direction', 'row');
+        expect($el).toHaveStyleRule('justify-content', 'normal');
+        expect($el).toHaveAttribute('aria-labelledby', `tablist-1`);
+        expect($el).toHaveStyleRule('display', 'block', {
+            modifier: '&::after',
+        });
+        expect($el).toHaveStyleRule('height', 'calc(0.25rem / 2)', {
+            modifier: '&::after',
+        });
+        expect($el).toHaveStyleRule(
+            'transform',
+            'translateY(calc(-0.25rem * 0.25))',
+            {
+                modifier: '&::after',
+            }
+        );
+        rerender(
+            <TabList
+                tabSelected={0}
+                titles={['Tab-1', 'Tab-2']}
+                order={2}
+                orientation="vertical"
+                borderBottomWidth="0.5rem"
+            />
+        );
+        expect($el).toHaveStyleRule('flex-direction', 'column');
+        expect($el).toHaveStyleRule('justify-content', 'space-evenly');
+        expect($el).toHaveAttribute('aria-labelledby', `tablist-2`);
+        expect($el).toHaveStyleRule('display', 'none', {
+            modifier: '&::after',
+        });
+        expect($el).toHaveStyleRule('height', 'calc(0.5rem / 2)', {
+            modifier: '&::after',
+        });
+        expect($el).toHaveStyleRule(
+            'transform',
+            'translateY(calc(-0.5rem * 0.25))',
+            {
+                modifier: '&::after',
+            }
+        );
     });
     test('renders nothing', () => {
         buildComponent({ titles: [] });

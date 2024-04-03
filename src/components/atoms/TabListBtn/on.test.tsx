@@ -10,7 +10,8 @@ type OptionalProps =
     | 'children'
     | 'tabIndex'
     | 'aria-controls'
-    | 'aria-selected';
+    | 'aria-selected'
+    | 'orientation';
 type BtnUsedProps = Omit<BtnProps, OptionalProps>;
 
 type Props = {
@@ -18,6 +19,7 @@ type Props = {
     children?: string;
     'aria-controls'?: string;
     'aria-selected'?: boolean | 'true' | 'false';
+    orientation?: BtnProps['orientation'];
 } & BtnUsedProps;
 
 const buildComponent = ({
@@ -27,6 +29,7 @@ const buildComponent = ({
     children = 'something',
     'aria-controls': ariaControls = 'some-element',
     'aria-selected': ariaSelected = 'true',
+    orientation = 'horizontal',
     onClick,
 }: Props = {}) => {
     return render(
@@ -36,6 +39,7 @@ const buildComponent = ({
             tabIndex={tabIndex}
             aria-controls={ariaControls}
             aria-selected={ariaSelected}
+            orientation={orientation}
             onClick={onClick}
         >
             {children}
@@ -59,18 +63,51 @@ describe('<TabListBtn /> component', () => {
         expect($btn).toBeVisible();
     });
     test('renders with properties passed', () => {
-        const props: Props = {
+        const props: Omit<
+            Props,
+            'orientation' | 'children' | 'className' | 'id'
+        > & {
+            orientation: NonNullable<Props['orientation']>;
+            id: string;
+            children: string;
+            className: string;
+        } = {
             id: 'foo',
             className: 'bar',
             tabIndex: 1,
             children: 'another thing',
             'aria-controls': 'otherComponent',
             'aria-selected': false,
+            orientation: 'vertical',
         };
-        buildComponent(props);
+        const { rerender } = buildComponent();
         const $btn = screen.getByRole('tab');
-        expect($btn).toHaveTextContent(props.children ?? '');
-        expect($btn).toHaveClass(props.className ?? '');
+        expect($btn).toHaveTextContent('something');
+        expect($btn).not.toHaveClass(props.className);
+        expect($btn).toHaveStyleRule('flex', '1');
+        expect($btn).toHaveStyleRule('text-align', 'center');
+        expect($btn).not.toHaveAttribute('id', props.id);
+        expectAttrs($btn, {
+            'aria-controls': 'some-element',
+            'aria-selected': 'true',
+            tabIndex: `0`,
+        });
+        rerender(
+            <TabListBtn
+                id={props.id}
+                className={props.className}
+                tabIndex={props.tabIndex}
+                aria-controls={props['aria-controls']}
+                aria-selected={props['aria-selected']}
+                orientation={props.orientation}
+            >
+                {props.children}
+            </TabListBtn>
+        );
+        expect($btn).toHaveTextContent(props.children);
+        expect($btn).toHaveClass(props.className);
+        expect($btn).toHaveStyleRule('flex', '0');
+        expect($btn).toHaveStyleRule('text-align', 'left');
         expectAttrs($btn, {
             'aria-controls': props['aria-controls'],
             'aria-selected': `${props['aria-selected']}`,
