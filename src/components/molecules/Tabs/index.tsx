@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, useRef, useState } from 'react';
-import { TabTitle } from '../../atoms/TabTitle';
+import { TitleHidden } from '../../atoms/TitleHidden';
 import { TabList } from '../TabList';
 import { TabPanel } from '../TabPanel';
 import { useKeydown } from './lib/hooks';
@@ -36,7 +36,7 @@ export const Tabs = ({
 
     return (
         <Tabs_ className="tabs" title="tabs" $orientation={orientation}>
-            <TabTitle order={order}>{title}</TabTitle>
+            <TitleHidden id={`tablist-${order}`}>{title}</TitleHidden>
             <TabList
                 ref={ref}
                 className="manual"
