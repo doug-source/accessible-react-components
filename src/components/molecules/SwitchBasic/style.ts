@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const Switch_ = styled.div`
+export const SwitchBasic_ = styled.div`
     cursor: pointer;
     padding: 0.25rem; // 4px
     border-width: 0.125rem; // 2px

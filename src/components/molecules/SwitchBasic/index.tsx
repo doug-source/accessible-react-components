@@ -3,15 +3,19 @@ import { SwitchLabel } from '../../atoms/SwitchLabel';
 import { SwitchMarker } from '../SwitchMarker';
 import { makeKeydownHandler } from './lib';
 import { useToogleAriaChecked } from './lib/hooks';
-import { Switch_ } from './style';
+import { SwitchBasic_ } from './style';
 
-type SwitchProps = {
+type SwitchBasicProps = {
     label?: string;
     className?: string;
     onChange?: (status: boolean) => void;
 };
 
-export const Switch = ({ className, label, onChange }: SwitchProps) => {
+export const SwitchBasic = ({
+    className,
+    label,
+    onChange,
+}: SwitchBasicProps) => {
     const ref = useRef<HTMLDivElement | null>(null);
     const [ariaChecked, setAriaChecked] = useState<boolean>(false);
     const toogleAriaChecked = useToogleAriaChecked(
@@ -22,7 +26,7 @@ export const Switch = ({ className, label, onChange }: SwitchProps) => {
     );
     const keydownHandler = makeKeydownHandler(toogleAriaChecked);
     return (
-        <Switch_
+        <SwitchBasic_
             ref={ref}
             className={className}
             role="switch"
@@ -33,6 +37,6 @@ export const Switch = ({ className, label, onChange }: SwitchProps) => {
         >
             <SwitchLabel label={label} />
             <SwitchMarker checked={ariaChecked} />
-        </Switch_>
+        </SwitchBasic_>
     );
 };

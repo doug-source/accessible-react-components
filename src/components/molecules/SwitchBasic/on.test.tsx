@@ -3,15 +3,15 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
-import { Switch } from './index';
+import { SwitchBasic } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof Switch>;
+type ElementProps = ComponentPropsWithoutRef<typeof SwitchBasic>;
 
 const buildComponent = ({ label, onChange }: ElementProps = {}) => {
-    return render(<Switch label={label} onChange={onChange} />);
+    return render(<SwitchBasic label={label} onChange={onChange} />);
 };
 
-describe('<Switch /> component', () => {
+describe('<SwitchBasic /> component', () => {
     test('renders correctly', () => {
         buildComponent({ label: 'Foo' });
         const $el = screen.getByRole('switch');
