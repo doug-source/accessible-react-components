@@ -13,7 +13,7 @@ const buildComponent = ({
     parentPadding = '0.125rem',
     checked = false,
 }: Props = {}) => {
-    return render(
+    return (
         <SwitchCursor
             size={size}
             parentPadding={parentPadding}
@@ -25,53 +25,35 @@ const buildComponent = ({
 
 describe('<SwitchCursor /> component', () => {
     test('renders correctly', () => {
-        buildComponent();
+        render(buildComponent());
         const $el = screen.getByTestId('switch-cursor');
         expect($el).toBeVisible();
     });
     test('renders $size propery correctly', () => {
-        const { rerender } = buildComponent();
+        const { rerender } = render(buildComponent());
         const $el = screen.getByTestId('switch-cursor');
         expect($el).toHaveStyleRule('width', '0.75rem');
         expect($el).toHaveStyleRule('height', '0.75rem');
         const newSize = '1.5rem';
-        rerender(
-            <SwitchCursor
-                size={newSize}
-                parentPadding="0.125rem"
-                checked={false}
-            />
-        );
+        rerender(buildComponent({ size: newSize }));
         expect($el).toHaveStyleRule('width', newSize);
         expect($el).toHaveStyleRule('height', newSize);
     });
     test('renders $parentPadding property correctly', () => {
-        const { rerender } = buildComponent();
+        const { rerender } = render(buildComponent());
         const $el = screen.getByTestId('switch-cursor');
         expect($el).toHaveStyleRule('left', 'calc(0.125rem)');
         const newParentPadding = '0.25rem';
-        rerender(
-            <SwitchCursor
-                size="0.75rem"
-                parentPadding={newParentPadding}
-                checked={false}
-            />
-        );
+        rerender(buildComponent({ parentPadding: newParentPadding }));
         expect($el).toHaveStyleRule('left', `calc(${newParentPadding})`);
     });
     test('render $checked property correctly', () => {
-        const { rerender } = buildComponent();
+        const { rerender } = render(buildComponent());
         const $el = screen.getByTestId('switch-cursor');
         expect($el).toHaveStyleRule('left', 'calc(0.125rem)');
         const size = '0.75rem';
         const parentPadding = '0.125rem';
-        rerender(
-            <SwitchCursor
-                size={size}
-                parentPadding={parentPadding}
-                checked={true}
-            />
-        );
+        rerender(buildComponent({ checked: true }));
         expect($el).toHaveStyleRule(
             'left',
             `calc(100% - ${size} - ${parentPadding})`
