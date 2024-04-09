@@ -32,7 +32,7 @@ const buildComponent = ({
     orientation = 'horizontal',
     onClick,
 }: Props = {}) => {
-    return render(
+    return (
         <TabListBtn
             id={id}
             className={className}
@@ -47,6 +47,18 @@ const buildComponent = ({
     );
 };
 
+const makeProps = () => {
+    return {
+        id: 'foo',
+        className: 'bar',
+        tabIndex: 1,
+        children: 'another thing',
+        'aria-controls': 'otherComponent',
+        'aria-selected': false,
+        orientation: 'vertical' as const,
+    };
+};
+
 const expectAttrs = (
     element: HTMLElement,
     args: Record<string, string | number | undefined>
@@ -58,29 +70,13 @@ const expectAttrs = (
 
 describe('<TabListBtn /> component', () => {
     test('renders correctly', () => {
-        buildComponent();
+        render(buildComponent());
         const $btn = screen.getByText('something');
         expect($btn).toBeVisible();
     });
     test('renders with properties passed', () => {
-        const props: Omit<
-            Props,
-            'orientation' | 'children' | 'className' | 'id'
-        > & {
-            orientation: NonNullable<Props['orientation']>;
-            id: string;
-            children: string;
-            className: string;
-        } = {
-            id: 'foo',
-            className: 'bar',
-            tabIndex: 1,
-            children: 'another thing',
-            'aria-controls': 'otherComponent',
-            'aria-selected': false,
-            orientation: 'vertical',
-        };
-        const { rerender } = buildComponent();
+        const props = makeProps();
+        const { rerender } = render(buildComponent());
         const $btn = screen.getByRole('tab');
         expect($btn).toHaveTextContent('something');
         expect($btn).not.toHaveClass(props.className);
@@ -92,18 +88,7 @@ describe('<TabListBtn /> component', () => {
             'aria-selected': 'true',
             tabIndex: `0`,
         });
-        rerender(
-            <TabListBtn
-                id={props.id}
-                className={props.className}
-                tabIndex={props.tabIndex}
-                aria-controls={props['aria-controls']}
-                aria-selected={props['aria-selected']}
-                orientation={props.orientation}
-            >
-                {props.children}
-            </TabListBtn>
-        );
+        rerender(buildComponent(props));
         expect($btn).toHaveTextContent(props.children);
         expect($btn).toHaveClass(props.className);
         expect($btn).toHaveStyleRule('flex', '0');
@@ -117,7 +102,7 @@ describe('<TabListBtn /> component', () => {
     });
     test('triggers the onclick event handler attached', async () => {
         const onClick = jest.fn();
-        buildComponent({ onClick });
+        render(buildComponent({ onClick }));
         const $btn = screen.getByText('something');
         const user = userEvent.setup();
         await user.click($btn);
