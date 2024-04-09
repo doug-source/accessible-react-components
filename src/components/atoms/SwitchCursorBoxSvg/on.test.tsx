@@ -4,7 +4,7 @@ import 'jest-styled-components';
 import { SwitchCursorBoxSvg } from './index';
 
 function buildComponent() {
-    render(
+    return (
         <svg>
             <SwitchCursorBoxSvg data-testid="element-to-test" />
         </svg>
@@ -13,12 +13,12 @@ function buildComponent() {
 
 describe('<SwitchCursorBoxSvg /> component', () => {
     test('renders correctly', () => {
-        buildComponent();
+        render(buildComponent());
         const $el = screen.getByTestId('element-to-test');
         expect($el).toBeVisible();
     });
     test('renders with style rules correctly', () => {
-        buildComponent();
+        render(buildComponent());
         const $el = screen.getByTestId('element-to-test');
         expect($el).toHaveStyleRule('fill-opacity', '0');
         expect($el).toHaveStyleRule('stroke-width', '0.125rem');
@@ -28,7 +28,7 @@ describe('<SwitchCursorBoxSvg /> component', () => {
         expect($el).toHaveStyleRule('position', 'absolute');
     });
     test('renders with SVG attributes correctly', () => {
-        buildComponent();
+        render(buildComponent());
         const $el = screen.getByTestId('element-to-test');
         expect($el).toHaveAttribute('x', '0.0625rem');
         expect($el).toHaveAttribute('y', '0.0625rem');
