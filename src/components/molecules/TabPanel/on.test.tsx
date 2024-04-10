@@ -1,28 +1,14 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
-import 'jest-styled-components';
-import { ComponentPropsWithoutRef } from 'react';
 import { TabPanel } from './index';
-
-type ElementProps = ComponentPropsWithoutRef<typeof TabPanel>;
-type keys = 'tabSelected' | 'padding' | 'children';
-type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
-
-const buildComponent = ({
-    tabSelected = 0,
-    padding = '0',
-    children = 'some text',
-}: Props = {}) => {
-    return render(
-        <TabPanel tabSelected={tabSelected} padding={padding}>
-            {children}
-        </TabPanel>
-    );
-};
 
 describe('<TabPanel /> component', () => {
     test('renders correctly', () => {
-        buildComponent();
+        render(
+            <TabPanel tabSelected={0} padding="0">
+                some text
+            </TabPanel>
+        );
         const $el = screen.getByRole('tabpanel');
         expect($el).toBeVisible();
     });
