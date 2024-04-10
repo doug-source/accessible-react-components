@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
 import { SwitchBtn } from './index';
@@ -53,5 +54,13 @@ describe('<SwitchBtn /> component', () => {
         expect($el).toHaveStyleRule('outline', 'none', {
             modifier: '&:hover',
         });
+    });
+    test('renders triggering click event handler correctly', async () => {
+        render(buildComponent());
+        const $el = screen.getByRole('switch');
+        expect($el).toHaveAttribute('aria-checked', 'false');
+        const user = userEvent.setup();
+        await user.click($el);
+        expect($el).toHaveAttribute('aria-checked', 'true');
     });
 });
