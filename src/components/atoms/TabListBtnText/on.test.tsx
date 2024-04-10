@@ -16,7 +16,7 @@ const buildComponent = ({
     borderBottomWidth = '0.25rem',
     orientation = 'horizontal',
 }: Props = {}) => {
-    return render(
+    return (
         <TabListBtnText
             paddingBlock={paddingBlock}
             selected={selected}
@@ -47,14 +47,12 @@ function testRerender(
     $btn: HTMLElement
 ) {
     rerender(
-        <TabListBtnText
-            orientation={orientation}
-            borderBottomWidth={borderWidth}
-            paddingBlock="0.25rem"
-            selected={selected}
-        >
-            some content
-        </TabListBtnText>
+        buildComponent({
+            orientation,
+            borderBottomWidth: borderWidth,
+            selected,
+            children: 'some content',
+        })
     );
     const borderWidthKey = orientation === 'horizontal' ? 'bottom' : 'left';
 
@@ -65,32 +63,22 @@ function testRerender(
 
 describe('<TabListBtnText /> component', () => {
     test('renders correctly', () => {
-        buildComponent();
+        render(buildComponent());
         const $btn = screen.getByText('some content');
         expect($btn).toBeVisible();
     });
     test('changes the style when selected prop changes', () => {
-        const { rerender } = buildComponent();
+        const { rerender } = render(buildComponent());
         const $btn = screen.getByText('some content');
         // horizontal and not selected
         expect($btn).toHaveStyleRule('border-bottom-width', '0.25rem');
         expect($btn).toHaveStyleRule('border-bottom-color', 'transparent');
         expect($btn).toHaveStyleRule('font-weight', 'normal');
         // just border-width change
-        testRerender(
-            {
-                borderWidth: '0.5rem',
-            },
-            rerender,
-            $btn
-        );
+        testRerender({ borderWidth: '0.5rem' }, rerender, $btn);
         // horizontal and selected
         testRerender(
-            {
-                selected: true,
-                borderColor: '#000',
-                fontWeight: '700',
-            },
+            { selected: true, borderColor: '#000', fontWeight: '700' },
             rerender,
             $btn
         );
@@ -122,7 +110,7 @@ describe('<TabListBtnText /> component', () => {
             className: 'another-class',
             children: 'another content',
         };
-        buildComponent(prop);
+        render(buildComponent(prop));
         const $btn = screen.getByText(prop.children);
         expect($btn).toHaveStyleRule('padding', `${prop.paddingBlock} 0.75rem`);
         expect($btn).toHaveClass(prop.className);
