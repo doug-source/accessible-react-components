@@ -8,5 +8,9 @@ Components list:
     -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/tabs/](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
 -   Switch
-    -   status: WIP
+    -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/switch/](https://www.w3.org/WAI/ARIA/apg/patterns/switch/)
+    -   types:
+        -   SwitchBasic component
+        -   SwitchBtn component
+        -   SwitchCheckbox component
