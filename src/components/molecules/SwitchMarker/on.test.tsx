@@ -14,22 +14,20 @@ const buildComponent = ({
     padding,
     height,
     borderWidth,
-}: Props = {}) => {
-    return render(
-        <SwitchMarker
-            checked={checked}
-            className={className}
-            padding={padding}
-            height={height}
-            borderWidth={borderWidth}
-            data-testid="switch-marker"
-        />
-    );
-};
+}: Props = {}) => (
+    <SwitchMarker
+        checked={checked}
+        className={className}
+        padding={padding}
+        height={height}
+        borderWidth={borderWidth}
+        data-testid="switch-marker"
+    />
+);
 
 describe('<SwitchMarker /> component', () => {
     test('renders correctly', () => {
-        buildComponent();
+        render(buildComponent());
         const $el = screen.getByTestId('switch-marker');
         expect($el).toBeVisible();
     });
@@ -39,7 +37,7 @@ describe('<SwitchMarker /> component', () => {
             borderWidth: '0.125rem',
             height: '0.75rem',
         };
-        const { rerender } = buildComponent(beforeProps);
+        const { rerender } = render(buildComponent(beforeProps));
         const $el = screen.getByTestId('switch-marker');
         expect($el).toHaveStyleRule('padding', beforeProps.padding);
         expect($el).toHaveStyleRule(
@@ -53,12 +51,11 @@ describe('<SwitchMarker /> component', () => {
             height: '1.5rem',
         };
         rerender(
-            <SwitchMarker
-                checked={false}
-                padding={afterProps.padding}
-                height={afterProps.height}
-                borderWidth={afterProps.borderWidth}
-            />
+            buildComponent({
+                padding: afterProps.padding,
+                height: afterProps.height,
+                borderWidth: afterProps.borderWidth,
+            })
         );
         expect($el).toHaveStyleRule('padding', afterProps.padding);
         expect($el).toHaveStyleRule('border-width', afterProps.borderWidth);
@@ -68,10 +65,12 @@ describe('<SwitchMarker /> component', () => {
         );
     });
     test('renders with className passed correctly', () => {
-        const { rerender } = buildComponent({ className: 'first-classname' });
+        const { rerender } = render(
+            buildComponent({ className: 'first-classname' })
+        );
         const $el = screen.getByTestId('switch-marker');
         expect($el).toHaveClass('first-classname');
-        rerender(<SwitchMarker checked={false} className="second-classname" />);
+        rerender(buildComponent({ className: 'second-classname' }));
         expect($el).toHaveClass('second-classname');
     });
 });
