@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
 import { SwitchMarker } from '../SwitchMarker';
 import { makeKeydownHandler } from './lib';
@@ -16,10 +16,8 @@ export const SwitchBasic = ({
     label,
     onChange,
 }: SwitchBasicProps) => {
-    const ref = useRef<HTMLDivElement | null>(null);
     const [ariaChecked, setAriaChecked] = useState<boolean>(false);
     const toogleAriaChecked = useToogleAriaChecked(
-        ref,
         ariaChecked,
         setAriaChecked,
         onChange
@@ -27,7 +25,6 @@ export const SwitchBasic = ({
     const keydownHandler = makeKeydownHandler(toogleAriaChecked);
     return (
         <SwitchBasic_
-            ref={ref}
             className={className}
             role="switch"
             aria-checked={ariaChecked}
