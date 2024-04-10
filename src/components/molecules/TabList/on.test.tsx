@@ -15,26 +15,26 @@ const buildComponent = ({
     order = 1,
     orientation = 'horizontal',
     onClick,
-}: Props = {}) => {
-    return render(
-        <TabList
-            tabSelected={tabSelected}
-            titles={titles}
-            order={order}
-            orientation={orientation}
-            onClick={onClick}
-        />
-    );
-};
+    ...remain
+}: Props = {}) => (
+    <TabList
+        tabSelected={tabSelected}
+        titles={titles}
+        order={order}
+        orientation={orientation}
+        onClick={onClick}
+        {...remain}
+    />
+);
 
 describe('<TabList /> component', () => {
     test('renders correctly', () => {
-        buildComponent();
+        render(buildComponent());
         const $el = screen.getByRole('tablist');
         expect($el).toBeVisible();
     });
     test('renders changing properties correctly', () => {
-        const { rerender } = buildComponent();
+        const { rerender } = render(buildComponent());
         const $el = screen.getByRole('tablist');
         expect($el).toHaveStyleRule('flex-direction', 'row');
         expect($el).toHaveStyleRule('justify-content', 'normal');
@@ -53,13 +53,11 @@ describe('<TabList /> component', () => {
             }
         );
         rerender(
-            <TabList
-                tabSelected={0}
-                titles={['Tab-1', 'Tab-2']}
-                order={2}
-                orientation="vertical"
-                borderBottomWidth="0.5rem"
-            />
+            buildComponent({
+                order: 2,
+                orientation: 'vertical',
+                borderBottomWidth: '0.5rem',
+            })
         );
         expect($el).toHaveStyleRule('flex-direction', 'column');
         expect($el).toHaveStyleRule('justify-content', 'space-evenly');
@@ -79,12 +77,12 @@ describe('<TabList /> component', () => {
         );
     });
     test('renders nothing', () => {
-        buildComponent({ titles: [] });
+        render(buildComponent({ titles: [] }));
         expect(screen.queryByRole('tablist')).not.toBeInTheDocument();
     });
     test('triggers the onclick event handler attached', async () => {
         const onClick = jest.fn();
-        buildComponent({ onClick });
+        render(buildComponent({ onClick }));
         const $el = screen.getByRole('tablist');
         const tabs = within($el).getAllByRole('tab');
         expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
