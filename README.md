@@ -14,3 +14,6 @@ Components list:
         -   SwitchBasic component
         -   SwitchBtn component
         -   SwitchCheckbox component
+-   Alert
+    -   status: done
+    -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/alert/](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)
