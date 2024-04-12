@@ -1,4 +1,4 @@
-import { isBooleanishFalsy } from '.';
+import { isBooleanishFalsy, makeBooleanHandle } from '.';
 
 describe('isBooleanishFalsy function', () => {
     test('returns as output the true value correctly', () => {
@@ -14,5 +14,18 @@ describe('isBooleanishFalsy function', () => {
         expect(isBooleanishFalsy(input)).toBe(true);
         input = undefined;
         expect(isBooleanishFalsy(input)).toBe(true);
+    });
+});
+
+describe('makeBooleanHandle function', () => {
+    test('returns the callback function', () => {
+        const fn = makeBooleanHandle(false, () => {});
+        expect(typeof fn).toBe('function');
+    });
+    test('calls the onChange parameter with opposite value before passed', () => {
+        const onChange = jest.fn();
+        const oldValue = false;
+        makeBooleanHandle(oldValue, onChange)();
+        expect(onChange).toHaveBeenCalledWith(!oldValue);
     });
 });

@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { makeBooleanHandle } from '../../../lib';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
 import { SwitchMarker } from '../SwitchMarker';
 import { makeKeydownHandler } from './lib';
-import { useToogleAriaChecked } from './lib/hooks';
 import { SwitchBasic_ } from './style';
 
 type SwitchBasicProps = {
@@ -17,11 +17,14 @@ export const SwitchBasic = ({
     onChange,
 }: SwitchBasicProps) => {
     const [ariaChecked, setAriaChecked] = useState<boolean>(false);
-    const toogleAriaChecked = useToogleAriaChecked(
+    const toogleAriaChecked = makeBooleanHandle(
         ariaChecked,
-        setAriaChecked,
-        onChange
+        (newAriaChecked) => {
+            setAriaChecked(newAriaChecked);
+            onChange && onChange(newAriaChecked);
+        }
     );
+
     const keydownHandler = makeKeydownHandler(toogleAriaChecked);
     return (
         <SwitchBasic_
