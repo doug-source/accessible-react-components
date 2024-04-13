@@ -1,17 +1,10 @@
 import { ComponentPropsWithoutRef } from 'react';
 import { DialogDesc_ } from './style';
 
-type DialogDescProps = ComponentPropsWithoutRef<typeof DialogDesc_> & {
-    description: string;
-};
+type DialogDescProps = ComponentPropsWithoutRef<typeof DialogDesc_>;
 
-export const DialogDesc = ({
-    description,
-    children,
-    ...remain
-}: DialogDescProps) => (
+export const DialogDesc = ({ children, ...remain }: DialogDescProps) => (
     <DialogDesc_ {...remain}>
-        <p>{description}</p>
-        {children}
+        <p>{children}</p>
     </DialogDesc_>
 );

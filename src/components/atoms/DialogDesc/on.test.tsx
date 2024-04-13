@@ -5,15 +5,12 @@ import { ComponentPropsWithoutRef } from 'react';
 import { DialogDesc } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof DialogDesc>;
-type keys = 'description';
-type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
 const buildComponent = ({
-    description = 'The text description',
-    children,
+    children = 'The text description',
     ...remain
-}: Props = {}) => (
-    <DialogDesc {...remain} description={description} data-testid="dialog-desc">
+}: ElementProps = {}) => (
+    <DialogDesc {...remain} data-testid="dialog-desc">
         {children}
     </DialogDesc>
 );
