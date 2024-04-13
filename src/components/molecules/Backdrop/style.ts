@@ -8,8 +8,9 @@ export const Backdrop_ = styled.div<{ $show: boolean }>`
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.3);
-    ${({ $show }) =>
-        css`
-            ${$show ? 'block' : 'none'}
-        `}
+    ${({ $show }) => {
+        return css`
+            display: ${$show ? 'block' : 'none'};
+        `;
+    }}
 `;
