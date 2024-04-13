@@ -1,7 +1,8 @@
 import { ComponentPropsWithoutRef } from 'react';
+import { Button_ } from './style';
 
 type DialogBtnProps = ComponentPropsWithoutRef<'button'>;
 
 export const DialogBtn = (props: DialogBtnProps) => (
-    <button {...props} type="button" />
+    <Button_ {...props} type="button" />
 );
