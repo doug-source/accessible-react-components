@@ -17,3 +17,6 @@ Components list:
 -   Alert
     -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/alert/](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)
+-   DialogAlert
+    -   status: done
+    -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/)
