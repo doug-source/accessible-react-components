@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const DialogHeading_ = styled.h2`
+export const AlertDialogHeading_ = styled.h2`
     text-align: center;
     font-size: 140%;
 `;
