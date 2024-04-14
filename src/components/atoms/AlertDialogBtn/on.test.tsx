@@ -2,17 +2,17 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import 'jest-styled-components';
-import { DialogBtn } from './index';
+import { AlertDialogBtn } from './index';
 
-describe('<DialogBtn /> component', () => {
+describe('<AlertDialogBtn /> component', () => {
     test('renders correctly', () => {
-        render(<DialogBtn id="this-btn">Ok</DialogBtn>);
+        render(<AlertDialogBtn id="this-btn">Ok</AlertDialogBtn>);
         const $btn = screen.getByRole('button');
         expect($btn).toBeVisible();
     });
     test('applies the props passed to component', () => {
         const id = 'this-btn';
-        render(<DialogBtn id={id}>Ok</DialogBtn>);
+        render(<AlertDialogBtn id={id}>Ok</AlertDialogBtn>);
         const $btn = screen.getByRole('button');
         expect($btn).toHaveTextContent('Ok');
         expect($btn).toHaveAttribute('id', id);
@@ -20,9 +20,9 @@ describe('<DialogBtn /> component', () => {
     test('triggers the click event handler', async () => {
         const onClick = jest.fn();
         render(
-            <DialogBtn id="this-btn" onClick={onClick}>
+            <AlertDialogBtn id="this-btn" onClick={onClick}>
                 Ok
-            </DialogBtn>
+            </AlertDialogBtn>
         );
         const $btn = screen.getByRole('button');
         const user = userEvent.setup();

@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react';
 import { Button_ } from './style';
 
-type DialogBtnProps = ComponentPropsWithoutRef<'button'>;
+type AlertDialogBtnProps = ComponentPropsWithoutRef<'button'>;
 
 /**
  * The HtmlButtonElement usually used into AlertDialog
@@ -9,6 +9,6 @@ type DialogBtnProps = ComponentPropsWithoutRef<'button'>;
  * @param props The component's properties
  * @returns The react component
  */
-export const DialogBtn = (props: DialogBtnProps) => (
+export const AlertDialogBtn = (props: AlertDialogBtnProps) => (
     <Button_ {...props} type="button" />
 );
