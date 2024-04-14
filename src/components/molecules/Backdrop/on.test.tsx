@@ -17,6 +17,6 @@ describe('<Backdrop /> component', () => {
             </Backdrop>
         );
         expect($el).toBeInTheDocument();
-        expect($el).not.toBeVisible();
+        expect($el).toBeVisible();
     });
 });
