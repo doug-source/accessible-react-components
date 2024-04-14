@@ -6,7 +6,7 @@ import { ComponentPropsWithoutRef } from 'react';
 import { AlertDialog } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof AlertDialog>;
-type keys = 'heading' | 'description';
+type keys = 'heading' | 'description' | 'onClose';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
 const buildComponent = ({
@@ -14,7 +14,7 @@ const buildComponent = ({
     heading = 'One heading',
     description = 'One description',
     children = 'One content',
-    onClose,
+    onClose = () => {},
 }: Props = {}) => {
     return (
         <AlertDialog
@@ -42,12 +42,13 @@ describe('<AlertDialog /> component', () => {
         const $el = $box?.parentElement;
         expect($el).toBeVisible();
     });
-    test('triggers the close event handler', async () => {
+    test('calls the close event handler after Escape keypress', async () => {
         const onClose = jest.fn();
         render(buildComponent({ show: true, onClose }));
-        const $el = screen.getByLabelText('close dialog');
+        const $box = screen.getByText('One heading').parentElement;
+        expect($box).toBeVisible();
         const user = userEvent.setup();
-        await user.click($el);
+        await user.keyboard('{Escape}');
         expect(onClose).toHaveBeenCalled();
     });
 });

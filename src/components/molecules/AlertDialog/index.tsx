@@ -1,9 +1,9 @@
 import { ReactNode, useId } from 'react';
 import { AlertDialogDesc } from '../../atoms/AlertDialogDesc';
 import { AlertDialogHeading } from '../../atoms/AlertDialogHeading';
-import { CloseIcon } from '../../atoms/CloseIcon';
 import { AlertDialogBox } from '../AlertDialogBox';
 import { TabIndexReset } from '../TabIndexReset';
+import { useKeydownBinding } from './lib/hooks';
 import { Backdrop_ } from './style';
 
 type AlertDialogProps = {
@@ -11,7 +11,7 @@ type AlertDialogProps = {
     description: string;
     show?: boolean;
     children?: ReactNode;
-    onClose?: () => void;
+    onClose: () => void;
 };
 
 export const AlertDialog = ({
@@ -23,6 +23,8 @@ export const AlertDialog = ({
 }: AlertDialogProps) => {
     const headingId = useId();
     const descriptionId = useId();
+    useKeydownBinding(onClose);
+
     return (
         <Backdrop_ show={show}>
             <TabIndexReset />
@@ -31,7 +33,6 @@ export const AlertDialog = ({
                 descriptionId={descriptionId}
                 show={show}
             >
-                <CloseIcon onClick={() => onClose && onClose()} />
                 <AlertDialogHeading id={headingId}>
                     {heading}
                 </AlertDialogHeading>
