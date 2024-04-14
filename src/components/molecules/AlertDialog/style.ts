@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
+import { AlertDialogDesc_ } from '../../atoms/AlertDialogDesc/style';
 import { CloseIcon_ } from '../../atoms/CloseIcon/style';
-import { DialogDesc_ } from '../../atoms/DialogDesc/style';
 import { DialogHeading_ } from '../../atoms/DialogHeading/style';
 import { AlertDialogBox_ } from '../AlertDialogBox/style';
 import { Backdrop } from '../Backdrop';
@@ -32,7 +32,7 @@ export const Backdrop_ = styled(Backdrop)`
     ${DialogHeading_} {
         margin: 1.25rem 0;
     }
-    ${DialogDesc_} {
+    ${AlertDialogDesc_} {
         flex: 1;
         display: flex;
         justify-content: center;

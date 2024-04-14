@@ -1,6 +1,6 @@
 import { ReactNode, useId } from 'react';
+import { AlertDialogDesc } from '../../atoms/AlertDialogDesc';
 import { CloseIcon } from '../../atoms/CloseIcon';
-import { DialogDesc } from '../../atoms/DialogDesc';
 import { DialogHeading } from '../../atoms/DialogHeading';
 import { AlertDialogBox } from '../AlertDialogBox';
 import { TabIndexReset } from '../TabIndexReset';
@@ -33,7 +33,9 @@ export const AlertDialog = ({
             >
                 <CloseIcon onClick={() => onClose && onClose()} />
                 <DialogHeading id={headingId}>{heading}</DialogHeading>
-                <DialogDesc id={descriptionId}>{description}</DialogDesc>
+                <AlertDialogDesc id={descriptionId}>
+                    {description}
+                </AlertDialogDesc>
                 {children}
             </AlertDialogBox>
             <TabIndexReset />

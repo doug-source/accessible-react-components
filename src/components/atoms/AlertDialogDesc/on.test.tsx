@@ -2,20 +2,20 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
-import { DialogDesc } from './index';
+import { AlertDialogDesc } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof DialogDesc>;
+type ElementProps = ComponentPropsWithoutRef<typeof AlertDialogDesc>;
 
 const buildComponent = ({
     children = 'The text description',
     ...remain
 }: ElementProps = {}) => (
-    <DialogDesc {...remain} data-testid="dialog-desc">
+    <AlertDialogDesc {...remain} data-testid="dialog-desc">
         {children}
-    </DialogDesc>
+    </AlertDialogDesc>
 );
 
-describe('<DialogDesc /> component', () => {
+describe('<AlertDialogDesc /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const { parentElement: $el } = screen.getByText('The text description');
