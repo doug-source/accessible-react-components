@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
 import { AlertDialog } from './index';
@@ -40,5 +41,13 @@ describe('<AlertDialog /> component', () => {
         expect($children).toBeVisible();
         const $el = $box?.parentElement;
         expect($el).toBeVisible();
+    });
+    test('triggers the close event handler', async () => {
+        const onClose = jest.fn();
+        render(buildComponent({ show: true, onClose }));
+        const $el = screen.getByLabelText('close dialog');
+        const user = userEvent.setup();
+        await user.click($el);
+        expect(onClose).toHaveBeenCalled();
     });
 });
