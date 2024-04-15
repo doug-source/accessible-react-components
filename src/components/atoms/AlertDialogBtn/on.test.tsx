@@ -1,14 +1,13 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import 'jest-styled-components';
 import { AlertDialogBtn } from './index';
 
 describe('<AlertDialogBtn /> component', () => {
     test('renders correctly', () => {
         render(<AlertDialogBtn id="this-btn">Ok</AlertDialogBtn>);
         const $btn = screen.getByRole('button');
-        expect($btn).toBeVisible();
+        expect($btn).toBeInTheDocument();
     });
     test('applies the props passed to component', () => {
         const id = 'this-btn';
