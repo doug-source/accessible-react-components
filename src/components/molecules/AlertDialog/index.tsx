@@ -1,6 +1,6 @@
 import { ReactNode, useId } from 'react';
 import { AlertDialogDesc } from '../../atoms/AlertDialogDesc';
-import { AlertDialogHeading } from '../../atoms/AlertDialogHeading';
+import { Heading } from '../../atoms/Heading';
 import { AlertDialogBox } from '../AlertDialogBox';
 import { TabIndexReset } from '../TabIndexReset';
 import { useKeydownBinding } from './lib/hooks';
@@ -33,9 +33,7 @@ export const AlertDialog = ({
                 descriptionId={descriptionId}
                 show={show}
             >
-                <AlertDialogHeading id={headingId}>
-                    {heading}
-                </AlertDialogHeading>
+                <Heading id={headingId}>{heading}</Heading>
                 <AlertDialogDesc id={descriptionId}>
                     {description}
                 </AlertDialogDesc>

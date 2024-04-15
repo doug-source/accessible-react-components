@@ -1,13 +1,11 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import 'jest-styled-components';
-import { AlertDialogHeading } from './index';
+import { Heading } from './index';
 
-describe('<AlertDialogHeading /> component', () => {
+describe('<Heading /> component', () => {
     test('renders correctly', () => {
-        render(
-            <AlertDialogHeading id="heading-title">title</AlertDialogHeading>
-        );
+        render(<Heading id="heading-title">title</Heading>);
         const $el = screen.getByText('title');
         expect($el).toBeVisible();
         expect($el).toHaveTextContent('title');

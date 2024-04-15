@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import { AlertDialogDesc_ } from '../../atoms/AlertDialogDesc/style';
-import { AlertDialogHeading_ } from '../../atoms/AlertDialogHeading/style';
 import { CloseIcon_ } from '../../atoms/CloseIcon/style';
+import { Heading_ } from '../../atoms/Heading/style';
 import { AlertDialogBox_ } from '../AlertDialogBox/style';
 import { Backdrop } from '../Backdrop';
 
@@ -29,7 +29,7 @@ export const Backdrop_ = styled(Backdrop)`
         z-index: 1;
         margin: 0.125rem;
     }
-    ${AlertDialogHeading_} {
+    ${Heading_} {
         margin: 1.25rem 0;
     }
     ${AlertDialogDesc_} {
