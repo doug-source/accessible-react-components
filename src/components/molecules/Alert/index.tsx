@@ -1,10 +1,15 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { Alert_ } from './style';
+import styles from './Alert.module.scss';
 
-type AlertProps = ComponentPropsWithoutRef<typeof Alert_>;
+type AlertProps = ComponentPropsWithoutRef<'div'>;
 
-export const Alert = ({ children, ...remain }: AlertProps) => (
-    <Alert_ {...remain} role="alert">
+export const Alert = ({ className, children, ...remain }: AlertProps) => (
+    <div
+        {...remain}
+        role="alert"
+        className={classNames(className, styles.alert)}
+    >
         {children}
-    </Alert_>
+    </div>
 );
