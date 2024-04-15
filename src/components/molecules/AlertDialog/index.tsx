@@ -3,6 +3,7 @@ import { AlertDialogDesc } from '../../atoms/AlertDialogDesc';
 import { Heading } from '../../atoms/Heading';
 import { AlertDialogBox } from '../AlertDialogBox';
 import { TabIndexReset } from '../TabIndexReset';
+import styles from './AlertDialog.module.scss';
 import { useKeydownBinding } from './lib/hooks';
 import { Backdrop_ } from './style';
 
@@ -34,7 +35,10 @@ export const AlertDialog = ({
                 show={show}
             >
                 <Heading id={headingId}>{heading}</Heading>
-                <AlertDialogDesc id={descriptionId}>
+                <AlertDialogDesc
+                    id={descriptionId}
+                    className={styles.alertDialog}
+                >
                     {description}
                 </AlertDialogDesc>
                 {children}
