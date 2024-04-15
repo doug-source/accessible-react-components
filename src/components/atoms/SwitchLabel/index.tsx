@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { SwitchLabel_ } from './style';
+import styles from './SwitchLabel.module.scss';
 
 type SwitchLabelProps = {
     className?: string;
@@ -16,8 +16,8 @@ export const SwitchLabel = ({
         return null;
     }
     return (
-        <SwitchLabel_ className={classNames('label', className)} {...remain}>
+        <span {...remain} className={classNames(className, styles.switchLabel)}>
             {label}
-        </SwitchLabel_>
+        </span>
     );
 };
