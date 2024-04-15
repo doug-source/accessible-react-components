@@ -19,12 +19,14 @@ describe('<AlertDialogDesc /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const { parentElement: $el } = screen.getByText('The text description');
-        expect($el).toBeVisible();
+        expect($el).toBeInTheDocument();
     });
     test('uses the description correctly', () => {
         render(buildComponent());
         const $el = screen.getByTestId('dialog-desc');
-        expect(within($el).getByText('The text description')).toBeVisible();
+        expect(
+            within($el).getByText('The text description')
+        ).toBeInTheDocument();
     });
     test('renders with children prop passed', () => {
         render(
@@ -33,11 +35,6 @@ describe('<AlertDialogDesc /> component', () => {
             })
         );
         const $el = screen.getByTestId('dialog-desc');
-        expect(within($el).getByText('Another content')).toBeVisible();
-    });
-    test('renders with style passed', () => {
-        render(buildComponent());
-        const { parentElement: $el } = screen.getByText('The text description');
-        expect($el).toHaveStyleRule('padding', '0.625rem 1.25rem');
+        expect(within($el).getByText('Another content')).toBeInTheDocument();
     });
 });

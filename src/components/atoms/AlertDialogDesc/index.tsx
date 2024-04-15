@@ -1,13 +1,15 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { AlertDialogDesc_ } from './style';
+import styles from './AlertDialogDesc.module.scss';
 
-type AlertDialogDescProps = ComponentPropsWithoutRef<typeof AlertDialogDesc_>;
+type AlertDialogDescProps = ComponentPropsWithoutRef<'div'>;
 
 export const AlertDialogDesc = ({
     children,
+    className,
     ...remain
 }: AlertDialogDescProps) => (
-    <AlertDialogDesc_ {...remain}>
+    <div {...remain} className={classNames(className, styles.alertDialogDesc)}>
         <p>{children}</p>
-    </AlertDialogDesc_>
+    </div>
 );
