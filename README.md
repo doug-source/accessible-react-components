@@ -1,6 +1,6 @@
 # accessible-react-components
 
-Project with accessible react components
+Project with some accessible react component parts that can be used as more complex and elaborate way.
 
 Components list:
 
