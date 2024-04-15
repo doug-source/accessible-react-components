@@ -1,8 +1,11 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { TitleHidden_ } from './style';
+import styles from './TitleHidden.module.scss';
 
-type StyledProps = ComponentPropsWithoutRef<typeof TitleHidden_>;
+type StyledProps = ComponentPropsWithoutRef<'h3'>;
 
-export const TitleHidden = (props: StyledProps) => {
-    return <TitleHidden_ aria-hidden="true" {...props} />;
+export const TitleHidden = ({ className, ...remain }: StyledProps) => {
+    return (
+        <h3 className={classNames(className, styles.titleHidden)} {...remain} />
+    );
 };

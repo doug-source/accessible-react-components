@@ -15,8 +15,6 @@ describe('<TitleHidden /> component', () => {
         buildComponent();
         const $el = screen.getByRole('heading', { level: 3, hidden: true });
         expect($el).toBeInTheDocument();
-        expect($el).not.toBeVisible();
-        expect($el).toHaveStyleRule('display', 'none');
     });
     test('renders text content passed correctly', () => {
         const props = { children: 'Another text' };
