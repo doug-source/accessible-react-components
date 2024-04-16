@@ -1,9 +1,8 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { AlertDialogActions_ } from './style';
+import styles from './AlertDialogActions.module.scss';
 
-type AlertDialogActionsProps = ComponentPropsWithoutRef<
-    typeof AlertDialogActions_
->;
+type AlertDialogActionsProps = ComponentPropsWithoutRef<'div'>;
 
 /**
  * Used as AlertDialog's children
@@ -12,8 +11,14 @@ type AlertDialogActionsProps = ComponentPropsWithoutRef<
  * @returns The HTMLDivElement wrapper
  */
 export const AlertDialogActions = ({
+    className,
     children,
     ...remain
 }: AlertDialogActionsProps) => (
-    <AlertDialogActions_ {...remain}>{children}</AlertDialogActions_>
+    <div
+        {...remain}
+        className={classNames(className, styles.alertDialogActions)}
+    >
+        {children}
+    </div>
 );
