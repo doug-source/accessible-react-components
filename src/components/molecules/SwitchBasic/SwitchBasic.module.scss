@@ -1,9 +1,7 @@
-import { styled } from 'styled-components';
-
-export const SwitchBasic_ = styled.div`
+.switchBasic {
     cursor: pointer;
-    padding: 0.25rem; // 4px
-    border-width: 0.125rem; // 2px
+    padding: 0.25rem;
+    border-width: 0.125rem;
     border-style: solid;
     border-color: transparent;
     display: inline-flex;
@@ -14,4 +12,4 @@ export const SwitchBasic_ = styled.div`
         border-color: #005a9c;
         outline: none;
     }
-`;
+}

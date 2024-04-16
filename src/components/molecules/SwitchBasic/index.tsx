@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import classNames from 'classnames';
+import { ComponentPropsWithoutRef, useState } from 'react';
 import { makeBooleanHandle } from '../../../lib';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
 import { SwitchMarker } from '../SwitchMarker';
+import styles from './SwitchBasic.module.scss';
 import { makeKeydownHandler } from './lib';
-import { SwitchBasic_ } from './style';
 
-type SwitchBasicProps = {
+type StyleProps = ComponentPropsWithoutRef<'div'>;
+
+type SwitchBasicProps = Omit<StyleProps, 'onChange'> & {
     label?: string;
-    className?: string;
     onChange?: (status: boolean) => void;
 };
 
@@ -27,8 +29,8 @@ export const SwitchBasic = ({
 
     const keydownHandler = makeKeydownHandler(toogleAriaChecked);
     return (
-        <SwitchBasic_
-            className={className}
+        <div
+            className={classNames(className, styles.switchBasic)}
             role="switch"
             aria-checked={ariaChecked}
             tabIndex={0}
@@ -37,6 +39,6 @@ export const SwitchBasic = ({
         >
             <SwitchLabel label={label} />
             <SwitchMarker checked={ariaChecked} />
-        </SwitchBasic_>
+        </div>
     );
 };

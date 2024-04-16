@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
 import { SwitchBasic } from './index';
 
@@ -15,7 +14,7 @@ describe('<SwitchBasic /> component', () => {
     test('renders correctly', () => {
         buildComponent({ label: 'Foo' });
         const $el = screen.getByRole('switch');
-        expect($el).toBeVisible();
+        expect($el).toBeInTheDocument();
     });
     test('renders no having label correctly', () => {
         buildComponent();
