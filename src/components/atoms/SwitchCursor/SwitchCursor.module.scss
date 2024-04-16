@@ -1,0 +1,24 @@
+.switchCursor {
+    border-radius: 100%;
+    display: block;
+    background: #000;
+    position: absolute;
+    // width from SwitchMarker component's height
+    width: 0.75rem;
+    // height from SwitchMarker component's height
+    height: 0.75rem;
+    // left from SwitchMarker component's padding
+    left: 0.125rem;
+    transition: left;
+    transition-duration: 0.2s;
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+
+    &.checked {
+        // 100% - size - parentPadding
+        // size: SwitchMarker component's height
+        // parentPadding: SwitchMarker component's padding
+        left: calc(100% - 0.75rem - 0.125rem);
+    }
+}

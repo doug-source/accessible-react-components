@@ -1,27 +1,28 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { SwitchCursor_ } from './style';
-
-type SwitchCursorStyleProps = ComponentPropsWithoutRef<typeof SwitchCursor_>;
+import styles from './SwitchCursor.module.scss';
 
 type SwitchCursorProps = {
-    className?: string;
-    size: SwitchCursorStyleProps['$size'];
-    parentPadding: SwitchCursorStyleProps['$parentPadding'];
-    checked: SwitchCursorStyleProps['$checked'];
+    checked: boolean;
 } & ComponentPropsWithoutRef<'div'>;
 
 export const SwitchCursor = ({
     className,
-    size,
-    parentPadding,
+    children,
     checked,
     ...remain
-}: SwitchCursorProps) => (
-    <SwitchCursor_
-        className={className}
-        $size={size}
-        $parentPadding={parentPadding}
-        $checked={checked}
-        {...remain}
-    />
-);
+}: SwitchCursorProps) => {
+    const classNameInner = checked ? styles.checked : null;
+    return (
+        <div
+            className={classNames(
+                className,
+                styles.switchCursor,
+                classNameInner
+            )}
+            {...remain}
+        >
+            {children}
+        </div>
+    );
+};
