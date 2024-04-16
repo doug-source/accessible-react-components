@@ -34,7 +34,9 @@ export const AlertDialog = ({
                 descriptionId={descriptionId}
                 show={show}
             >
-                <Heading id={headingId}>{heading}</Heading>
+                <Heading id={headingId} className={styles.heading}>
+                    {heading}
+                </Heading>
                 <AlertDialogDesc
                     id={descriptionId}
                     className={styles.alertDialog}

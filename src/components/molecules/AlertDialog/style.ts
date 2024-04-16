@@ -1,5 +1,4 @@
 import { styled } from 'styled-components';
-import { Heading_ } from '../../atoms/Heading/style';
 import { AlertDialogBox_ } from '../AlertDialogBox/style';
 import { Backdrop } from '../Backdrop';
 
@@ -16,8 +15,5 @@ export const Backdrop_ = styled(Backdrop)`
         background-color: #ddd;
         display: flex;
         flex-direction: column;
-    }
-    ${Heading_} {
-        margin: 1.25rem 0;
     }
 `;
