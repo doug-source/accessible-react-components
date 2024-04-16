@@ -1,17 +1,23 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
 import { SwitchCursorBoxSvg } from '../../atoms/SwitchCursorBoxSvg';
 import { SwitchCursorSvg } from '../../atoms/SwitchCursorSvg';
+import styles from './SwitchMarkerSvg.module.scss';
 import { isAriaCheckedFalsy } from './lib';
-import { SwitchMarkerSvg_ } from './style';
 
-type SwitchMarkerSvgProps = ComponentPropsWithoutRef<typeof SwitchMarkerSvg_>;
+type SwitchMarkerSvgProps = ComponentPropsWithoutRef<'svg'>;
 
 export const SwitchMarkerSvg = ({
     'aria-checked': ariaChecked,
+    className,
     ...remain
 }: SwitchMarkerSvgProps) => {
     return (
-        <SwitchMarkerSvg_ {...remain} xmlns="http://www.w3.org/2000/svg">
+        <svg
+            {...remain}
+            className={classNames(className, styles.switchMarkerSvg)}
+            xmlns="http://www.w3.org/2000/svg"
+        >
             <SwitchCursorBoxSvg />
             <SwitchCursorSvg
                 type="off"
@@ -35,6 +41,6 @@ export const SwitchMarkerSvg = ({
                     ariaChecked === 'mixed' || isAriaCheckedFalsy(ariaChecked)
                 }
             />
-        </SwitchMarkerSvg_>
+        </svg>
     );
 };

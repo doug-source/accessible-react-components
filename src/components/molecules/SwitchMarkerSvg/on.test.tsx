@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
+import stylesFromCursor from '../../atoms/SwitchCursorSvg/SwitchCursorSvg.module.scss';
 import { SwitchMarkerSvg } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof SwitchMarkerSvg>;
@@ -21,31 +22,45 @@ describe('<SwitchMarkerSvg /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const $el = screen.getByTestId('element-to-test');
-        expect($el).toBeVisible();
+        expect($el).toBeInTheDocument();
     });
-    test('renders css rules correctly', () => {
+    test('renders children with ariaChecked equal false correctly', () => {
         render(buildComponent());
-        const $el = screen.getByTestId('element-to-test');
-        expect($el).toHaveStyleRule('width', '3.5rem');
-        expect($el).toHaveStyleRule('height', '1.5rem');
-        expect($el).toHaveStyleRule('position', 'relative');
-    });
-    test('renders children correctly', () => {
-        const { rerender } = render(buildComponent());
         const $el = screen.getByTestId('element-to-test');
         const offChild = within($el).getByLabelText('cursor off');
         const mixedChild = within($el).getByLabelText('cursor mixed');
         const onChild = within($el).getByLabelText('cursor on');
-        expect(offChild).toBeVisible();
-        expect(mixedChild).not.toBeVisible();
-        expect(onChild).not.toBeVisible();
-        rerender(buildComponent({ 'aria-checked': 'true' }));
-        expect(offChild).not.toBeVisible();
-        expect(mixedChild).not.toBeVisible();
-        expect(onChild).toBeVisible();
-        rerender(buildComponent({ 'aria-checked': 'mixed' }));
-        expect(offChild).not.toBeVisible();
-        expect(mixedChild).toBeVisible();
-        expect(onChild).not.toBeVisible();
+        expect(offChild).toHaveClass(stylesFromCursor.show);
+        expect(offChild).not.toHaveClass(stylesFromCursor.hide);
+        expect(mixedChild).toHaveClass(stylesFromCursor.hide);
+        expect(mixedChild).not.toHaveClass(stylesFromCursor.show);
+        expect(onChild).toHaveClass(stylesFromCursor.hide);
+        expect(onChild).not.toHaveClass(stylesFromCursor.show);
+    });
+    test('renders children with ariaChecked equal true correctly', () => {
+        render(buildComponent({ 'aria-checked': true }));
+        const $el = screen.getByTestId('element-to-test');
+        const offChild = within($el).getByLabelText('cursor off');
+        const mixedChild = within($el).getByLabelText('cursor mixed');
+        const onChild = within($el).getByLabelText('cursor on');
+        expect(offChild).toHaveClass(stylesFromCursor.hide);
+        expect(offChild).not.toHaveClass(stylesFromCursor.show);
+        expect(mixedChild).toHaveClass(stylesFromCursor.hide);
+        expect(mixedChild).not.toHaveClass(stylesFromCursor.show);
+        expect(onChild).toHaveClass(stylesFromCursor.show);
+        expect(onChild).not.toHaveClass(stylesFromCursor.hide);
+    });
+    test('renders children with ariaChecked equal mixed correctly', () => {
+        render(buildComponent({ 'aria-checked': 'mixed' }));
+        const $el = screen.getByTestId('element-to-test');
+        const offChild = within($el).getByLabelText('cursor off');
+        const mixedChild = within($el).getByLabelText('cursor mixed');
+        const onChild = within($el).getByLabelText('cursor on');
+        expect(offChild).toHaveClass(stylesFromCursor.hide);
+        expect(offChild).not.toHaveClass(stylesFromCursor.show);
+        expect(mixedChild).toHaveClass(stylesFromCursor.show);
+        expect(mixedChild).not.toHaveClass(stylesFromCursor.hide);
+        expect(onChild).toHaveClass(stylesFromCursor.hide);
+        expect(onChild).not.toHaveClass(stylesFromCursor.show);
     });
 });
