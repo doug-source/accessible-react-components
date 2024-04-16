@@ -1,34 +1,26 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import { orientationAxis } from '../../../types/css-props';
 import { TabListBtn } from '../../atoms/TabListBtn';
 import { TabListBtnText } from '../../atoms/TabListBtnText';
-import { TabList_ } from './style';
-
-type TabListBtnTextProps = ComponentPropsWithoutRef<typeof TabListBtnText>;
-type TabListStyledProps = ComponentPropsWithoutRef<typeof TabList_>;
-type StyledProps = Omit<
-    TabListStyledProps,
-    'onClick' | '$borderBottomWidth' | '$orientation'
->;
+import styles from './TabList.module.scss';
 
 type TabListProps = {
     tabSelected: number;
     titles: string[];
     order: number;
     onClick?: (itemIndex: number) => void;
-    paddingBlockBtnText?: TabListBtnTextProps['paddingBlock'];
-    borderBottomWidth?: TabListBtnTextProps['borderBottomWidth'];
-    orientation: TabListStyledProps['$orientation'];
-} & StyledProps;
+    orientation: orientationAxis;
+} & Omit<ComponentPropsWithoutRef<'div'>, 'onClick'>;
 
 export const TabList = forwardRef<HTMLDivElement, TabListProps>(
     function TabListInner(
         {
+            className,
             tabSelected,
             titles,
             order,
             onClick,
-            paddingBlockBtnText = '0.5rem',
-            borderBottomWidth = '0.25rem',
             orientation,
             ...remain
         }: TabListProps,
@@ -38,13 +30,16 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
             return null;
         }
         return (
-            <TabList_
+            <div
+                {...remain}
+                className={classNames(
+                    className,
+                    styles.tabList,
+                    orientation === 'vertical' ? styles.vertical : null
+                )}
                 ref={ref}
                 role="tablist"
                 aria-labelledby={`tablist-${order}`}
-                $borderBottomWidth={borderBottomWidth}
-                $orientation={orientation}
-                {...remain}
             >
                 {titles.map((title, i) => (
                     <TabListBtn
@@ -60,14 +55,12 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
                             className="focus"
                             orientation={orientation}
                             selected={tabSelected === i}
-                            paddingBlock={paddingBlockBtnText}
-                            borderBottomWidth={borderBottomWidth}
                         >
                             {title}
                         </TabListBtnText>
                     </TabListBtn>
                 ))}
-            </TabList_>
+            </div>
         );
     }
 );

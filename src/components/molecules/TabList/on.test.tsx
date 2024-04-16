@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
+import styles from './TabList.module.scss';
 import { TabList } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof TabList>;
@@ -31,50 +31,19 @@ describe('<TabList /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const $el = screen.getByRole('tablist');
-        expect($el).toBeVisible();
+        expect($el).toBeInTheDocument();
     });
     test('renders changing properties correctly', () => {
         const { rerender } = render(buildComponent());
         const $el = screen.getByRole('tablist');
-        expect($el).toHaveStyleRule('flex-direction', 'row');
-        expect($el).toHaveStyleRule('justify-content', 'normal');
-        expect($el).toHaveAttribute('aria-labelledby', `tablist-1`);
-        expect($el).toHaveStyleRule('display', 'block', {
-            modifier: '&::after',
-        });
-        expect($el).toHaveStyleRule('height', 'calc(0.25rem / 2)', {
-            modifier: '&::after',
-        });
-        expect($el).toHaveStyleRule(
-            'transform',
-            'translateY(calc(-0.25rem * 0.25))',
-            {
-                modifier: '&::after',
-            }
-        );
-        rerender(
-            buildComponent({
-                order: 2,
-                orientation: 'vertical',
-                borderBottomWidth: '0.5rem',
-            })
-        );
-        expect($el).toHaveStyleRule('flex-direction', 'column');
-        expect($el).toHaveStyleRule('justify-content', 'space-evenly');
-        expect($el).toHaveAttribute('aria-labelledby', `tablist-2`);
-        expect($el).toHaveStyleRule('display', 'none', {
-            modifier: '&::after',
-        });
-        expect($el).toHaveStyleRule('height', 'calc(0.5rem / 2)', {
-            modifier: '&::after',
-        });
-        expect($el).toHaveStyleRule(
-            'transform',
-            'translateY(calc(-0.5rem * 0.25))',
-            {
-                modifier: '&::after',
-            }
-        );
+        expect($el).toHaveClass(styles.tabList);
+        expect($el).not.toHaveClass(styles.vertical);
+        expect($el).toHaveAttribute('aria-labelledby', 'tablist-1');
+        // change properties
+        rerender(buildComponent({ order: 2, orientation: 'vertical' }));
+        expect($el).toHaveAttribute('aria-labelledby', 'tablist-2');
+        expect($el).toHaveClass(styles.tabList);
+        expect($el).toHaveClass(styles.vertical);
     });
     test('renders nothing', () => {
         render(buildComponent({ titles: [] }));

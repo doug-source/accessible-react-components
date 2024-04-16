@@ -1,0 +1,33 @@
+.tabList {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 1rem 0.5rem;
+    flex-direction: row;
+    justify-content: normal;
+    align-items: center;
+
+    &::after {
+        position: absolute;
+        content: '';
+        background: #ccc;
+        top: auto;
+        display: block;
+        height: calc(0.25rem / 2);
+        right: 0.5rem;
+        left: 0.5rem;
+        bottom: 1rem;
+        // translateY(calc(-(height * 2) * 0.25))
+        transform: translateY(calc(-0.25rem * 0.25));
+    }
+
+    &.vertical {
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-start;
+
+        &::after {
+            display: none;
+        }
+    }
+}
