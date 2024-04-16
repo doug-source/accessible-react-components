@@ -1,17 +1,16 @@
+import classNames from 'classnames';
 import { Children, ComponentPropsWithoutRef, ReactNode } from 'react';
-import { TabPanel_ } from './style';
+import styles from './TabPanel.module.scss';
 
-type TabPanelStyleProps_ = ComponentPropsWithoutRef<typeof TabPanel_>;
 type TabPanelProps = {
     tabSelected: number;
     children: ReactNode;
-    padding?: TabPanelStyleProps_['$padding'];
-} & Omit<TabPanelStyleProps_, '$padding' | 'children'>;
+} & Omit<ComponentPropsWithoutRef<'div'>, 'children'>;
 
 export const TabPanel = ({
     tabSelected,
+    className,
     children,
-    padding = 0,
     ...remain
 }: TabPanelProps) => {
     return (
@@ -21,16 +20,16 @@ export const TabPanel = ({
                     return null;
                 }
                 return (
-                    <TabPanel_
+                    <div
+                        {...remain}
+                        className={classNames(className, styles.tabPanel)}
                         key={i}
                         id={`tabpanel-${i + 1}`}
                         role="tabpanel"
                         aria-labelledby={`tab-${i + 1}`}
-                        $padding={padding}
-                        {...remain}
                     >
                         {child}
-                    </TabPanel_>
+                    </div>
                 );
             })}
         </>
