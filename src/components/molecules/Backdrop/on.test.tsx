@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import 'jest-styled-components';
 import { Backdrop } from './index';
 
 describe('<Backdrop /> component', () => {
@@ -10,13 +9,15 @@ describe('<Backdrop /> component', () => {
         );
         const $el = screen.getByTestId('backdrop-id');
         expect($el).toBeInTheDocument();
-        expect($el).not.toBeVisible();
+        expect($el).not.toHaveClass('show');
+        expect($el).toHaveClass('hide');
         rerender(
             <Backdrop data-testid="backdrop-id" show>
                 content
             </Backdrop>
         );
         expect($el).toBeInTheDocument();
-        expect($el).toBeVisible();
+        expect($el).toHaveClass('show');
+        expect($el).not.toHaveClass('hide');
     });
 });
