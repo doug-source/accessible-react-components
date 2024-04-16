@@ -1,39 +1,17 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { SwitchCursor } from '../../atoms/SwitchCursor';
-import { SwitchMarker_ } from './style';
+import styles from './SwitchMarker.module.scss';
 
-type SwitchMarkerStyleProps = ComponentPropsWithoutRef<typeof SwitchMarker_>;
-type SwitchCursorStyleProps = ComponentPropsWithoutRef<typeof SwitchCursor>;
-
-type SwitchMarkerProps = {
-    checked: SwitchCursorStyleProps['checked'];
-    padding?: SwitchMarkerStyleProps['$padding'];
-    height?: SwitchMarkerStyleProps['$height'];
-    borderWidth?: SwitchMarkerStyleProps['$borderWidth'];
-} & ComponentPropsWithoutRef<'div'>;
+type SwitchMarkerProps = ComponentPropsWithoutRef<'div'>;
 
 export const SwitchMarker = ({
     className,
-    checked,
-    padding = '0.125rem',
-    height = '0.75rem',
-    borderWidth = '0.125rem',
+    children,
     ...remain
 }: SwitchMarkerProps) => {
     return (
-        <SwitchMarker_
-            className={classNames('switch', className)}
-            $padding={padding}
-            $height={height}
-            $borderWidth={borderWidth}
-            {...remain}
-        >
-            <SwitchCursor
-                parentPadding={padding}
-                size={height}
-                checked={checked}
-            />
-        </SwitchMarker_>
+        <div className={classNames(className, styles.switchMarker)} {...remain}>
+            {children}
+        </div>
     );
 };

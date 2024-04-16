@@ -1,0 +1,13 @@
+.switchMarker {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-style: solid;
+    border-color: #000;
+    width: 2.5rem;
+    border-radius: 0.75rem;
+    padding: 0.125rem;
+    border-width: 0.125rem;
+    // height + 2 * padding + 2 * border-width
+    height: calc(0.75rem + 2 * 0.125rem + 2 * 0.125rem);
+}
