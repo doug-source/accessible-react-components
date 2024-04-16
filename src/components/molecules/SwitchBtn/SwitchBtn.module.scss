@@ -1,12 +1,10 @@
-import { styled } from 'styled-components';
-
-export const SwitchBtn_ = styled.button`
+.switchBtn {
     color: currentColor;
     background-color: transparent;
 
     cursor: pointer;
-    padding: 0.25rem; // 4px
-    border-width: 0.125rem; // 2px
+    padding: 0.25rem;
+    border-width: 0.125rem;
     border-style: solid;
     border-color: transparent;
     margin: 0;
@@ -18,4 +16,4 @@ export const SwitchBtn_ = styled.button`
         border-color: #005a9c;
         outline: none;
     }
-`;
+}
