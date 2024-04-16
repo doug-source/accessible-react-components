@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef } from 'react';
+import styleMarker from '../SwitchMarker/SwitchMarker.module.scss';
 import { SwitchBasic } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof SwitchBasic>;
@@ -20,7 +21,7 @@ describe('<SwitchBasic /> component', () => {
         buildComponent();
         const $el = screen.getByRole('switch');
         expect($el.children).toHaveLength(1);
-        expect($el.firstChild).toHaveClass('switch');
+        expect($el.firstChild).toHaveClass(styleMarker.switchMarker);
     });
     test('renders triggering click event correctly', async () => {
         const onChange = jest.fn();
