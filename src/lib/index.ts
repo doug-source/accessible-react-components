@@ -8,3 +8,9 @@ export const makeBooleanHandle = (
 ) => {
     return () => onChange(!oldValue);
 };
+
+export const parseBooleanish = (
+    val?: Parameters<typeof isBooleanishFalsy>[number]
+) => {
+    return !isBooleanishFalsy(val);
+};

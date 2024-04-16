@@ -1,4 +1,4 @@
-import { isBooleanishFalsy, makeBooleanHandle } from '.';
+import { isBooleanishFalsy, makeBooleanHandle, parseBooleanish } from '.';
 
 describe('isBooleanishFalsy function', () => {
     test('returns as output the true value correctly', () => {
@@ -27,5 +27,22 @@ describe('makeBooleanHandle function', () => {
         const oldValue = false;
         makeBooleanHandle(oldValue, onChange)();
         expect(onChange).toHaveBeenCalledWith(!oldValue);
+    });
+});
+
+describe('parseBooleanish function', () => {
+    test('returns true output', () => {
+        let output = parseBooleanish(true);
+        expect(output).toBe(true);
+        output = parseBooleanish('true');
+        expect(output).toBe(true);
+    });
+    test('returns false output', () => {
+        let output = parseBooleanish();
+        expect(output).toBe(false);
+        output = parseBooleanish(false);
+        expect(output).toBe(false);
+        output = parseBooleanish('false');
+        expect(output).toBe(false);
     });
 });
