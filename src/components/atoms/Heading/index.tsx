@@ -1,12 +1,13 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { Heading_ } from './style';
+import styles from './Heading.module.scss';
 
-type StyleProps = ComponentPropsWithoutRef<typeof Heading_>;
-
-type HeadingProps = Omit<StyleProps, 'children'> & {
+type HeadingProps = Omit<ComponentPropsWithoutRef<'h2'>, 'children'> & {
     children: string;
 };
 
-export const Heading = ({ children, ...remain }: HeadingProps) => (
-    <Heading_ {...remain}>{children}</Heading_>
+export const Heading = ({ children, className, ...remain }: HeadingProps) => (
+    <h2 {...remain} className={classNames(className, styles.heading)}>
+        {children}
+    </h2>
 );
