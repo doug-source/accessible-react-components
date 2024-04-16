@@ -2,10 +2,10 @@ import { ReactNode, useId } from 'react';
 import { AlertDialogDesc } from '../../atoms/AlertDialogDesc';
 import { Heading } from '../../atoms/Heading';
 import { AlertDialogBox } from '../AlertDialogBox';
+import { Backdrop } from '../Backdrop';
 import { TabIndexReset } from '../TabIndexReset';
 import styles from './AlertDialog.module.scss';
 import { useKeydownBinding } from './lib/hooks';
-import { Backdrop_ } from './style';
 
 type AlertDialogProps = {
     heading: string;
@@ -27,12 +27,13 @@ export const AlertDialog = ({
     useKeydownBinding(onClose);
 
     return (
-        <Backdrop_ show={show}>
+        <Backdrop show={show}>
             <TabIndexReset />
             <AlertDialogBox
                 headingId={headingId}
                 descriptionId={descriptionId}
                 show={show}
+                className={styles.alertDialoBox}
             >
                 <Heading id={headingId} className={styles.heading}>
                     {heading}
@@ -46,6 +47,6 @@ export const AlertDialog = ({
                 {children}
             </AlertDialogBox>
             <TabIndexReset />
-        </Backdrop_>
+        </Backdrop>
     );
 };
