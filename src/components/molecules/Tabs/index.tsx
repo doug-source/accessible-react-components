@@ -1,15 +1,16 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useRef, useState } from 'react';
+import { orientationAxis } from '../../../types/css-props';
 import { TitleHidden } from '../../atoms/TitleHidden';
 import { TabList } from '../TabList';
 import { TabPanel } from '../TabPanel';
+import styles from './Tabs.module.scss';
 import { useKeydown } from './lib/hooks';
-import { Tabs_ } from './style';
 
 let orderCache = 1;
 
 type TabListProps = ComponentPropsWithoutRef<typeof TabList>;
 type TabPanelProps = ComponentPropsWithoutRef<typeof TabPanel>;
-type TabsStyledProps = ComponentPropsWithoutRef<typeof Tabs_>;
 
 type TabsProps = {
     // h3 tag is a terminal-block element. Just text contents!
@@ -18,13 +19,15 @@ type TabsProps = {
     titles: TabListProps['titles'];
     children: TabPanelProps['children'];
     manual?: boolean;
-    orientation?: TabsStyledProps['$orientation'];
+    orientation?: orientationAxis;
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>;
 
 export const Tabs = ({
+    className,
     title,
     titles,
     children,
+    // Define if the tabs must be focused on arrows keyboard pressing
     manual = false,
     orientation = 'horizontal',
 }: TabsProps) => {
@@ -35,7 +38,14 @@ export const Tabs = ({
     useKeydown(ref, orientation, manual);
 
     return (
-        <Tabs_ className="tabs" title="tabs" $orientation={orientation}>
+        <div
+            className={classNames(
+                className,
+                styles.tabs,
+                orientation === 'vertical' ? styles.vertical : null
+            )}
+            title="tabs"
+        >
             <TitleHidden id={`tablist-${order}`}>{title}</TitleHidden>
             <TabList
                 ref={ref}
@@ -44,11 +54,9 @@ export const Tabs = ({
                 titles={titles}
                 onClick={(i) => setTabSelected(i)}
                 order={order}
-                paddingBlockBtnText="0.5rem"
-                borderBottomWidth="0.25rem"
                 orientation={orientation}
             />
             <TabPanel tabSelected={tabSelected}>{children}</TabPanel>
-        </Tabs_>
+        </div>
     );
 };

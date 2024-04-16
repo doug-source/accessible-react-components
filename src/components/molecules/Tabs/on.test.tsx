@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
+import headingStyle from '../../atoms/TitleHidden/TitleHidden.module.scss';
+import styles from './Tabs.module.scss';
 import { Tabs } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof Tabs>;
@@ -24,31 +25,32 @@ describe('<Tabs /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const $el = screen.getByTitle('tabs');
-        expect($el).toBeVisible();
+        expect($el).toBeInTheDocument();
+        expect($el).not.toHaveClass(styles.vertical);
     });
     test('renders each internal component correctly', () => {
         render(buildComponent());
         const $el = screen.getByTitle('tabs');
-        expect($el).toBeVisible();
+        expect($el).toBeInTheDocument();
         const $heading = within($el).getByRole('heading', {
             level: 3,
             hidden: true,
         });
         expect($heading).toBeInTheDocument();
-        expect($heading).not.toBeVisible();
-        expect(within($el).getByRole('tablist')).toBeVisible();
+        expect($heading).toHaveClass(headingStyle.titleHidden);
+        expect(within($el).getByRole('tablist')).toBeInTheDocument();
         const panels = within($el).getAllByRole('tabpanel');
         panels.forEach(($panel, i) => {
-            expect($panel).toBeVisible();
+            expect($panel).toBeInTheDocument();
             expect($panel).toHaveAttribute('id', `tabpanel-${i + 1}`);
         });
     });
     test('renders when orientation property changes correctly', () => {
         const { rerender } = render(buildComponent());
         const $el = screen.getByTitle('tabs');
-        expect($el).toHaveStyleRule('flex-direction', 'column');
+        expect($el).not.toHaveClass(styles.vertical);
         rerender(buildComponent({ orientation: 'vertical' }));
-        expect($el).toHaveStyleRule('flex-direction', 'row');
+        expect($el).toHaveClass(styles.vertical);
     });
     test('changes the active tab after user click', async () => {
         render(buildComponent());
