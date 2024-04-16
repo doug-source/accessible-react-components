@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
+import styles from './TabListBtn.module.scss';
 import { TabListBtn } from './index';
 
 type BtnProps = ComponentPropsWithoutRef<typeof TabListBtn>;
@@ -72,7 +72,7 @@ describe('<TabListBtn /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const $btn = screen.getByText('something');
-        expect($btn).toBeVisible();
+        expect($btn).toBeInTheDocument();
     });
     test('renders with properties passed', () => {
         const props = makeProps();
@@ -80,8 +80,7 @@ describe('<TabListBtn /> component', () => {
         const $btn = screen.getByRole('tab');
         expect($btn).toHaveTextContent('something');
         expect($btn).not.toHaveClass(props.className);
-        expect($btn).toHaveStyleRule('flex', '1');
-        expect($btn).toHaveStyleRule('text-align', 'center');
+        expect($btn).not.toHaveClass(styles.vertical);
         expect($btn).not.toHaveAttribute('id', props.id);
         expectAttrs($btn, {
             'aria-controls': 'some-element',
@@ -91,8 +90,7 @@ describe('<TabListBtn /> component', () => {
         rerender(buildComponent(props));
         expect($btn).toHaveTextContent(props.children);
         expect($btn).toHaveClass(props.className);
-        expect($btn).toHaveStyleRule('flex', '0');
-        expect($btn).toHaveStyleRule('text-align', 'left');
+        expect($btn).toHaveClass(styles.vertical);
         expectAttrs($btn, {
             'aria-controls': props['aria-controls'],
             'aria-selected': `${props['aria-selected']}`,

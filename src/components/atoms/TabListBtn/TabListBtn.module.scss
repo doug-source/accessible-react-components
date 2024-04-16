@@ -1,0 +1,17 @@
+.tabListBtn {
+    appearance: none;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.85rem;
+    flex: 1;
+    text-align: center;
+    &:focus {
+        outline: none;
+    }
+    &.vertical {
+        flex: 0;
+        text-align: left;
+    }
+}
