@@ -1,31 +1,31 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { TabListBtnText_ as BtnText_ } from './style';
-
-type BtnTextProps = ComponentPropsWithoutRef<typeof BtnText_>;
+import { orientationAxis } from '../../../types/css-props';
+import styles from './TabListBtnText.module.scss';
 
 type TabListBtnTextProps = {
-    selected?: BtnTextProps['$selected'];
-    paddingBlock: BtnTextProps['$paddingBlock'];
-    borderBottomWidth: BtnTextProps['$borderBottomWidth'];
-    orientation: BtnTextProps['$orientation'];
-} & Omit<
-    BtnTextProps,
-    '$selected' | '$paddingBlock' | '$borderBottomWidth' | '$orientation'
->;
+    selected?: boolean;
+    orientation: orientationAxis;
+} & ComponentPropsWithoutRef<'span'>;
 
 export const TabListBtnText = ({
     selected,
-    paddingBlock,
-    borderBottomWidth,
     orientation,
+    className,
     ...remain
 }: TabListBtnTextProps) => {
+    const orientationClass =
+        orientation === 'horizontal' ? styles.horizontal : styles.vertical;
+    const selectClass = selected ? styles.selected : null;
+
     return (
-        <BtnText_
-            $paddingBlock={paddingBlock}
-            $borderBottomWidth={borderBottomWidth}
-            $selected={selected}
-            $orientation={orientation}
+        <span
+            className={classNames(
+                className,
+                styles.tabListBtnText,
+                orientationClass,
+                selectClass
+            )}
             {...remain}
         />
     );

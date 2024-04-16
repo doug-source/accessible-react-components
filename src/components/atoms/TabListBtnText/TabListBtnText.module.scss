@@ -1,0 +1,38 @@
+.tabListBtnText {
+    display: inline-block;
+    width: 100%;
+    text-transform: capitalize;
+    position: relative;
+    z-index: 1;
+    font-weight: normal;
+    padding: 0.5rem 0.75rem;
+    border-width: 0;
+    border-color: transparent;
+    border-style: solid;
+
+    &.selected {
+        font-weight: 700;
+        border-color: #000;
+    }
+    &.horizontal {
+        // value from TabList's height (2 times)
+        border-bottom-width: 0.25rem;
+    }
+    &.vertical {
+        // value from TabList's height (2 times)
+        border-left-width: 0.25rem;
+    }
+
+    *:focus > &::after {
+        content: '';
+        position: absolute;
+        top: 0.0625rem;
+        right: 0.0625rem;
+        bottom: 0.0625rem;
+        left: 0.0625rem;
+        border: 0.125rem;
+        border-style: solid;
+        border-color: blue;
+        border-radius: 0.5rem;
+    }
+}
