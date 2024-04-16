@@ -1,18 +1,24 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { DialogBox_ } from './style';
+import styles from './DialogBox.module.scss';
 
-type StyleProps = ComponentPropsWithoutRef<typeof DialogBox_>;
-
-type DialogBoxProps = Omit<StyleProps, '$show'> & {
-    show?: StyleProps['$show'];
+type DialogBoxProps = ComponentPropsWithoutRef<'div'> & {
+    show?: boolean;
 };
 
 export const DialogBox = ({
     show = false,
+    className,
     children,
     ...remain
-}: DialogBoxProps) => (
-    <DialogBox_ $show={show} {...remain}>
-        {children}
-    </DialogBox_>
-);
+}: DialogBoxProps) => {
+    const classNameInner = show ? styles.show : styles.hide;
+    return (
+        <div
+            {...remain}
+            className={classNames(className, styles.dialogBox, classNameInner)}
+        >
+            {children}
+        </div>
+    );
+};
