@@ -1,16 +1,34 @@
-import { calcTranslateX } from '.';
+import { defineTypeClass, defineVisibilityByAriaHidden } from '.';
+import styles from '../SwitchCursorSvg.module.scss';
 
-describe('calcTranslateX function', () => {
+describe('defineTypeClass function', () => {
     test('returns on output', () => {
-        const output = calcTranslateX('on');
-        expect(output).toBe('calc(100% - 1rem - 0.5rem)');
+        const output = defineTypeClass('on');
+        expect(output).toBe(styles.on);
     });
     test('returns mixed output', () => {
-        const output = calcTranslateX('mixed');
-        expect(output).toBe('calc((100% - 1rem - 0.5rem) / 2)');
+        const output = defineTypeClass('mixed');
+        expect(output).toBe(styles.mixed);
     });
     test('returns off output', () => {
-        const output = calcTranslateX('off');
-        expect(output).toBe('0');
+        const output = defineTypeClass('off');
+        expect(output).toBe(styles.off);
+    });
+});
+
+describe('defineVisibility function', () => {
+    test('returns hide output', () => {
+        let output = defineVisibilityByAriaHidden(true);
+        expect(output).toBe(styles.hide);
+        output = defineVisibilityByAriaHidden('true');
+        expect(output).toBe(styles.hide);
+    });
+    test('returns show output', () => {
+        let output = defineVisibilityByAriaHidden();
+        expect(output).toBe(styles.show);
+        output = defineVisibilityByAriaHidden(false);
+        expect(output).toBe(styles.show);
+        output = defineVisibilityByAriaHidden('false');
+        expect(output).toBe(styles.show);
     });
 });

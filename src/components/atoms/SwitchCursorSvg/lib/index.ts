@@ -1,9 +1,22 @@
-export const calcTranslateX = (type: 'on' | 'off' | 'mixed') => {
+import { ComponentPropsWithoutRef } from 'react';
+import { parseBooleanish } from '../../../../lib';
+import styles from '../SwitchCursorSvg.module.scss';
+
+export const defineTypeClass = (type: 'on' | 'off' | 'mixed') => {
     if (type === 'on') {
-        return 'calc(100% - 1rem - 0.5rem)';
+        return styles.on;
     }
     if (type === 'mixed') {
-        return 'calc((100% - 1rem - 0.5rem) / 2)';
+        return styles.mixed;
     }
-    return '0';
+    return styles.off;
+};
+
+type Booleanish = NonNullable<ComponentPropsWithoutRef<'rect'>['aria-hidden']>;
+
+export const defineVisibilityByAriaHidden = (val?: Booleanish) => {
+    if (!parseBooleanish(val)) {
+        return styles.show;
+    }
+    return styles.hide;
 };

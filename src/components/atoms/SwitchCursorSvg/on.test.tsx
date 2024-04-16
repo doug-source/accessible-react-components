@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
+import styles from './SwitchCursorSvg.module.scss';
 import { SwitchCursorSvg } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof SwitchCursorSvg>;
@@ -26,26 +26,23 @@ describe('<SwitchCursorSvg /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const $el = screen.getByTestId('element-to-test');
-        expect($el).toBeVisible();
+        expect($el).toBeInTheDocument();
+        expect($el).toHaveAttribute('aria-hidden', 'false');
+        expect($el).toHaveClass(styles.show);
     });
-    test('renders no rect correctly', () => {
+    test('renders in hidden way correctly', () => {
         render(buildComponent({ 'aria-hidden': true }));
         const $el = screen.getByTestId('element-to-test');
-        expect($el).not.toBeVisible();
+        expect($el).toHaveAttribute('aria-hidden', 'true');
+        expect($el).toHaveClass(styles.hide);
     });
-    test('renders with transform css rule based on type property correctly', () => {
+    test('renders based on type property correctly', () => {
         const { rerender } = render(buildComponent({ type: 'on' }));
         const $el = screen.getByTestId('element-to-test');
-        expect($el).toHaveStyleRule(
-            'transform',
-            'translateX(calc(100% - 1rem - 0.5rem))'
-        );
+        expect($el).toHaveClass(styles.on);
         rerender(buildComponent({ type: 'mixed' }));
-        expect($el).toHaveStyleRule(
-            'transform',
-            'translateX(calc((100% - 1rem - 0.5rem) / 2))'
-        );
+        expect($el).toHaveClass(styles.mixed);
         rerender(buildComponent({ type: 'off' }));
-        expect($el).toHaveStyleRule('transform', 'translateX(0)');
+        expect($el).toHaveClass(styles.off);
     });
 });

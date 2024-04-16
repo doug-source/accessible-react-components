@@ -1,0 +1,25 @@
+.switchCursorSvg {
+    stroke: currentcolor;
+    fill: currentcolor;
+    fill-opacity: 1;
+
+    width: 1rem;
+    height: calc(100% - 0.25rem * 2);
+    position: absolute;
+
+    &.show {
+        display: block;
+    }
+    &.hide {
+        display: none;
+    }
+    &.on {
+        transform: translateX(calc(100% - 1rem - 0.5rem));
+    }
+    &.off {
+        transform: translateX(0);
+    }
+    &.mixed {
+        transform: translateX(calc((100% - 1rem - 0.5rem) / 2));
+    }
+}
