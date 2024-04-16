@@ -1,0 +1,11 @@
+.switchCheckbox {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+}
+
+.focused {
+    border-color: #005a9c;
+    outline: none;
+}

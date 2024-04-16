@@ -1,8 +1,10 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useState } from 'react';
+import { SwitchCursor } from '../../atoms/SwitchCursor';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
-import { SwitchBasicBox } from '../SwitchBasicBox';
+import boxStyles from '../SwitchBasicBox/SwitchBasicBox.module.scss';
 import { SwitchMarker } from '../SwitchMarker';
-import { Checkbox_ } from './style';
+import styles from './SwitchCheckbox.module.scss';
 
 type SwitchCheckboxProps = {
     label?: ComponentPropsWithoutRef<typeof SwitchLabel>['label'];
@@ -14,23 +16,25 @@ export const SwitchCheckbox = ({
     checked = false,
 }: SwitchCheckboxProps) => {
     const [checkedState, setCheckedState] = useState(checked);
-    const [className, setClassName] = useState<'focus' | ''>('');
+    const [className, setClassName] = useState<string>('');
     return (
-        <SwitchBasicBox
-            as="label"
-            className={className}
-            onFocus={() => setClassName('focus')}
+        <label
+            className={classNames(className, boxStyles.switchBasicBox)}
+            onFocus={() => setClassName(styles.focused)}
             onBlur={() => setClassName('')}
-            focusable={false}
         >
             <SwitchLabel label={label} />
 
-            <Checkbox_
+            <input
+                type="checkbox"
                 role="switch"
+                className={styles.switchCheckbox}
                 onClick={() => setCheckedState(!checkedState)}
             />
 
-            <SwitchMarker checked={checkedState} />
-        </SwitchBasicBox>
+            <SwitchMarker>
+                <SwitchCursor checked={checkedState} />
+            </SwitchMarker>
+        </label>
     );
 };

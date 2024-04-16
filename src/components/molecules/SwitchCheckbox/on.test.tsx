@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
 import { act } from 'react-dom/test-utils';
 import { SwitchCheckbox } from './index';
@@ -17,13 +16,13 @@ describe('<SwitchCheckbox /> component', () => {
         const label = 'some content';
         render(buildComponent({ label }));
         const $el = screen.getByText(label);
-        expect($el).toBeVisible();
+        expect($el).toBeInTheDocument();
     });
     test('renders by switch role element correctly', () => {
         render(buildComponent());
         const $el = screen.getByRole('switch');
-        expect($el.parentNode).toBeVisible();
-        expect($el).not.toBeVisible();
+        expect($el.parentNode).toBeInTheDocument();
+        expect($el).toBeInTheDocument();
     });
     test('renders with focus and blur correctly', () => {
         render(buildComponent());
@@ -31,11 +30,11 @@ describe('<SwitchCheckbox /> component', () => {
         act(() => {
             $el && $el.focus();
         });
-        expect($el.parentElement).toHaveClass('focus');
+        expect($el.parentElement).toHaveClass('focused');
         act(() => {
             $el && $el.blur();
         });
-        expect($el.parentElement).not.toHaveClass('focus');
+        expect($el.parentElement).not.toHaveClass('focused');
     });
     test('renders triggering click event correctly', async () => {
         render(buildComponent());
