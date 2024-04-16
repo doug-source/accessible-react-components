@@ -1,18 +1,20 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { SwitchCursorBoxSvg_ } from './style';
+import styles from './SwitchCursorBoxSvg.module.scss';
 
-type SwitchCursorBoxSvgProps = ComponentPropsWithoutRef<
-    typeof SwitchCursorBoxSvg_
->;
+type SwitchCursorBoxSvgProps = ComponentPropsWithoutRef<'rect'>;
 
-export const SwitchCursorBoxSvg = (props: SwitchCursorBoxSvgProps) => {
+export const SwitchCursorBoxSvg = ({
+    className,
+    ...remain
+}: SwitchCursorBoxSvgProps) => {
     return (
-        <SwitchCursorBoxSvg_
-            className="container"
+        <rect
+            {...remain}
+            className={classNames(className, styles.switchCursorBoxSvg)}
             x="0.0625rem"
             y="0.0625rem"
             rx="0.25rem"
-            {...props}
         />
     );
 };
