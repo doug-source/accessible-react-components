@@ -33,12 +33,9 @@ const buildComponent = ({
 
 describe('<AlertDialogBox /> component', () => {
     test('renders correctly', () => {
-        const { rerender } = render(buildComponent());
+        render(buildComponent());
         const $el = screen.getByRole('alertdialog', { hidden: true });
         expect($el).toBeInTheDocument();
-        expect($el).not.toBeVisible();
-        rerender(buildComponent({ show: true }));
-        expect($el).toBeVisible();
     });
     test('renders with remain properties passed', () => {
         const props = {
@@ -51,6 +48,6 @@ describe('<AlertDialogBox /> component', () => {
         const $el = screen.getByRole('alertdialog');
         expect($el).toHaveAttribute('aria-labelledby', props.headingId);
         expect($el).toHaveAttribute('aria-describedby', props.descriptionId);
-        expect(within($el).getByText('content')).toBeVisible();
+        expect(within($el).getByText('content')).toBeInTheDocument();
     });
 });

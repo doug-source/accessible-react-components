@@ -1,7 +1,8 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { AlertDialogBox_ } from './style';
+import styles from './AlertDialogBox.module.scss';
 
-type AlertDialogBoxProps = ComponentPropsWithoutRef<typeof AlertDialogBox_> & {
+type AlertDialogBoxProps = ComponentPropsWithoutRef<'div'> & {
     headingId: string;
     descriptionId: string;
     show?: boolean;
@@ -12,17 +13,25 @@ export const AlertDialogBox = ({
     descriptionId,
     show,
     children,
+    className,
     ...remain
-}: AlertDialogBoxProps) => (
-    <AlertDialogBox_
-        id="alertdialog"
-        role="alertdialog"
-        aria-modal="true"
-        aria-labelledby={headingId}
-        aria-describedby={descriptionId}
-        $show={show}
-        {...remain}
-    >
-        {children}
-    </AlertDialogBox_>
-);
+}: AlertDialogBoxProps) => {
+    const classNameInner = show ? styles.show : styles.hide;
+    return (
+        <div
+            {...remain}
+            className={classNames(
+                className,
+                styles.alertDialogBox,
+                classNameInner
+            )}
+            id="alertdialog"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby={headingId}
+            aria-describedby={descriptionId}
+        >
+            {children}
+        </div>
+    );
+};

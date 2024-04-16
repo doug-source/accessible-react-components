@@ -1,0 +1,9 @@
+.alertDialogBox {
+    position: relative;
+}
+.alertDialogBox.show {
+    display: flex;
+}
+.alertDialogBox.hide {
+    display: none;
+}
