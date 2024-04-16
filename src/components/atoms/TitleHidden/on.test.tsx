@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
 import { TitleHidden } from './index';
 

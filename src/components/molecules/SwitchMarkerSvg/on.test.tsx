@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
-import 'jest-styled-components';
 import { ComponentPropsWithoutRef } from 'react';
 import stylesFromCursor from '../../atoms/SwitchCursorSvg/SwitchCursorSvg.module.scss';
 import { SwitchMarkerSvg } from './index';
