@@ -1,21 +1,15 @@
+import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { WebTarget } from 'styled-components';
-import { SwitchBasicBox_ } from './style';
+import styles from './SwitchBasicBox.module.scss';
 
-type StyleProps = ComponentPropsWithoutRef<typeof SwitchBasicBox_>;
-
-type SwitchBasicBoxProps = Omit<StyleProps, '$focusable'> & {
-    as?: void | WebTarget;
-    focusable: StyleProps['$focusable'];
-};
+type SwitchBasicBoxProps = ComponentPropsWithoutRef<'div'>;
 
 export const SwitchBasicBox = ({
-    as,
-    focusable,
+    className,
     children,
     ...remain
 }: SwitchBasicBoxProps) => (
-    <SwitchBasicBox_ {...remain} as={as} $focusable={focusable}>
+    <div {...remain} className={classNames(className, styles.switchBasicBox)}>
         {children}
-    </SwitchBasicBox_>
+    </div>
 );

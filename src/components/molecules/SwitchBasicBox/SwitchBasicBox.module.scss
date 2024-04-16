@@ -1,0 +1,18 @@
+.switchBasicBox {
+    cursor: pointer;
+    padding: 0.25rem;
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: transparent;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    border-radius: 0.3125rem;
+}
+:not(label).switchBasicBox {
+    &:focus,
+    &:hover {
+        border-color: #005a9c;
+        outline: none;
+    }
+}
