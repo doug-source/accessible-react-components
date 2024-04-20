@@ -1,0 +1,20 @@
+.btnDefault {
+    width: 1.575rem;
+    height: 1.575rem;
+    padding: 0.125rem;
+    margin: 0;
+    border: 0;
+
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: transparent;
+
+    appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+        border-radius: 0.25rem;
+    }
+}
