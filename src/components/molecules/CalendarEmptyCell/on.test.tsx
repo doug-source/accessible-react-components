@@ -28,7 +28,7 @@ describe('<CalendarEmptyCell /> component', () => {
         const $el = screen.getByTestId('key-test');
         expect($el).toBeInTheDocument();
         expect($el).toHaveClass(stylesCell.calendarCell);
-        expect($el).toHaveClass(styles.empty);
+        expect($el).toHaveClass(styles.ghost);
     });
     test('renders with HTMLTableCellElement instance correctly', () => {
         const { rerender } = render(buildComponent());

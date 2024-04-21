@@ -14,7 +14,7 @@ export const CalendarEmptyCell = ({
     <CalendarCell
         {...remain}
         type={type}
-        className={classNames(className, styles.empty)}
+        className={classNames(className, styles.ghost)}
         tabIndex={-1}
     >
         {children}
