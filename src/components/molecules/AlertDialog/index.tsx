@@ -3,8 +3,8 @@ import { Heading } from '../../atoms/Heading';
 import { Backdrop } from '../Backdrop';
 import { TabIndexReset } from '../TabIndexReset';
 import styles from './AlertDialog.module.scss';
-import { AlertDialogDesc } from './components/AlertDialogDesc';
 import { Box } from './components/Box';
+import { Description } from './components/Description';
 import { useKeydownBinding } from './lib/hooks';
 
 type AlertDialogProps = {
@@ -38,12 +38,12 @@ const AlertDialog = ({
                 <Heading id={headingId} className={styles.heading}>
                     {heading}
                 </Heading>
-                <AlertDialog.AlertDialogDesc
+                <AlertDialog.Description
                     id={descriptionId}
                     className={styles.alertDialog}
                 >
                     {description}
-                </AlertDialog.AlertDialogDesc>
+                </AlertDialog.Description>
                 {children}
             </AlertDialog.Box>
             <TabIndexReset />
@@ -52,6 +52,6 @@ const AlertDialog = ({
 };
 
 AlertDialog.Box = Box;
-AlertDialog.AlertDialogDesc = AlertDialogDesc;
+AlertDialog.Description = Description;
 
 export { AlertDialog };

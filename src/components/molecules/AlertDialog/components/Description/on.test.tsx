@@ -1,17 +1,17 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import { ComponentPropsWithoutRef } from 'react';
-import { AlertDialogDesc } from './index';
+import { Description } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof AlertDialogDesc>;
+type ElementProps = ComponentPropsWithoutRef<typeof Description>;
 
 const buildComponent = ({
     children = 'The text description',
     ...remain
 }: ElementProps = {}) => (
-    <AlertDialogDesc {...remain} data-testid="dialog-desc">
+    <Description {...remain} data-testid="dialog-desc">
         {children}
-    </AlertDialogDesc>
+    </Description>
 );
 
 describe('<AlertDialogDesc /> component', () => {
