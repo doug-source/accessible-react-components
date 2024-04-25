@@ -14,3 +14,8 @@ export const parseBooleanish = (
 ) => {
     return !isBooleanishFalsy(val);
 };
+
+export const firstUpperCase = (str: string) => {
+    const strVal = str.trim();
+    return strVal.charAt(0).toUpperCase() + strVal.slice(1);
+};

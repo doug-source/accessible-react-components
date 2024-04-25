@@ -1,4 +1,9 @@
-import { isBooleanishFalsy, makeBooleanHandle, parseBooleanish } from '.';
+import {
+    firstUpperCase,
+    isBooleanishFalsy,
+    makeBooleanHandle,
+    parseBooleanish,
+} from '.';
 
 describe('isBooleanishFalsy function', () => {
     test('returns as output the true value correctly', () => {
@@ -44,5 +49,14 @@ describe('parseBooleanish function', () => {
         expect(output).toBe(false);
         output = parseBooleanish('false');
         expect(output).toBe(false);
+    });
+});
+
+describe('firstUpperCase function', () => {
+    test('returns output correctly', () => {
+        let output = firstUpperCase('test-A');
+        expect(output).toBe('Test-A');
+        output = firstUpperCase('   test-B   ');
+        expect(output).toBe('Test-B');
     });
 });
