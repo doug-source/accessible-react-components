@@ -1,10 +1,10 @@
 import { ReactNode, useId } from 'react';
 import { AlertDialogDesc } from '../../atoms/AlertDialogDesc';
 import { Heading } from '../../atoms/Heading';
-import { AlertDialogBox } from '../AlertDialogBox';
 import { Backdrop } from '../Backdrop';
 import { TabIndexReset } from '../TabIndexReset';
 import styles from './AlertDialog.module.scss';
+import { AlertDialogBox } from './components/AlertDialogBox';
 import { useKeydownBinding } from './lib/hooks';
 
 type AlertDialogProps = {
