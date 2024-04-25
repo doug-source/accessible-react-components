@@ -4,7 +4,7 @@ import { Heading } from '../../atoms/Heading';
 import { Backdrop } from '../Backdrop';
 import { TabIndexReset } from '../TabIndexReset';
 import styles from './AlertDialog.module.scss';
-import { AlertDialogBox } from './components/AlertDialogBox';
+import { Box } from './components/Box';
 import { useKeydownBinding } from './lib/hooks';
 
 type AlertDialogProps = {
@@ -15,7 +15,7 @@ type AlertDialogProps = {
     onClose: () => void;
 };
 
-export const AlertDialog = ({
+const AlertDialog = ({
     show,
     heading,
     description,
@@ -29,7 +29,7 @@ export const AlertDialog = ({
     return (
         <Backdrop show={show}>
             <TabIndexReset />
-            <AlertDialogBox
+            <AlertDialog.Box
                 headingId={headingId}
                 descriptionId={descriptionId}
                 show={show}
@@ -45,8 +45,12 @@ export const AlertDialog = ({
                     {description}
                 </AlertDialogDesc>
                 {children}
-            </AlertDialogBox>
+            </AlertDialog.Box>
             <TabIndexReset />
         </Backdrop>
     );
 };
+
+AlertDialog.Box = Box;
+
+export { AlertDialog };

@@ -1,9 +1,9 @@
-.alertDialogBox {
+.box {
     position: relative;
 }
-.alertDialogBox.show {
+.box.show {
     display: flex;
 }
-.alertDialogBox.hide {
+.box.hide {
     display: none;
 }

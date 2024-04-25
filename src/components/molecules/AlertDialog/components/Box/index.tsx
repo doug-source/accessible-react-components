@@ -1,30 +1,26 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import styles from './AlertDialogBox.module.scss';
+import styles from './Box.module.scss';
 
-type AlertDialogBoxProps = ComponentPropsWithoutRef<'div'> & {
+type BoxProps = ComponentPropsWithoutRef<'div'> & {
     headingId: string;
     descriptionId: string;
     show?: boolean;
 };
 
-export const AlertDialogBox = ({
+export const Box = ({
     headingId,
     descriptionId,
     show,
     children,
     className,
     ...remain
-}: AlertDialogBoxProps) => {
+}: BoxProps) => {
     const classNameInner = show ? styles.show : styles.hide;
     return (
         <div
             {...remain}
-            className={classNames(
-                className,
-                styles.alertDialogBox,
-                classNameInner
-            )}
+            className={classNames(className, styles.box, classNameInner)}
             id="alertdialog"
             role="alertdialog"
             aria-modal="true"

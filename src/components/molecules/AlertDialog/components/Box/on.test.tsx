@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 import { render, renderHook, screen, within } from '@testing-library/react';
 import { ComponentPropsWithoutRef, useId } from 'react';
-import { AlertDialogBox } from './index';
+import { Box } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof AlertDialogBox>;
+type ElementProps = ComponentPropsWithoutRef<typeof Box>;
 type keys = 'headingId' | 'descriptionId' | 'show';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
@@ -21,13 +21,9 @@ const buildComponent = ({
     children,
 }: Props = {}) => {
     return (
-        <AlertDialogBox
-            show={show}
-            headingId={headingId}
-            descriptionId={descriptionId}
-        >
+        <Box show={show} headingId={headingId} descriptionId={descriptionId}>
             {children}
-        </AlertDialogBox>
+        </Box>
     );
 };
 
