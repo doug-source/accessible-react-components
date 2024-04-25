@@ -1,9 +1,9 @@
 import { ReactNode, useId } from 'react';
-import { AlertDialogDesc } from '../../atoms/AlertDialogDesc';
 import { Heading } from '../../atoms/Heading';
 import { Backdrop } from '../Backdrop';
 import { TabIndexReset } from '../TabIndexReset';
 import styles from './AlertDialog.module.scss';
+import { AlertDialogDesc } from './components/AlertDialogDesc';
 import { Box } from './components/Box';
 import { useKeydownBinding } from './lib/hooks';
 
@@ -38,12 +38,12 @@ const AlertDialog = ({
                 <Heading id={headingId} className={styles.heading}>
                     {heading}
                 </Heading>
-                <AlertDialogDesc
+                <AlertDialog.AlertDialogDesc
                     id={descriptionId}
                     className={styles.alertDialog}
                 >
                     {description}
-                </AlertDialogDesc>
+                </AlertDialog.AlertDialogDesc>
                 {children}
             </AlertDialog.Box>
             <TabIndexReset />
@@ -52,5 +52,6 @@ const AlertDialog = ({
 };
 
 AlertDialog.Box = Box;
+AlertDialog.AlertDialogDesc = AlertDialogDesc;
 
 export { AlertDialog };
