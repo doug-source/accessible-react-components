@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ReactNode, useId } from 'react';
+import { Backdrop } from '../../atoms/Backdrop';
 import { Heading } from '../../atoms/Heading';
-import { Backdrop } from '../Backdrop';
 import { DialogBox } from '../DialogBox';
 import { TabIndexReset } from '../TabIndexReset';
 
