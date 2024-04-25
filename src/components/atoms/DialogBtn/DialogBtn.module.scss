@@ -1,6 +1,22 @@
 .button {
     cursor: pointer;
+    padding: 0.375rem;
+    margin-left: 1rem;
+    width: 5rem;
+    background-color: #dae7fb;
+    border: 0.0625rem solid transparent;
+    color: #000;
+    outline: none;
+    font-weight: bold;
+
     & ~ & {
         margin-left: 0.5rem;
+    }
+    &:hover {
+        border-color: #000;
+    }
+    &:focus {
+        padding: 0.25rem;
+        border: 0.125rem solid #000;
     }
 }
