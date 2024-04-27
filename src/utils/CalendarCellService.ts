@@ -90,9 +90,9 @@ export class CalendarCellService {
             return null;
         }
         if (col === 0) {
-            return this.refList.current[row + 1][col];
+            return this.refList.current?.[row + 1]?.[col];
         }
-        return this.refList.current[row][col];
+        return this.refList.current?.[row]?.[col];
     }
 
     /**
@@ -116,10 +116,10 @@ export class CalendarCellService {
             return null;
         }
         if (col === 6) {
-            return this.refList.current[row - 1][col];
+            return this.refList.current?.[row - 1]?.[col];
         }
 
-        return this.refList.current[row][col];
+        return this.refList.current?.[row]?.[col];
     }
 
     /**
@@ -163,7 +163,7 @@ export class CalendarCellService {
             this.soonDate = new Date(newDate);
             return null;
         }
-        return refList[row][col];
+        return refList?.[row]?.[col];
     }
 
     /**
