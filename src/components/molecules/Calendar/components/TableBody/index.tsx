@@ -11,7 +11,10 @@ import { ariaSelectedCell, extractDateContent, tabIndexCell } from './lib';
 import { makeCellKeyDown } from './lib/handlers/makeCellKeyDown';
 import { useTableRowRef } from './lib/hooks/useTableCellRefList';
 
-type TableBodyProps = ComponentPropsWithoutRef<typeof TableSection> & {
+type TableBodyProps = Omit<
+    ComponentPropsWithoutRef<typeof TableSection>,
+    'type'
+> & {
     listRows: Date[][];
     cellClassName?: string;
     calendarData: CalendarData;

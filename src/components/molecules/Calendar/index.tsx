@@ -133,7 +133,6 @@ const Calendar = ({
                     />
                     <Calendar.TableBody
                         listRows={listRows}
-                        type="tbody"
                         calendarData={calendarData}
                         hideCallback={hideCallback}
                         setDateFocused={setDateFocused}
