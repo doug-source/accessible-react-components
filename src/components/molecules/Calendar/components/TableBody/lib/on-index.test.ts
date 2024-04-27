@@ -1,5 +1,5 @@
 import { ariaSelectedCell, extractDateContent, tabIndexCell } from '.';
-import { CalendarData } from '../../../../utils/CalendarData';
+import { CalendarData } from '../../../../../../utils/CalendarData';
 
 const calendarData = new CalendarData('en-US');
 
