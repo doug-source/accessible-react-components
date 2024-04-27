@@ -12,7 +12,7 @@ type DialogBtnProps = ComponentPropsWithoutRef<'button'>;
  * @returns The react component
  */
 export const DialogBtn = forwardRef<HTMLButtonElement, DialogBtnProps>(
-    function AlertDialogBtnInner(
+    function DialogBtnInner(
         { children, className, ...remain }: DialogBtnProps,
         ref
     ) {
