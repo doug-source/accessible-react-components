@@ -31,9 +31,9 @@ describe('<TableHead /> component', () => {
     test('renders weekdays correctly', () => {
         const { rerender } = render(buildComponent());
         const $el = screen.getByTitle('weekdays');
-        expect(within($el).getByText('Sunday')).toBeInTheDocument();
-        expect(within($el).getByText('Monday')).toBeInTheDocument();
-        expect(within($el).queryByText('Tuesday')).not.toBeInTheDocument();
+        expect(within($el).getByText('sun')).toBeInTheDocument();
+        expect(within($el).getByText('mon')).toBeInTheDocument();
+        expect(within($el).queryByText('tue')).not.toBeInTheDocument();
         rerender(
             buildComponent({
                 weekdays: [
@@ -42,8 +42,8 @@ describe('<TableHead /> component', () => {
                 ],
             })
         );
-        expect(within($el).queryByText('Sunday')).not.toBeInTheDocument();
-        expect(within($el).getByText('Monday')).toBeInTheDocument();
-        expect(within($el).getByText('Tuesday')).toBeInTheDocument();
+        expect(within($el).queryByText('sun')).not.toBeInTheDocument();
+        expect(within($el).getByText('mon')).toBeInTheDocument();
+        expect(within($el).getByText('tue')).toBeInTheDocument();
     });
 });
