@@ -1,0 +1,65 @@
+.tableBox {
+    width: 100%;
+    overflow: auto;
+}
+
+.calendarBox {
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 0.3125rem;
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: #06c;
+    background: #fff;
+    z-index: 2;
+}
+
+.arrowIcon {
+    fill: #fff;
+    width: 0.75rem;
+    height: 0.75rem;
+    &.left {
+        transform: rotate(180deg);
+    }
+}
+
+.headerBtn {
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    &:focus {
+        border: 0.125rem solid #fff;
+        border-radius: 0;
+    }
+}
+
+.cell {
+    text-align: center;
+    color: currentColor;
+    min-width: 2.5rem;
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid transparent;
+    padding: 0.125rem;
+    outline: none;
+    cursor: default;
+
+    &[aria-selected] {
+        border: 0.125rem dotted #646464;
+        padding: 0.625rem;
+    }
+    &[tabindex='0'] {
+        border-style: solid;
+        background-color: #1e6ee6;
+        color: white;
+    }
+    &:hover:not([tabindex='0']) {
+        border-color: #646464;
+        background-color: #dae7fb;
+    }
+    &:focus {
+        padding: 0.625rem;
+        border-width: 0.125rem;
+        border-color: #646464;
+    }
+}

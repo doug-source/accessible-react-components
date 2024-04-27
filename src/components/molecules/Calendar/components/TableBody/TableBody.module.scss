@@ -1,0 +1,11 @@
+.day {
+    min-width: 2ch;
+    background-color: #eee;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    &.empty:hover,
+    &.empty:focus {
+        background-color: #eee;
+        border-color: transparent;
+    }
+}
