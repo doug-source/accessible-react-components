@@ -25,6 +25,9 @@ export const useCalendarDays = (
                 : calendarData.getInputDateSelected()
         );
     }, [calendarData, dateSelected, onDateChange]);
+    useEffect(() => {
+        calendarData.setLocale(locale);
+    }, [calendarData, locale]);
 
     const [monthDays, setMonthDays] = useState<Date[][]>([]);
     useEffect(() => {
