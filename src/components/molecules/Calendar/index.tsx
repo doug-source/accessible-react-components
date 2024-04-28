@@ -67,6 +67,7 @@ const Calendar = ({
             aria-label="Choose Date"
             show={showCalendar}
             onKeyDown={escKeyDownHandler}
+            title="calendar"
         >
             <Calendar.Header>
                 <Calendar.HeaderBtns>
