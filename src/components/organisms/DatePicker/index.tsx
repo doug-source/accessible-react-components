@@ -28,7 +28,7 @@ const DatePicker = ({
     } = useCalendarData(locale, onDateChange);
     const [showCalendar, setShowCalendar] = useState(show);
     return (
-        <DatePicker.Box>
+        <DatePicker.Box title="date picker">
             <DatePicker.DateInput
                 format={calendarData.getDateFormat()}
                 value={dataSelectedInput}
