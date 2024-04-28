@@ -9,15 +9,11 @@ import { useCalendarData } from './hooks/useCalendarData';
 
 type DatePickerProps = {
     show: boolean;
-    locale?: string;
+    locale: string;
     onDateChange?: (date: Date) => void;
 };
 
-const DatePicker = ({
-    show,
-    locale = 'en-US',
-    onDateChange,
-}: DatePickerProps) => {
+const DatePicker = ({ show, locale, onDateChange }: DatePickerProps) => {
     const {
         list: listRows,
         calendarData,
