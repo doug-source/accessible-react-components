@@ -28,3 +28,14 @@ Components list:
     -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
     -   code base: [https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/)
+
+<div align="center">
+  <h3><b>📍 Repository Visitor Count</b></h3>
+</div>
+
+<p align="center">
+  <img
+    src="https://profile-counter.glitch.me/accessible-react-components/count.svg"
+    alt="Número de visitantes no repositório"
+  />
+</p>
