@@ -115,8 +115,8 @@ const Calendar = ({
                     <Calendar.AfterYearBtn
                         className={styles.headerBtn}
                         btnHandler={afterBtnHandler}
-                        label="next month"
-                        title="go to next month"
+                        label="next year"
+                        title="go to next year"
                     >
                         <ArrowsIcon noEvents className={styles.arrowIcon} />
                     </Calendar.AfterYearBtn>
