@@ -6,13 +6,16 @@ import { CalendarCellService } from '../../../../../../../utils/CalendarCellServ
 import { CalendarData } from '../../../../../../../utils/CalendarData';
 import { makeCellKeyDown } from './makeCellKeyDown';
 
-const createBtn = (onKeyDown: KeyboardEventHandler<HTMLElement>) => {
+const createBtn = (
+    onKeyDown: KeyboardEventHandler<HTMLElement>,
+    onKeyDownTwo = onKeyDown
+) => {
     return (
         <>
             <button data-testid="preBtn" onKeyDown={onKeyDown}>
                 One
             </button>
-            <button data-testid="posBtn" onKeyDown={onKeyDown}>
+            <button data-testid="posBtn" onKeyDown={onKeyDownTwo}>
                 Two
             </button>
         </>
@@ -256,5 +259,217 @@ describe('makeCellKeyDown handler', () => {
         newDate.setDate(date.getDate() - 1);
         expect(calendarData.getDateFocused()).toMatchObject(newDate);
         expect($preBtn).toHaveFocus();
+    });
+    test("runs triggering keydown KeyBoard event with Home key with complete month's week correctly", async () => {
+        const date13 = new Date('2024-04-13T00:00:00');
+        const date7 = new Date('2024-04-07T00:00:00');
+        const calendarData = new CalendarData('en-US', date13);
+        const cellService = new CalendarCellService(detachHook(runHook()));
+
+        const jestDateFocused = jest.fn();
+        const setDateFocused = (date: Date) => {
+            jestDateFocused();
+            calendarData.setDateFocused(date);
+        };
+        const row = 1;
+        render(
+            createBtn(
+                makeCellKeyDown(
+                    calendarData,
+                    cellService,
+                    setDateFocused,
+                    () => {},
+                    row,
+                    date7,
+                    () => {}
+                ),
+                makeCellKeyDown(
+                    calendarData,
+                    cellService,
+                    setDateFocused,
+                    () => {},
+                    row,
+                    date13,
+                    () => {}
+                )
+            )
+        );
+        const $preBtn = screen.getByTestId(
+            'preBtn'
+        ) as unknown as HTMLTableCellElement;
+        const $posBtn = screen.getByTestId(
+            'posBtn'
+        ) as unknown as HTMLTableCellElement;
+        $posBtn.focus();
+
+        const anyDate = new Date();
+        cellService.insertItem(row, 0, $preBtn, anyDate);
+        cellService.insertItem(row, 6, $posBtn, anyDate);
+
+        const user = userEvent.setup();
+        await user.keyboard('{Home}');
+        expect(jestDateFocused).toHaveBeenCalled();
+        const newDate = new Date(date7);
+        expect(calendarData.getDateFocused()).toMatchObject(newDate);
+        expect($preBtn).toHaveFocus();
+    });
+    test("runs triggering keydown KeyBoard event with Home key with incomplete month's week correctly", async () => {
+        const date4 = new Date('2024-05-04T00:00:00');
+        const date1 = new Date('2024-05-01T00:00:00');
+        const calendarData = new CalendarData('en-US', date4);
+        const cellService = new CalendarCellService(detachHook(runHook()));
+
+        const jestDateFocused = jest.fn();
+        const setDateFocused = (date: Date) => {
+            jestDateFocused();
+            calendarData.setDateFocused(date);
+        };
+        const row = 0;
+        render(
+            createBtn(
+                makeCellKeyDown(
+                    calendarData,
+                    cellService,
+                    setDateFocused,
+                    () => {},
+                    row,
+                    date1,
+                    () => {}
+                ),
+                makeCellKeyDown(
+                    calendarData,
+                    cellService,
+                    setDateFocused,
+                    () => {},
+                    row,
+                    date4,
+                    () => {}
+                )
+            )
+        );
+        const $preBtn = screen.getByTestId(
+            'preBtn'
+        ) as unknown as HTMLTableCellElement;
+        const $posBtn = screen.getByTestId(
+            'posBtn'
+        ) as unknown as HTMLTableCellElement;
+        $posBtn.focus();
+
+        const anyDate = new Date();
+        cellService.insertItem(row, 3, $preBtn, anyDate);
+        cellService.insertItem(row, 6, $posBtn, anyDate);
+
+        const user = userEvent.setup();
+        await user.keyboard('{Home}');
+        expect(jestDateFocused).toHaveBeenCalled();
+        const newDate = new Date(date1);
+        expect(calendarData.getDateFocused()).toMatchObject(newDate);
+        expect($preBtn).toHaveFocus();
+    });
+    test("runs triggering keydown KeyBoard event with End key with complete month's week correctly", async () => {
+        const date7 = new Date('2024-04-07T00:00:00');
+        const date13 = new Date('2024-04-13T00:00:00');
+        const calendarData = new CalendarData('en-US', date7);
+        const cellService = new CalendarCellService(detachHook(runHook()));
+
+        const jestDateFocused = jest.fn();
+        const setDateFocused = (date: Date) => {
+            jestDateFocused();
+            calendarData.setDateFocused(date);
+        };
+        const row = 1;
+        render(
+            createBtn(
+                makeCellKeyDown(
+                    calendarData,
+                    cellService,
+                    setDateFocused,
+                    () => {},
+                    row,
+                    date7,
+                    () => {}
+                ),
+                makeCellKeyDown(
+                    calendarData,
+                    cellService,
+                    setDateFocused,
+                    () => {},
+                    row,
+                    date13,
+                    () => {}
+                )
+            )
+        );
+        const $preBtn = screen.getByTestId(
+            'preBtn'
+        ) as unknown as HTMLTableCellElement;
+        const $posBtn = screen.getByTestId(
+            'posBtn'
+        ) as unknown as HTMLTableCellElement;
+        $preBtn.focus();
+
+        const anyDate = new Date();
+        cellService.insertItem(row, 0, $preBtn, anyDate);
+        cellService.insertItem(row, 6, $posBtn, anyDate);
+
+        const user = userEvent.setup();
+        await user.keyboard('{End}');
+        expect(jestDateFocused).toHaveBeenCalled();
+        const newDate = new Date(date13);
+        expect(calendarData.getDateFocused()).toMatchObject(newDate);
+        expect($posBtn).toHaveFocus();
+    });
+    test("runs triggering keydown KeyBoard event with End key with incomplete month's week correctly", async () => {
+        const date28 = new Date('2024-04-28T00:00:00');
+        const date30 = new Date('2024-04-30T00:00:00');
+        const calendarData = new CalendarData('en-US', date28);
+        const cellService = new CalendarCellService(detachHook(runHook()));
+
+        const jestDateFocused = jest.fn();
+        const setDateFocused = (date: Date) => {
+            jestDateFocused();
+            calendarData.setDateFocused(date);
+        };
+        const row = 4;
+        render(
+            createBtn(
+                makeCellKeyDown(
+                    calendarData,
+                    cellService,
+                    setDateFocused,
+                    () => {},
+                    row,
+                    date28,
+                    () => {}
+                ),
+                makeCellKeyDown(
+                    calendarData,
+                    cellService,
+                    setDateFocused,
+                    () => {},
+                    row,
+                    date30,
+                    () => {}
+                )
+            )
+        );
+        const $preBtn = screen.getByTestId(
+            'preBtn'
+        ) as unknown as HTMLTableCellElement;
+        const $posBtn = screen.getByTestId(
+            'posBtn'
+        ) as unknown as HTMLTableCellElement;
+        $preBtn.focus();
+
+        const anyDate = new Date();
+        cellService.insertItem(row, 0, $preBtn, anyDate);
+        cellService.insertItem(row, 2, $posBtn, anyDate);
+
+        const user = userEvent.setup();
+        await user.keyboard('{End}');
+        expect(jestDateFocused).toHaveBeenCalled();
+        const newDate = new Date(date30);
+        expect(calendarData.getDateFocused()).toMatchObject(newDate);
+        expect($posBtn).toHaveFocus();
     });
 });

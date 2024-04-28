@@ -68,5 +68,40 @@ export const makeCellKeyDown = (
                 return true;
             },
         ],
+        [
+            'Home',
+            () => {
+                const dayQty = date.getDay() % CalendarData.CALENDAR_WEEK_DAYS;
+                const newDate = new Date(date);
+                newDate.setDate(newDate.getDate() - dayQty);
+                if (newDate.getMonth() !== date.getMonth()) {
+                    const lastMonthDate = CalendarData.getMonthDaysQty(
+                        newDate.getMonth() + 1,
+                        newDate.getFullYear()
+                    );
+                    const diff = lastMonthDate - newDate.getDate();
+                    newDate.setDate(newDate.getDate() + diff + 1);
+                }
+                setDateFocused(newDate);
+                cellService.focusPrevious(i, newDate);
+                return true;
+            },
+        ],
+        [
+            'End',
+            () => {
+                const weekDays = CalendarData.CALENDAR_WEEK_DAYS;
+                const dayPos = date.getDay() % weekDays;
+                const dayQty = weekDays - (dayPos + 1);
+                const newDate = new Date(date);
+                newDate.setDate(newDate.getDate() + dayQty);
+                if (newDate.getMonth() !== date.getMonth()) {
+                    newDate.setDate(0);
+                }
+                setDateFocused(newDate);
+                cellService.focusNext(i, newDate);
+                return true;
+            },
+        ],
     ]);
 };
