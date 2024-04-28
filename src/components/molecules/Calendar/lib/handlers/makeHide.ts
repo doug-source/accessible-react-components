@@ -1,10 +1,6 @@
 import { makeKeydownHandler } from '../../../../../lib/handlers/keyDown';
 
-export const useShowHide = (setShowCalendar: (show: boolean) => void) => {
-    const showCallback = () => {
-        setShowCalendar(true);
-        return true;
-    };
+export const makeHideHandlers = (setShowCalendar: (show: boolean) => void) => {
     const hideCallback = () => {
         setShowCalendar(false);
         return true;
@@ -13,5 +9,5 @@ export const useShowHide = (setShowCalendar: (show: boolean) => void) => {
         ['Esc', () => hideCallback()],
         ['Escape', () => hideCallback()],
     ]);
-    return { showCallback, hideCallback, escKeyDownHandler };
+    return { hideCallback, escKeyDownHandler };
 };

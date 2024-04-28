@@ -21,8 +21,8 @@ import { TableBody } from './components/TableBody';
 import { TableGrid } from './components/TableGrid';
 import { TableHead } from './components/TableHead';
 import { makeHeaderHandlers } from './lib/handlers/dateMode';
+import { makeHideHandlers } from './lib/handlers/makeHide';
 import { useMonthYear } from './lib/hooks/useMonthYear';
-import { useShowHide } from './lib/hooks/useShowHide';
 import { useWeekdays } from './lib/hooks/useWeekdays';
 
 type CalendarProps = {
@@ -57,7 +57,8 @@ const Calendar = ({
         calendarData.year
     );
 
-    const { hideCallback, escKeyDownHandler } = useShowHide(setShowCalendar);
+    const { hideCallback, escKeyDownHandler } =
+        makeHideHandlers(setShowCalendar);
 
     const refBeforeYearBtn = useRef<HTMLButtonElement | null>(null);
     const okBtnRef = useRef<HTMLButtonElement | null>(null);
