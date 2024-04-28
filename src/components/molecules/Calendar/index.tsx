@@ -131,6 +131,7 @@ const Calendar = ({
                     <Calendar.TableHead
                         weekdays={weekdays}
                         cellClassName={styles.cell}
+                        title="weekdays"
                     />
                     <Calendar.TableBody
                         listRows={listRows}
