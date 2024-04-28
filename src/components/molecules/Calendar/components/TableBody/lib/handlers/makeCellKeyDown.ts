@@ -103,5 +103,34 @@ export const makeCellKeyDown = (
                 return true;
             },
         ],
+        [
+            'PageUp',
+            () => {
+                const preMonthDate = date.getDate();
+                let newDate = new Date(date);
+                newDate.setMonth(newDate.getMonth() - 1);
+                if (newDate.getDate() !== preMonthDate) {
+                    newDate = new Date(date);
+                    newDate.setDate(0);
+                }
+                setDateFocused(newDate);
+                cellService.focusPreviousWeek(i, newDate, calendarData);
+                return true;
+            },
+        ],
+        [
+            'PageDown',
+            () => {
+                const preMonthDate = date.getDate();
+                const newDate = new Date(date);
+                newDate.setMonth(newDate.getMonth() + 1);
+                if (newDate.getDate() !== preMonthDate) {
+                    newDate.setDate(0);
+                }
+                setDateFocused(newDate);
+                cellService.focusNextWeek(i, newDate, calendarData);
+                return true;
+            },
+        ],
     ]);
 };
