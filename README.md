@@ -24,3 +24,7 @@ Components list:
     -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
     -   code base: [https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/dialog/)
+-   Dialog (Modal)
+    -   status: done
+    -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+    -   code base: [https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/)
