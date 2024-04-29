@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useRef, useState } from 'react';
 import { orientationAxis } from '../../../types/css-props';
 import { TitleHidden } from '../../atoms/TitleHidden';
-import { TabList } from '../TabList';
-import { TabPanel } from '../TabPanel';
+import { TabList } from '../../molecules/TabList';
+import { TabPanel } from '../../molecules/TabPanel';
 import styles from './Tabs.module.scss';
 import { useKeydown } from './lib/hooks';
 
