@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
-import { SwitchCursorBoxSvg } from '../../atoms/SwitchCursorBoxSvg';
-import { SwitchCursorSvg } from '../../atoms/SwitchCursorSvg';
+import { SwitchCursorBoxSvg } from '../SwitchCursorBoxSvg';
+import { SwitchCursorSvg } from '../SwitchCursorSvg';
 import styles from './SwitchMarkerSvg.module.scss';
 import { isAriaCheckedFalsy } from './lib';
 

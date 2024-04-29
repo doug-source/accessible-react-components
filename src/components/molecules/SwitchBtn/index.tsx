@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useState } from 'react';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
-import { SwitchMarkerSvg } from '../SwitchMarkerSvg';
+import { SwitchMarkerSvg } from '../../atoms/SwitchMarkerSvg';
 import styles from './SwitchBtn.module.scss';
 
 type StyleProps = ComponentPropsWithoutRef<'button'> & {
