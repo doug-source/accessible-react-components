@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, useState } from 'react';
 import { makeBooleanHandle } from '../../../lib';
+import { SwitchBasicBox } from '../../atoms/SwitchBasicBox';
 import { SwitchCursor } from '../../atoms/SwitchCursor';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
-import { SwitchBasicBox } from '../SwitchBasicBox';
 import { SwitchMarker } from '../SwitchMarker';
 import { makeKeydownHandler } from './lib';
 

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useState } from 'react';
+import boxStyles from '../../atoms/SwitchBasicBox/SwitchBasicBox.module.scss';
 import { SwitchCursor } from '../../atoms/SwitchCursor';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
-import boxStyles from '../SwitchBasicBox/SwitchBasicBox.module.scss';
 import { SwitchMarker } from '../SwitchMarker';
 import styles from './SwitchCheckbox.module.scss';
 
