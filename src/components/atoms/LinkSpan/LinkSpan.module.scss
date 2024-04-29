@@ -1,0 +1,15 @@
+.linkSpan {
+    color: #009;
+    background: transparent;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus,
+    &:hover::before,
+    &:focus::before {
+        color: #000;
+        cursor: pointer;
+        outline: 0.2rem solid #2a5bb7;
+        outline-offset: 0.2rem;
+    }
+}
