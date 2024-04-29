@@ -1,7 +1,7 @@
 import { ReactNode, useId } from 'react';
 import { Backdrop } from '../../atoms/Backdrop';
 import { Heading } from '../../atoms/Heading';
-import { TabIndexReset } from '../TabIndexReset';
+import { TabIndexReset } from '../../atoms/TabIndexReset';
 import styles from './AlertDialog.module.scss';
 import { Box } from './components/Box';
 import { Description } from './components/Description';

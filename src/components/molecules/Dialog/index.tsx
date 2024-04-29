@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ReactNode, useId } from 'react';
 import { Backdrop } from '../../atoms/Backdrop';
 import { DialogBox } from '../../atoms/DialogBox';
 import { Heading } from '../../atoms/Heading';
-import { TabIndexReset } from '../TabIndexReset';
+import { TabIndexReset } from '../../atoms/TabIndexReset';
 
 type DialogBoxProps = ComponentPropsWithoutRef<typeof DialogBox>;
 
