@@ -29,7 +29,7 @@ Components list:
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
     -   code base: [https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/)
 -   Link
-    -   status: WIP
+    -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/link/](https://www.w3.org/WAI/ARIA/apg/patterns/link/)
 
 <div align="center">
