@@ -2,8 +2,8 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef } from 'react';
-import styles from './LinkSpan.module.scss';
-import { LinkSpan } from './index';
+import styles from './Link.module.scss';
+import { Link } from './index';
 
 const makeParams = (replaceFn?: ReturnType<typeof jest.fn>) => {
     const locationMocked = {
@@ -20,7 +20,7 @@ const makeParams = (replaceFn?: ReturnType<typeof jest.fn>) => {
     };
 };
 
-type ElementProps = ComponentPropsWithoutRef<typeof LinkSpan>;
+type ElementProps = ComponentPropsWithoutRef<typeof Link>;
 type Props = Omit<ElementProps, 'href'> & Partial<Pick<ElementProps, 'href'>>;
 
 const buildComponent = ({
@@ -29,20 +29,20 @@ const buildComponent = ({
     location = window.location,
 }: Props = {}) => {
     return (
-        <LinkSpan href={href} location={location}>
+        <Link href={href} location={location}>
             {children}
-        </LinkSpan>
+        </Link>
     );
 };
 
-describe('<LinkSpan /> component', () => {
+describe('<Link /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const $el = screen.getByRole('link');
         expect($el).toBeInTheDocument();
         expect($el).toHaveTextContent('some content');
         expect($el).toHaveAttribute('tabIndex', '0');
-        expect($el).toHaveClass(styles.linkSpan);
+        expect($el).toHaveClass(styles.link);
     });
     test('runs calling click event handler correctly', async () => {
         const replaceFn = jest.fn();
