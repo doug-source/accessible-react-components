@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ComponentPropsWithoutRef } from 'react';
 import styles from './Link.module.scss';
 import { Link } from './index';
 
@@ -20,34 +19,36 @@ const makeParams = (replaceFn?: ReturnType<typeof jest.fn>) => {
     };
 };
 
-type ElementProps = ComponentPropsWithoutRef<typeof Link>;
-type Props = Omit<ElementProps, 'href'> & Partial<Pick<ElementProps, 'href'>>;
-
-const buildComponent = ({
-    href = 'http://test.com',
-    children = 'some content',
-    location = window.location,
-}: Props = {}) => {
-    return (
-        <Link href={href} location={location}>
-            {children}
-        </Link>
-    );
-};
-
 describe('<Link /> component', () => {
     test('renders correctly', () => {
-        render(buildComponent());
-        const $el = screen.getByRole('link');
+        const { rerender } = render(
+            <Link type="span" href="http://test.com">
+                some content
+            </Link>
+        );
+        let $el = screen.getByRole('link');
         expect($el).toBeInTheDocument();
         expect($el).toHaveTextContent('some content');
         expect($el).toHaveAttribute('tabIndex', '0');
         expect($el).toHaveClass(styles.link);
+        rerender(
+            <Link type="img" href="http://test.com" alt="alternative text" />
+        );
+        $el = screen.getByRole('link');
+        expect($el).toBeInTheDocument();
+        expect($el).not.toHaveTextContent('some content');
+        expect($el).toHaveAttribute('tabIndex', '0');
+        expect($el).toHaveClass(styles.link);
+        expect($el).toHaveAttribute('alt', 'alternative text');
     });
     test('runs calling click event handler correctly', async () => {
         const replaceFn = jest.fn();
         const { href, locationMocked } = makeParams(replaceFn);
-        render(buildComponent({ href, location: locationMocked }));
+        render(
+            <Link type="span" href={href} location={locationMocked}>
+                some content
+            </Link>
+        );
         const $el = screen.getByRole('link');
         const user = userEvent.setup();
         await user.click($el);
@@ -56,7 +57,11 @@ describe('<Link /> component', () => {
     test('runs calling keyboard event handler correctly', async () => {
         const replaceFn = jest.fn();
         const { href, locationMocked } = makeParams(replaceFn);
-        render(buildComponent({ href, location: locationMocked }));
+        render(
+            <Link type="span" href={href} location={locationMocked}>
+                some content
+            </Link>
+        );
         const $el = screen.getByRole('link');
         $el.focus();
         const user = userEvent.setup();
