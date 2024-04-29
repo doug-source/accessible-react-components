@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef, useState } from 'react';
 import boxStyles from '../../atoms/SwitchBasicBox/SwitchBasicBox.module.scss';
 import { SwitchCursor } from '../../atoms/SwitchCursor';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
-import { SwitchMarker } from '../SwitchMarker';
+import { SwitchMarker } from '../../atoms/SwitchMarker';
 import styles from './SwitchCheckbox.module.scss';
 
 type SwitchCheckboxProps = {

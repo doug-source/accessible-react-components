@@ -3,7 +3,7 @@ import { makeBooleanHandle } from '../../../lib';
 import { SwitchBasicBox } from '../../atoms/SwitchBasicBox';
 import { SwitchCursor } from '../../atoms/SwitchCursor';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
-import { SwitchMarker } from '../SwitchMarker';
+import { SwitchMarker } from '../../atoms/SwitchMarker';
 import { makeKeydownHandler } from './lib';
 
 type StyleProps = ComponentPropsWithoutRef<'div'>;
