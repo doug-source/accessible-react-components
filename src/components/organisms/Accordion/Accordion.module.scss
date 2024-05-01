@@ -1,0 +1,17 @@
+.accordion {
+    display: table;
+    margin: 0;
+    padding: 0;
+    border-radius: 0.4375rem;
+    border: 0.125rem solid #858585;
+    width: auto;
+    height: auto;
+
+    & > * ~ * {
+        border-top: 0.0625rem solid #858585;
+    }
+
+    &:focus-within {
+        border-color: #0759d5;
+    }
+}

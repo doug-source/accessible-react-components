@@ -1,0 +1,7 @@
+.panel {
+    padding: 1rem 1.5rem;
+    border-top: 0.0625rem solid #858585;
+    &[hidden] {
+        display: none;
+    }
+}

@@ -1,0 +1,61 @@
+.header {
+    margin: 0;
+    padding: 0;
+
+    .btn {
+        padding: 1rem 1.5rem;
+        border-style: none;
+        outline: none;
+        display: block;
+        color: #212121;
+        background: none;
+        width: 100%;
+        cursor: pointer;
+        &:hover {
+            background-color: #e1edfe;
+
+            .icon {
+                border-color: #0759d5;
+            }
+        }
+        position: relative;
+
+        &[aria-expanded='true'] .icon {
+            transform: translateY(-50%) rotate(-135deg);
+        }
+        .title {
+            display: block;
+            border: 0.125rem solid transparent;
+            outline: none;
+            border-radius: 0.3125rem;
+            padding: 0.25rem;
+            min-width: 6rem;
+        }
+
+        &:focus {
+            background: #e1edfe;
+            .title {
+                border-color: #0759d5;
+            }
+            .icon {
+                border-color: #0759d5;
+            }
+        }
+    }
+
+    .icon {
+        border: solid currentcolor;
+        border-width: 0 0.125rem 0.125rem 0;
+        transform: translateY(-60%) rotate(45deg);
+        width: 0.5rem;
+        height: 0.5rem;
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        pointer-events: none;
+    }
+
+    *:focus-within & {
+        background-color: #f7f7f7;
+    }
+}
