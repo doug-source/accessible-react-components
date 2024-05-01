@@ -24,12 +24,12 @@ const DatePicker = ({ show, locale, onDateChange }: DatePickerProps) => {
     } = useCalendarData(locale, onDateChange);
     const [showCalendar, setShowCalendar] = useState(show);
     return (
-        <DatePicker.Box title="date picker">
-            <DatePicker.DateInput
+        <Box title="date picker">
+            <DateInput
                 format={calendarData.getDateFormat()}
                 value={dataSelectedInput}
             />
-            <DatePicker.Btn
+            <Btn
                 onClick={() => setShowCalendar(true)}
                 onKeyDown={makeKeydownHandler([
                     [
@@ -43,7 +43,7 @@ const DatePicker = ({ show, locale, onDateChange }: DatePickerProps) => {
                 aria-label={ariaLabelBtn}
             >
                 <CalendarIcon noEvents />
-            </DatePicker.Btn>
+            </Btn>
             <Calendar
                 calendarData={calendarData}
                 listRows={listRows}
@@ -53,12 +53,8 @@ const DatePicker = ({ show, locale, onDateChange }: DatePickerProps) => {
                 setDateFocused={setDateFocused}
                 setDateSelected={setDateSelected}
             />
-        </DatePicker.Box>
+        </Box>
     );
 };
-
-DatePicker.Box = Box;
-DatePicker.DateInput = DateInput;
-DatePicker.Btn = Btn;
 
 export { DatePicker };
