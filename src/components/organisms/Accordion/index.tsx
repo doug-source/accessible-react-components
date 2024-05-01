@@ -9,16 +9,16 @@ type ItemListProps = ComponentPropsWithoutRef<typeof ItemList>;
 
 type AccordionProps = {
     headerList: Array<ItemListProps['itemList'][number][0]>;
-    unique?: boolean;
-    collapse?: boolean;
+    unique: boolean;
+    collapse: boolean;
 } & ComponentPropsWithoutRef<'div'>;
 
 const Accordion = ({
     headerList,
     children,
     className,
-    unique = false,
-    collapse = true,
+    unique,
+    collapse,
     ...remain
 }: AccordionProps) => {
     const sizeLower = Math.min(Children.count(children), headerList.length);
