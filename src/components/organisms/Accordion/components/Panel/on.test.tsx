@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { ComponentPropsWithoutRef } from 'react';
+import styles from './Panel.module.scss';
 import { Panel } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof Panel>;
@@ -33,6 +34,7 @@ describe('<Panel /> component', () => {
         expect($el).toBeInTheDocument();
         expect($el).toHaveTextContent('content');
         expect($el).toHaveAttribute('aria-labelledby', 'outside');
+        expect($el).toHaveClass(styles.panel);
     });
     test('renders with properties passed correctly', () => {
         const { rerender } = render(buildComponent());
