@@ -24,29 +24,21 @@ const Accordion = ({
     const sizeLower = Math.min(Children.count(children), headerList.length);
     const childrenArray = Children.toArray(children).slice(0, sizeLower);
     return (
-        <Accordion.UniqueWrapper value={unique}>
-            <Accordion.CollapseWrapper value={collapse}>
+        <UniqueWrapper value={unique}>
+            <CollapseWrapper value={collapse}>
                 <div
                     {...remain}
-                    className={classNames(
-                        Accordion.styles.accordion,
-                        className
-                    )}
+                    className={classNames(styles.accordion, className)}
                 >
-                    <Accordion.ItemList
+                    <ItemList
                         itemList={headerList
                             .slice(0, sizeLower)
                             .map(($header, i) => [$header, childrenArray[i]])}
                     />
                 </div>
-            </Accordion.CollapseWrapper>
-        </Accordion.UniqueWrapper>
+            </CollapseWrapper>
+        </UniqueWrapper>
     );
 };
-
-Accordion.UniqueWrapper = UniqueWrapper;
-Accordion.CollapseWrapper = CollapseWrapper;
-Accordion.ItemList = ItemList;
-Accordion.styles = styles;
 
 export { Accordion };

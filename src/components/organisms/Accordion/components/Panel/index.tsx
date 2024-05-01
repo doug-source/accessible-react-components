@@ -24,12 +24,10 @@ const Panel = ({
         id={id}
         aria-labelledby={ariaLabelledBy}
         role={keepRole ? 'region' : undefined}
-        className={classNames(Panel.styles.panel, className)}
+        className={classNames(styles.panel, className)}
     >
         {children}
     </div>
 );
-
-Panel.styles = styles;
 
 export { Panel };

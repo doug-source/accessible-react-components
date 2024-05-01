@@ -28,8 +28,8 @@ const Item = ({
     const unique = useUnique();
     const collapse = useCollapse();
     return (
-        <div {...remain} className={Item.styles.item}>
-            <Item.Header
+        <div {...remain} className={styles.item}>
+            <Header
                 id={headerId}
                 aria-controls={panelId}
                 aria-expanded={expandedList.includes(headerId)}
@@ -41,10 +41,10 @@ const Item = ({
                 onClick={() => onClick(headerId)}
             >
                 {headerContent}
-            </Item.Header>
-            <Item.Panel
+            </Header>
+            <Panel
                 className={classNames(
-                    !expandedList.includes(headerId) && Item.styles.collapsed
+                    !expandedList.includes(headerId) && styles.collapsed
                 )}
                 id={panelId}
                 aria-labelledby={headerId}
@@ -52,13 +52,9 @@ const Item = ({
                 hidden={!expandedList.includes(headerId)}
             >
                 {panelContent}
-            </Item.Panel>
+            </Panel>
         </div>
     );
 };
-
-Item.Header = Header;
-Item.Panel = Panel;
-Item.styles = styles;
 
 export { Item };

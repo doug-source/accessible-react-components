@@ -22,7 +22,7 @@ const Header = ({
     children,
     ...remain
 }: HeaderProps) => (
-    <h3 {...remain} className={classNames(className, Header.styles.header)}>
+    <h3 {...remain} className={classNames(className, styles.header)}>
         <button
             id={id}
             type="button"
@@ -31,14 +31,12 @@ const Header = ({
             aria-disabled={ariaDisabled}
             className={styles.btn}
         >
-            <span className={Header.styles.title}>
+            <span className={styles.title}>
                 {children}
-                <span className={Header.styles.icon}></span>
+                <span className={styles.icon}></span>
             </span>
         </button>
     </h3>
 );
-
-Header.styles = styles;
 
 export { Header };

@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef } from 'react';
+import itemStyles from '../Item/Item.module.scss';
 import { ItemList } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof ItemList>;
@@ -22,7 +23,7 @@ describe('<ItemList /> component', () => {
         });
         expect($wrapper).toBeInTheDocument();
         expect($wrapper?.tagName).toBe('DIV');
-        expect($wrapper).toHaveClass(ItemList.Item.styles.item);
+        expect($wrapper).toHaveClass(itemStyles.item);
     });
     test("renders clicking in Item's heading correctly", async () => {
         render(buildComponent({ itemList }));

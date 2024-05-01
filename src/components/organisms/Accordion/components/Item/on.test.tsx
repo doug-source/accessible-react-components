@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef } from 'react';
 import { CollapseWrapper } from '../../context/collapse';
 import { UniqueWrapper } from '../../context/unique';
+import styles from './Item.module.scss';
 import { Item } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof Item>;
@@ -48,7 +49,7 @@ describe('<Item /> component', () => {
         render(buildComponent({ title: 'this item' }));
         const $el = screen.getByTitle('this item');
         expect($el).toBeInTheDocument();
-        expect($el).toHaveClass(Item.styles.item);
+        expect($el).toHaveClass(styles.item);
         const $header = within($el).getByRole('heading', { level: 3 });
         expect($header).toBeInTheDocument();
         const $panel = within($el).getByRole('region', { hidden: true });
@@ -72,7 +73,7 @@ describe('<Item /> component', () => {
         expect($btn).toHaveAttribute('aria-expanded', 'false');
         expect($btn).not.toHaveAttribute('aria-disabled');
         const $panel = within($el).getByRole('region', { hidden: true });
-        expect($panel).toHaveClass(Item.styles.collapsed);
+        expect($panel).toHaveClass(styles.collapsed);
         expect($panel).toHaveAttribute('hidden');
         const user = userEvent.setup();
         await user.click($header);
@@ -87,7 +88,7 @@ describe('<Item /> component', () => {
         expect($btn).toHaveAttribute('aria-disabled', 'true');
         expect(mockFn).toHaveBeenCalled();
         expect($btn).toHaveAttribute('aria-expanded', 'true');
-        expect($panel).not.toHaveClass(Item.styles.collapsed);
+        expect($panel).not.toHaveClass(styles.collapsed);
         expect($panel).not.toHaveAttribute('hidden');
         expect($panel).toHaveAttribute('aria-labelledby', headerId);
         expect(screen.getByText('panel text')).toBeInTheDocument();

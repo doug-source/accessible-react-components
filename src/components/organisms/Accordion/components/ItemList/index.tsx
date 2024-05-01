@@ -16,7 +16,7 @@ const ItemList = ({ itemList }: ItemListProps) => {
     return (
         <>
             {itemList.map(([$headerContent, $panelContent], i) => (
-                <ItemList.Item
+                <Item
                     key={i}
                     expandedList={expandedList}
                     headerContent={$headerContent}
@@ -37,7 +37,5 @@ const ItemList = ({ itemList }: ItemListProps) => {
         </>
     );
 };
-
-ItemList.Item = Item;
 
 export { ItemList };

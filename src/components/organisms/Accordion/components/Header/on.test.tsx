@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import { ComponentPropsWithoutRef } from 'react';
+import styles from './Header.module.scss';
 import { Header } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof Header>;
@@ -33,15 +34,15 @@ describe('<Header /> component', () => {
         render(buildComponent());
         const $el = screen.getByRole('heading', { level: 3 });
         expect($el).toBeInTheDocument();
-        expect($el).toHaveClass(Header.styles.header);
+        expect($el).toHaveClass(styles.header);
         const $btn = within($el).getByRole('button');
         expect($btn).toBeInTheDocument();
-        expect($btn).toHaveClass(Header.styles.btn);
+        expect($btn).toHaveClass(styles.btn);
         const $title = within($btn).getByText('content');
         expect($title).toBeInTheDocument();
-        expect($title).toHaveClass(Header.styles.title);
+        expect($title).toHaveClass(styles.title);
         const $icon = $title.lastElementChild;
-        expect($icon).toHaveClass(Header.styles.icon);
+        expect($icon).toHaveClass(styles.icon);
     });
     test('renders with properties passed correctly', () => {
         const { rerender } = render(
