@@ -31,6 +31,9 @@ Components list:
 -   Link
     -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/link/](https://www.w3.org/WAI/ARIA/apg/patterns/link/)
+-   Accordion
+    -   status: WIP
+    -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/accordion/](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)
 
 <div align="center">
   <h3><b>📍 Repository Visitor Count</b></h3>
