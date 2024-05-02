@@ -72,9 +72,18 @@ describe('<Calendar /> component', () => {
             ($el) => Array.from($el.children)
         );
         expect($firstHeaderBtns).toBeInTheDocument();
-        const [$beforeYearBtn, $beforeMonthBtn] = Array.from(
-            $firstHeaderBtns.children
-        );
+        expect($heading).toBeInTheDocument();
+        expect($secondHeaderBtns).toBeInTheDocument();
+    });
+    test("the calendar's header's buttons correctly", () => {
+        render(buildComponent());
+        const $el = screen.getByTitle('calendar');
+        const $beforeYearBtn = within($el).getByRole('button', {
+            name: 'previous year',
+        });
+        const $beforeMonthBtn = within($el).getByRole('button', {
+            name: 'previous month',
+        });
         expect($beforeYearBtn).toBeInTheDocument();
         expect($beforeYearBtn).toHaveAttribute('title', 'go to previous year');
         expect($beforeMonthBtn).toBeInTheDocument();
@@ -82,11 +91,12 @@ describe('<Calendar /> component', () => {
             'title',
             'go to previous month'
         );
-        expect($heading).toBeInTheDocument();
-        expect($secondHeaderBtns).toBeInTheDocument();
-        const [$afterMonthBtn, $afterYearBtn] = Array.from(
-            $secondHeaderBtns.children
-        );
+        const $afterMonthBtn = within($el).getByRole('button', {
+            name: 'next month',
+        });
+        const $afterYearBtn = within($el).getByRole('button', {
+            name: 'next year',
+        });
         expect($afterMonthBtn).toBeInTheDocument();
         expect($afterMonthBtn).toHaveAttribute('title', 'go to next month');
         expect($afterYearBtn).toBeInTheDocument();

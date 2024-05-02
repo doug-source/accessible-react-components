@@ -1,8 +1,6 @@
 import classNames from 'classnames';
 import { useId, useRef, useState } from 'react';
 import { CalendarData } from '../../../utils/CalendarData';
-import { ArrowIcon } from '../../atoms/ArrowIcon';
-import { ArrowsIcon } from '../../atoms/ArrowsIcon';
 import { DialogBox as CalendarBox } from '../../atoms/DialogBox';
 import { DialogBtn } from '../../atoms/DialogBtn';
 import styles from './Calendar.module.scss';
@@ -80,13 +78,19 @@ const Calendar = ({
                         label="previous year"
                         title="go to previous year"
                     >
-                        <ArrowsIcon
-                            noEvents
+                        <span
                             className={classNames(
-                                styles.arrowIcon,
-                                styles.left
+                                styles.icon,
+                                styles.iconBeforeDouble
                             )}
-                        />
+                        ></span>
+                        <span
+                            className={classNames(
+                                styles.icon,
+                                styles.iconBeforeDouble,
+                                styles.back
+                            )}
+                        ></span>
                     </BeforeYearBtn>
                     <BeforeMonthBtn
                         className={styles.headerBtn}
@@ -94,13 +98,7 @@ const Calendar = ({
                         label="previous month"
                         title="go to previous month"
                     >
-                        <ArrowIcon
-                            noEvents
-                            className={classNames(
-                                styles.arrowIcon,
-                                styles.left
-                            )}
-                        />
+                        <span className={styles.icon}></span>
                     </BeforeMonthBtn>
                 </HeaderBtns>
                 <Heading id={headingId}>{monthYear}</Heading>
@@ -111,7 +109,12 @@ const Calendar = ({
                         label="next month"
                         title="go to next month"
                     >
-                        <ArrowIcon noEvents className={styles.arrowIcon} />
+                        <span
+                            className={classNames(
+                                styles.icon,
+                                styles.iconAfterSingle
+                            )}
+                        ></span>
                     </AfterMonthBtn>
                     <AfterYearBtn
                         className={styles.headerBtn}
@@ -119,7 +122,19 @@ const Calendar = ({
                         label="next year"
                         title="go to next year"
                     >
-                        <ArrowsIcon noEvents className={styles.arrowIcon} />
+                        <span
+                            className={classNames(
+                                styles.icon,
+                                styles.iconAfterDouble
+                            )}
+                        ></span>
+                        <span
+                            className={classNames(
+                                styles.icon,
+                                styles.iconAfterDouble,
+                                styles.back
+                            )}
+                        ></span>
                     </AfterYearBtn>
                 </HeaderBtns>
             </Header>

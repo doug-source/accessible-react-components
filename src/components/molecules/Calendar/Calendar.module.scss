@@ -1,3 +1,27 @@
+.icon {
+    border: solid currentcolor;
+    border-width: 0 0.125rem 0.125rem 0;
+    width: 0.625rem;
+    height: 0.625rem;
+    pointer-events: none;
+    transform: translateX(-35%) translateY(-55%) rotate(135deg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    &.iconAfterSingle {
+        transform: translateX(-75%) translateY(-55%) rotate(-45deg);
+    }
+    &.iconAfterDouble {
+        transform: translateX(-45%) translateY(-55%) rotate(-45deg);
+    }
+    &.iconBeforeDouble {
+        transform: translateX(0) translateY(-55%) rotate(135deg);
+    }
+    &.back {
+        left: calc(50% - 6px);
+    }
+}
+
 .tableBox {
     width: 100%;
     overflow: auto;
@@ -32,6 +56,7 @@
         border: 0.125rem solid #fff;
         border-radius: 0;
     }
+    position: relative;
 }
 
 .cell {
