@@ -13,6 +13,7 @@ type ItemProps = Omit<DivProps, 'onClick'> & {
     expandedList: string[];
     onClick: (headerId: string) => void;
     keepPanelRole: ComponentPropsWithoutRef<typeof Panel>['keepRole'];
+    btnRefFn?: ComponentPropsWithoutRef<typeof Header>['btnRefFn'];
 };
 
 const Item = ({
@@ -21,6 +22,7 @@ const Item = ({
     expandedList,
     onClick,
     keepPanelRole,
+    btnRefFn,
     ...remain
 }: ItemProps) => {
     const headerId = useId();
@@ -39,6 +41,7 @@ const Item = ({
                         : undefined
                 }
                 onClick={() => onClick(headerId)}
+                btnRefFn={btnRefFn}
             >
                 {headerContent}
             </Header>

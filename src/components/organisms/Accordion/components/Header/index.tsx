@@ -11,6 +11,7 @@ type HeaderProps = Omit<
     id: NonNullable<HeadingProps['id']>;
     'aria-controls': NonNullable<HeadingProps['aria-controls']>;
     'aria-expanded': NonNullable<HeadingProps['aria-expanded']>;
+    btnRefFn?: (btn: HTMLButtonElement | null) => void;
 };
 
 const Header = ({
@@ -18,6 +19,7 @@ const Header = ({
     'aria-controls': ariaControls,
     'aria-expanded': ariaExpanded,
     'aria-disabled': ariaDisabled,
+    btnRefFn,
     className,
     children,
     ...remain
@@ -26,6 +28,7 @@ const Header = ({
         <button
             id={id}
             type="button"
+            ref={(btn) => btnRefFn && btnRefFn(btn)}
             aria-expanded={ariaExpanded}
             aria-controls={ariaControls}
             aria-disabled={ariaDisabled}
