@@ -9,7 +9,11 @@ export const HeaderBtns = ({
     children,
     ...remain
 }: HeaderBtnsProps) => (
-    <div {...remain} className={classNames(className, styles.headerBtns)}>
+    <div
+        {...remain}
+        className={classNames(className, styles.headerBtns)}
+        role="group"
+    >
         {children}
     </div>
 );
