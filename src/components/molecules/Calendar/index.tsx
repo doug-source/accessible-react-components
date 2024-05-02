@@ -70,9 +70,9 @@ const Calendar = ({
             onKeyDown={escKeyDownHandler}
             title="calendar"
         >
-            <Calendar.Header>
-                <Calendar.HeaderBtns>
-                    <Calendar.BeforeYearBtn
+            <Header>
+                <HeaderBtns>
+                    <BeforeYearBtn
                         className={styles.headerBtn}
                         ref={refBeforeYearBtn}
                         btnHandler={beforeBtnHandler}
@@ -87,8 +87,8 @@ const Calendar = ({
                                 styles.left
                             )}
                         />
-                    </Calendar.BeforeYearBtn>
-                    <Calendar.BeforeMonthBtn
+                    </BeforeYearBtn>
+                    <BeforeMonthBtn
                         className={styles.headerBtn}
                         btnHandler={beforeBtnHandler}
                         label="previous month"
@@ -101,40 +101,40 @@ const Calendar = ({
                                 styles.left
                             )}
                         />
-                    </Calendar.BeforeMonthBtn>
-                </Calendar.HeaderBtns>
-                <Calendar.Heading id={headingId}>{monthYear}</Calendar.Heading>
-                <Calendar.HeaderBtns>
-                    <Calendar.AfterMonthBtn
+                    </BeforeMonthBtn>
+                </HeaderBtns>
+                <Heading id={headingId}>{monthYear}</Heading>
+                <HeaderBtns>
+                    <AfterMonthBtn
                         className={styles.headerBtn}
                         btnHandler={afterBtnHandler}
                         label="next month"
                         title="go to next month"
                     >
                         <ArrowIcon noEvents className={styles.arrowIcon} />
-                    </Calendar.AfterMonthBtn>
-                    <Calendar.AfterYearBtn
+                    </AfterMonthBtn>
+                    <AfterYearBtn
                         className={styles.headerBtn}
                         btnHandler={afterBtnHandler}
                         label="next year"
                         title="go to next year"
                     >
                         <ArrowsIcon noEvents className={styles.arrowIcon} />
-                    </Calendar.AfterYearBtn>
-                </Calendar.HeaderBtns>
-            </Calendar.Header>
+                    </AfterYearBtn>
+                </HeaderBtns>
+            </Header>
             <div className={styles.tableBox}>
-                <Calendar.TableGrid
+                <TableGrid
                     aria-labelledby={headingId}
                     onFocus={() => setShowMsgFooter(true)}
                     onBlur={() => setShowMsgFooter(false)}
                 >
-                    <Calendar.TableHead
+                    <TableHead
                         weekdays={weekdays}
                         cellClassName={styles.cell}
                         title="weekdays"
                     />
-                    <Calendar.TableBody
+                    <TableBody
                         listRows={listRows}
                         calendarData={calendarData}
                         hideCallback={hideCallback}
@@ -142,13 +142,13 @@ const Calendar = ({
                         setDateSelected={setDateSelected}
                         cellClassName={styles.cell}
                     />
-                </Calendar.TableGrid>
+                </TableGrid>
             </div>
-            <Calendar.Bottom>
+            <Bottom>
                 <DialogBtn onClick={hideCallback} onKeyDown={escKeyDownHandler}>
                     Cancel
                 </DialogBtn>
-                <Calendar.OkBtn
+                <OkBtn
                     ref={okBtnRef}
                     beforeYearBtnRef={refBeforeYearBtn}
                     onSelect={() => {
@@ -158,30 +158,15 @@ const Calendar = ({
                     }}
                 >
                     Ok
-                </Calendar.OkBtn>
-            </Calendar.Bottom>
-            <Calendar.Footer>
-                <Calendar.FooterMsg showMsg={showMsgFooter}>
+                </OkBtn>
+            </Bottom>
+            <Footer>
+                <FooterMsg showMsg={showMsgFooter}>
                     Cursor keys can navigate dates
-                </Calendar.FooterMsg>
-            </Calendar.Footer>
+                </FooterMsg>
+            </Footer>
         </CalendarBox>
     );
 };
-
-Calendar.Header = Header;
-Calendar.HeaderBtns = HeaderBtns;
-Calendar.Heading = Heading;
-Calendar.TableGrid = TableGrid;
-Calendar.TableHead = TableHead;
-Calendar.Footer = Footer;
-Calendar.FooterMsg = FooterMsg;
-Calendar.BeforeYearBtn = BeforeYearBtn;
-Calendar.BeforeMonthBtn = BeforeMonthBtn;
-Calendar.AfterMonthBtn = AfterMonthBtn;
-Calendar.AfterYearBtn = AfterYearBtn;
-Calendar.Bottom = Bottom;
-Calendar.OkBtn = OkBtn;
-Calendar.TableBody = TableBody;
 
 export { Calendar };
