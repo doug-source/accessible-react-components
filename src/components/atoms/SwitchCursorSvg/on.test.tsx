@@ -40,8 +40,6 @@ describe('<SwitchCursorSvg /> component', () => {
         const { rerender } = render(buildComponent({ type: 'on' }));
         const $el = screen.getByTestId('element-to-test');
         expect($el).toHaveClass(styles.on);
-        rerender(buildComponent({ type: 'mixed' }));
-        expect($el).toHaveClass(styles.mixed);
         rerender(buildComponent({ type: 'off' }));
         expect($el).toHaveClass(styles.off);
     });

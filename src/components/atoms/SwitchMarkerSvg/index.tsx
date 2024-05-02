@@ -5,7 +5,11 @@ import { SwitchCursorSvg } from '../SwitchCursorSvg';
 import styles from './SwitchMarkerSvg.module.scss';
 import { isAriaCheckedFalsy } from './lib';
 
-type SwitchMarkerSvgProps = ComponentPropsWithoutRef<'svg'>;
+type SvgProps = ComponentPropsWithoutRef<'svg'>;
+
+type SwitchMarkerSvgProps = Omit<SvgProps, 'aria-checked'> & {
+    'aria-checked': boolean | 'true' | 'false';
+};
 
 export const SwitchMarkerSvg = ({
     'aria-checked': ariaChecked,
@@ -23,23 +27,13 @@ export const SwitchMarkerSvg = ({
                 type="off"
                 className="off"
                 aria-label="cursor off"
-                aria-hidden={
-                    ariaChecked === 'mixed' || !isAriaCheckedFalsy(ariaChecked)
-                }
-            />
-            <SwitchCursorSvg
-                type="mixed"
-                className="mixed"
-                aria-label="cursor mixed"
-                aria-hidden={ariaChecked !== 'mixed'}
+                aria-hidden={!isAriaCheckedFalsy(ariaChecked)}
             />
             <SwitchCursorSvg
                 className="on"
                 type="on"
                 aria-label="cursor on"
-                aria-hidden={
-                    ariaChecked === 'mixed' || isAriaCheckedFalsy(ariaChecked)
-                }
+                aria-hidden={isAriaCheckedFalsy(ariaChecked)}
             />
         </svg>
     );

@@ -4,7 +4,7 @@ import styles from './SwitchCursorSvg.module.scss';
 import { defineTypeClass, defineVisibilityByAriaHidden } from './lib';
 
 type SwitchCursorSvgProps = ComponentPropsWithoutRef<'rect'> & {
-    type: 'on' | 'off' | 'mixed';
+    type: 'on' | 'off';
 };
 
 export const SwitchCursorSvg = ({

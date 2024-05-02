@@ -6,10 +6,6 @@ describe('defineTypeClass function', () => {
         const output = defineTypeClass('on');
         expect(output).toBe(styles.on);
     });
-    test('returns mixed output', () => {
-        const output = defineTypeClass('mixed');
-        expect(output).toBe(styles.mixed);
-    });
     test('returns off output', () => {
         const output = defineTypeClass('off');
         expect(output).toBe(styles.off);

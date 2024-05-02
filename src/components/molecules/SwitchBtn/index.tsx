@@ -1,11 +1,17 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useState } from 'react';
+import { parseBooleanish } from '../../../lib';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
 import { SwitchMarkerSvg } from '../../atoms/SwitchMarkerSvg';
 import styles from './SwitchBtn.module.scss';
 
-type StyleProps = ComponentPropsWithoutRef<'button'> & {
+type BtnProps = ComponentPropsWithoutRef<'button'>;
+
+type StyleProps = Omit<BtnProps, 'aria-checked'> & {
     label?: ComponentPropsWithoutRef<typeof SwitchLabel>['label'];
+    'aria-checked'?: ComponentPropsWithoutRef<
+        typeof SwitchMarkerSvg
+    >['aria-checked'];
 };
 
 export const SwitchBtn = ({
@@ -14,8 +20,7 @@ export const SwitchBtn = ({
     className,
     ...remain
 }: StyleProps) => {
-    const [ariaCheckedState, setAriaCheckedState] =
-        useState<StyleProps['aria-checked']>(ariaChecked);
+    const [ariaCheckedState, setAriaCheckedState] = useState(ariaChecked);
     return (
         <button
             {...remain}
@@ -23,7 +28,9 @@ export const SwitchBtn = ({
             role="switch"
             type="button"
             aria-checked={ariaCheckedState}
-            onClick={() => setAriaCheckedState(!ariaCheckedState)}
+            onClick={() => {
+                setAriaCheckedState(!parseBooleanish(ariaCheckedState));
+            }}
         >
             <SwitchLabel label={label} />
             <SwitchMarkerSvg aria-checked={ariaCheckedState} />

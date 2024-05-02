@@ -19,7 +19,4 @@
     &.off {
         transform: translateX(0);
     }
-    &.mixed {
-        transform: translateX(calc((100% - 1rem - 0.5rem) / 2));
-    }
 }

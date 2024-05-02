@@ -2,12 +2,9 @@ import { ComponentPropsWithoutRef } from 'react';
 import { parseBooleanish } from '../../../../lib';
 import styles from '../SwitchCursorSvg.module.scss';
 
-export const defineTypeClass = (type: 'on' | 'off' | 'mixed') => {
+export const defineTypeClass = (type: 'on' | 'off') => {
     if (type === 'on') {
         return styles.on;
-    }
-    if (type === 'mixed') {
-        return styles.mixed;
     }
     return styles.off;
 };
