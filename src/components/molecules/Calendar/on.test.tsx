@@ -3,6 +3,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef } from 'react';
 import { CalendarData } from '../../../utils/CalendarData';
+import styles from './Calendar.module.scss';
 import { Calendar } from './index';
 
 const makeDate = (day: number, month = 4) => {
@@ -52,6 +53,7 @@ describe('<Calendar /> component', () => {
         render(buildComponent());
         const $el = screen.getByTitle('calendar');
         expect($el).toBeInTheDocument();
+        expect($el).toHaveClass(styles.calendarBox);
     });
     test("renders the calendar's HTMLElement children correctly", () => {
         render(buildComponent());
