@@ -1,0 +1,44 @@
+.arrow {
+    pointer-events: none;
+    border-style: solid;
+    display: inline-block;
+
+    &.complete {
+        width: 0;
+        height: 0;
+        border-width: 0.375rem;
+        transform: translate(0.125rem, -0.0625rem);
+
+        &.top {
+            border-color: transparent transparent currentColor transparent;
+        }
+        &.bottom {
+            border-color: currentColor transparent transparent transparent;
+        }
+        &.right {
+            border-color: transparent transparent transparent currentColor;
+        }
+        &.left {
+            border-color: transparent currentColor transparent transparent;
+        }
+    }
+
+    &.bordered {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-width: 0 0.125rem 0.125rem 0;
+
+        &.bottom {
+            transform: translateY(-60%) rotate(45deg);
+        }
+        &.left {
+            transform: translateY(-60%) rotate(135deg);
+        }
+        &.right {
+            transform: translateY(-60%) rotate(-45deg);
+        }
+        &.top {
+            transform: translateY(-60%) rotate(-135deg);
+        }
+    }
+}
