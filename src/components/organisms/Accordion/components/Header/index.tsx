@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef } from 'react';
+import { Arrow } from '../../../../atoms/Arrow';
 import styles from './Header.module.scss';
 
 type HeadingProps = ComponentPropsWithoutRef<'h3'>;
@@ -36,7 +37,11 @@ const Header = ({
         >
             <span className={styles.title}>
                 {children}
-                <span className={styles.icon}></span>
+                <Arrow
+                    type="bordered"
+                    direction={ariaExpanded ? 'top' : 'bottom'}
+                    className={styles.icon}
+                />
             </span>
         </button>
     </h3>
