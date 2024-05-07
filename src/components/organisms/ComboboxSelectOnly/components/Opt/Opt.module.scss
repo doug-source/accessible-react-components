@@ -1,0 +1,30 @@
+.opt {
+    padding: 0.625rem 0.75rem 0.75rem;
+    cursor: pointer;
+    outline-width: 0.1875rem;
+    outline-color: transparent;
+    position: relative;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    &.focused {
+        outline-style: solid;
+        outline-color: #0067b8;
+        outline-offset: -0.1875rem;
+    }
+    &[aria-selected='true'] {
+        padding-right: 1.875rem;
+        &::after {
+            border-bottom: 0.125rem solid #000;
+            border-right: 0.125rem solid #000;
+            content: '';
+            height: 1rem;
+            position: absolute;
+            right: 0.9375rem;
+            top: 50%;
+            transform: translate(0, -70%) rotate(45deg);
+            width: 0.5rem;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+.box {
+    position: relative;
+    max-width: 25rem;
+
+    &.sameline {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .comboLabel {
+        white-space: nowrap;
+    }
+}
