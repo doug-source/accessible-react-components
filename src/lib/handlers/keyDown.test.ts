@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { KeyboardEvent } from 'react';
-import { makeKeydownHandler } from './keyDown';
+import { detachEventCallback, makeKeydownHandler } from './keyDown';
 
 const makeEvent = (key: string) => {
     return {
@@ -9,6 +9,32 @@ const makeEvent = (key: string) => {
         stopPropagation: jest.fn(),
     } as unknown as KeyboardEvent<HTMLButtonElement>;
 };
+
+describe('detachEventCallback function', () => {
+    test('runs correctly', () => {
+        const enterOriginCallback = () => true;
+        const letterAOriginCallback = () => true;
+        const spaceOriginCallback = () => true;
+
+        const keys: [
+            string,
+            (evt: KeyboardEvent<HTMLButtonElement>) => boolean
+        ][] = [
+            ['Enter', enterOriginCallback],
+            ['{typing}', letterAOriginCallback],
+            [' ', spaceOriginCallback],
+        ];
+        const enterFinalCallback = detachEventCallback(
+            makeEvent('Enter'),
+            keys
+        );
+        expect(enterFinalCallback).toBe(enterOriginCallback);
+        const aKeyFinalCallback = detachEventCallback(makeEvent('a'), keys);
+        expect(aKeyFinalCallback).toBe(letterAOriginCallback);
+        const spaceFinalCallback = detachEventCallback(makeEvent(' '), keys);
+        expect(spaceFinalCallback).toBe(spaceOriginCallback);
+    });
+});
 
 describe('makeKeydownHandler function', () => {
     test('runs returning a function correctly', () => {
