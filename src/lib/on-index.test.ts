@@ -3,6 +3,7 @@ import {
     isBooleanishFalsy,
     makeBooleanHandle,
     parseBooleanish,
+    swapIndex,
 } from '.';
 
 describe('isBooleanishFalsy function', () => {
@@ -58,5 +59,27 @@ describe('firstUpperCase function', () => {
         expect(output).toBe('Test-A');
         output = firstUpperCase('   test-B   ');
         expect(output).toBe('Test-B');
+    });
+});
+
+describe('swapIndex function', () => {
+    test('return output correctly', () => {
+        const list = ['a', 'b', 'c'];
+        let output = swapIndex(list, 0);
+        expect(output).toBe(0);
+        output = swapIndex(list, 1);
+        expect(output).toBe(1);
+        output = swapIndex(list, 2);
+        expect(output).toBe(2);
+        output = swapIndex(list, 3);
+        expect(output).toBe(0);
+        output = swapIndex(list, 4);
+        expect(output).toBe(1);
+        output = swapIndex(list, -1);
+        expect(output).toBe(2);
+        output = swapIndex(list, -2);
+        expect(output).toBe(1);
+        output = swapIndex(list, -3);
+        expect(output).toBe(0);
     });
 });

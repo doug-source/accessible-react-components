@@ -19,3 +19,7 @@ export const firstUpperCase = (str: string) => {
     const strVal = str.trim();
     return strVal.charAt(0).toUpperCase() + strVal.slice(1);
 };
+
+export const swapIndex = <T>(list: T[], index: number) => {
+    return ((index % list.length) + list.length) % list.length;
+};
