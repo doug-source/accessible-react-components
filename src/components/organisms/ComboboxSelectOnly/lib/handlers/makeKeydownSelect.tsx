@@ -1,8 +1,8 @@
 import { MutableRefObject, ReactNode } from 'react';
 import { scrollTo, triggerScrollTo } from '..';
 import { makeKeydownHandler } from '../../../../../lib/handlers/keyDown';
+import runtimeSearch from '../../../../../utils/RuntimeSearch';
 import { LabelDefault } from '../../components/LabelDefault';
-import runtimeSearch from '../services/RuntimeSearch';
 
 const makeKeydownSelect = <T,>(
     itemName: string,
