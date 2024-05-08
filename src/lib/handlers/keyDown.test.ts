@@ -1,6 +1,10 @@
 import '@testing-library/jest-dom';
 import { KeyboardEvent } from 'react';
-import { detachEventCallback, makeKeydownHandler } from './keyDown';
+import {
+    detachEventCallback,
+    makeKeydownHandler,
+    runPredicate,
+} from './keyDown';
 
 const makeEvent = (key: string) => {
     return {
@@ -9,6 +13,27 @@ const makeEvent = (key: string) => {
         stopPropagation: jest.fn(),
     } as unknown as KeyboardEvent<HTMLButtonElement>;
 };
+
+describe('runPredicate function', () => {
+    test('runs correctly', () => {
+        let output = runPredicate('Enter', makeEvent('Enter'));
+        expect(output).toBe(true);
+        output = runPredicate(/Enter/, makeEvent('Enter'));
+        expect(output).toBe(true);
+        output = runPredicate(/Enter/, makeEvent(' '));
+        expect(output).toBe(false);
+        output = runPredicate(/\{typing\}/, makeEvent('a'));
+        expect(output).toBe(true);
+        output = runPredicate(/\{typing\}/, makeEvent('Enter'));
+        expect(output).toBe(false);
+        output = runPredicate(/^Enter|\s$/, makeEvent('Enter'));
+        expect(output).toBe(true);
+        output = runPredicate(/^Enter|\s$/, makeEvent(' '));
+        expect(output).toBe(true);
+        output = runPredicate(/^Enter|\s$/, makeEvent('a'));
+        expect(output).toBe(false);
+    });
+});
 
 describe('detachEventCallback function', () => {
     test('runs correctly', () => {
