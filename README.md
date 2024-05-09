@@ -42,6 +42,8 @@ Components list:
 -   Button
     -   status: WIP
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/button/](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
+    -   code bases:
+        -   [Actions Menu Button example using element.focus()](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions/)
 
 <div align="center">
   <h3><b>📍 Repository Visitor Count</b></h3>
