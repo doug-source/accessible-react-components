@@ -4,7 +4,7 @@ import { SwitchBasicBox } from '../../atoms/SwitchBasicBox';
 import { SwitchCursor } from '../../atoms/SwitchCursor';
 import { SwitchLabel } from '../../atoms/SwitchLabel';
 import { SwitchMarker } from '../../atoms/SwitchMarker';
-import { makeKeydownHandler } from './lib';
+import { makeSwitchBasicKeydownHandler } from './handlers/makeSwitchBasicKeydown';
 
 type StyleProps = ComponentPropsWithoutRef<'div'>;
 
@@ -27,7 +27,6 @@ export const SwitchBasic = ({
         }
     );
 
-    const keydownHandler = makeKeydownHandler(toogleAriaChecked);
     return (
         <SwitchBasicBox
             className={className}
@@ -35,7 +34,7 @@ export const SwitchBasic = ({
             aria-checked={ariaChecked}
             tabIndex={0}
             onClick={() => toogleAriaChecked()}
-            onKeyDown={keydownHandler}
+            onKeyDown={makeSwitchBasicKeydownHandler(toogleAriaChecked)}
         >
             <SwitchLabel label={label} />
             <SwitchMarker>
