@@ -6,8 +6,7 @@ export const makeHideHandlers = (setShowCalendar: (show: boolean) => void) => {
         return true;
     };
     const escKeyDownHandler = makeKeydownHandler([
-        ['Esc', () => hideCallback()],
-        ['Escape', () => hideCallback()],
+        [/^Escape|Esc$/, () => hideCallback()],
     ]);
     return { hideCallback, escKeyDownHandler };
 };
