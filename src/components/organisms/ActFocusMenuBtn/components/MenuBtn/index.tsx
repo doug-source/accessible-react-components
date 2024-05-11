@@ -5,8 +5,12 @@ import styles from './MenuBtn.module.scss';
 
 type BtnProps = ComponentPropsWithoutRef<'button'>;
 
-type MenuBtnProps = Omit<BtnProps, 'aria-expanded' | 'children'> & {
+type MenuBtnProps = Omit<
+    BtnProps,
+    'aria-expanded' | 'aria-controls' | 'children'
+> & {
     'aria-expanded'?: BtnProps['aria-expanded'];
+    'aria-controls': NonNullable<BtnProps['aria-controls']>;
     children: BtnProps['children'];
 };
 
@@ -15,6 +19,7 @@ export const MenuBtn = forwardRef<HTMLButtonElement, MenuBtnProps>(
         {
             className,
             'aria-expanded': ariaExpanded,
+            'aria-controls': ariaControls,
             children,
             ...remain
         }: MenuBtnProps,
@@ -23,6 +28,8 @@ export const MenuBtn = forwardRef<HTMLButtonElement, MenuBtnProps>(
         return (
             <button
                 {...remain}
+                aria-controls={ariaControls}
+                aria-haspopup="true"
                 aria-expanded={ariaExpanded}
                 className={classNames(className, styles.menuBtn)}
                 type="button"

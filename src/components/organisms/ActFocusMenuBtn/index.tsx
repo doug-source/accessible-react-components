@@ -32,6 +32,7 @@ export const ActFocusMenuBtn = ({
                 id={menuBtnId}
                 aria-expanded={expanded}
                 ref={menuBtnRef}
+                aria-controls={menuId}
                 onClick={(evt) => {
                     const newExpanded = !expanded;
                     setExpanded(newExpanded);

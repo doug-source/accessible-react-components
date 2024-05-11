@@ -6,15 +6,20 @@ import styles from './MenuBtn.module.scss';
 import { MenuBtn } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof MenuBtn>;
-type keys = 'aria-expanded' | 'children';
+type keys = 'aria-expanded' | 'aria-controls' | 'children';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
 const buildComponent = ({
     'aria-expanded': ariaExpanded,
+    'aria-controls': ariaControls = 'anyone',
     children = 'btn content',
     ...remain
 }: Props = {}) => (
-    <MenuBtn {...remain} aria-expanded={ariaExpanded}>
+    <MenuBtn
+        {...remain}
+        aria-expanded={ariaExpanded}
+        aria-controls={ariaControls}
+    >
         {children}
     </MenuBtn>
 );
@@ -34,9 +39,15 @@ describe('<MenuBtn /> component', () => {
         expect($arrow).toHaveClass(styles.icon);
         expect($arrow).toHaveClass(Arrow.styles.complete);
         expect($arrow).toHaveClass(Arrow.styles.bottom);
-        rerender(buildComponent({ 'aria-expanded': true }));
+        rerender(
+            buildComponent({
+                'aria-expanded': true,
+                'aria-controls': 'otherElement',
+            })
+        );
         expect($el).toBeInTheDocument();
         expect($el).toHaveAttribute('aria-expanded', 'true');
+        expect($el).toHaveAttribute('aria-controls', 'otherElement');
         expect($arrow).toHaveClass(styles.icon);
         expect($arrow).toHaveClass(Arrow.styles.top);
     });
