@@ -6,7 +6,7 @@ import {
     MouseEvent,
     MutableRefObject,
 } from 'react';
-import { MenuItem } from '../MenuItem';
+import { ActMenuItem as MenuItem } from '../../../../molecules/ActMenuItem';
 import styles from './Menu.module.scss';
 import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useRowFocused } from './lib/hooks/useRowFocused';

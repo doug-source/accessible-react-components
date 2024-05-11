@@ -1,9 +1,10 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { ComponentPropsWithoutRef } from 'react';
-import { MenuItem } from './index';
+import styles from './ActMenuItem.module.scss';
+import { ActMenuItem } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof MenuItem>;
+type ElementProps = ComponentPropsWithoutRef<typeof ActMenuItem>;
 type keys = 'listRefFn';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
@@ -13,9 +14,9 @@ const buildComponent = ({
     ...remain
 }: Props = {}) => (
     <ul>
-        <MenuItem {...remain} listRefFn={listRefFn}>
+        <ActMenuItem {...remain} listRefFn={listRefFn}>
             {children}
-        </MenuItem>
+        </ActMenuItem>
     </ul>
 );
 
@@ -24,5 +25,6 @@ describe('<MenuItem /> component', () => {
         render(buildComponent());
         const $el = screen.getByText('list item content');
         expect($el).toBeInTheDocument();
+        expect($el).toHaveClass(styles.menuItem);
     });
 });
