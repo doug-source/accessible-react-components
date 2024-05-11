@@ -9,7 +9,7 @@ type MenuBtnProps = Omit<
     BtnProps,
     'aria-expanded' | 'aria-controls' | 'children'
 > & {
-    'aria-expanded'?: BtnProps['aria-expanded'];
+    'aria-expanded': NonNullable<BtnProps['aria-expanded']>;
     'aria-controls': NonNullable<BtnProps['aria-controls']>;
     children: BtnProps['children'];
 };

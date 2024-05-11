@@ -10,7 +10,7 @@ type keys = 'aria-expanded' | 'aria-controls' | 'children';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
 const buildComponent = ({
-    'aria-expanded': ariaExpanded,
+    'aria-expanded': ariaExpanded = false,
     'aria-controls': ariaControls = 'anyone',
     children = 'btn content',
     ...remain
@@ -30,7 +30,7 @@ describe('<MenuBtn /> component', () => {
         const $el = screen.getByRole('button');
         expect($el).toBeInTheDocument();
         expect($el).toHaveClass(styles.menuBtn);
-        expect($el).not.toHaveAttribute('aria-expanded');
+        expect($el).toHaveAttribute('aria-expanded', 'false');
         const $span = within($el).getByText('btn content');
         expect($span).toBeInTheDocument();
         expect($span).toHaveTextContent('btn content');
