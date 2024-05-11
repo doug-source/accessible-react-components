@@ -4,6 +4,20 @@ import { makeKeydownHandler } from '../../../../../lib/handlers/keyDown';
 import runtimeSearch from '../../../../../utils/RuntimeSearch';
 import { LabelDefault } from '../../components/LabelDefault';
 
+const definePageIndex = (
+    { key }: { key: string },
+    currentIndex: number,
+    optionsLength: number
+) => {
+    if (key === 'PageUp') {
+        return Math.max(0, currentIndex - makeKeydownSelect.pageSize);
+    }
+    return Math.min(
+        optionsLength - 1,
+        currentIndex + makeKeydownSelect.pageSize
+    );
+};
+
 const makeKeydownSelect = <T,>(
     itemName: string,
     focused: T | null,
@@ -52,7 +66,7 @@ const makeKeydownSelect = <T,>(
             },
         ],
         [
-            ' ',
+            /^Enter|\s$/,
             () => {
                 if (!expanded) {
                     return openCallback();
@@ -61,16 +75,7 @@ const makeKeydownSelect = <T,>(
             },
         ],
         [
-            'Enter',
-            () => {
-                if (!expanded) {
-                    return openCallback();
-                }
-                return chooseFocusedCallback();
-            },
-        ],
-        [
-            'Escape',
+            /^Escape|Esc$/,
             () => {
                 if (!expanded) {
                     setLabelSelected(<LabelDefault itemName={itemName} />);
@@ -130,12 +135,12 @@ const makeKeydownSelect = <T,>(
             },
         ],
         [
-            'Home',
-            () => {
+            /^Home|End$/,
+            (evt) => {
                 if (!expanded) {
                     openCallback();
                 }
-                const newIndex = 0;
+                const newIndex = evt.key === 'Home' ? 0 : options.length - 1;
                 const option = options[newIndex];
                 option && setFocused(option.value);
 
@@ -149,61 +154,18 @@ const makeKeydownSelect = <T,>(
             },
         ],
         [
-            'End',
-            () => {
-                if (!expanded) {
-                    openCallback();
-                }
-                const newIndex = options.length - 1;
-                const option = options[newIndex];
-                option && setFocused(option.value);
-
-                const { current: comboMenu } = comboMenuRef;
-                if (comboMenu) {
-                    setTimeout(() => {
-                        triggerScrollTo(optionListRef, comboMenu, newIndex);
-                    }, 50);
-                }
-                return true;
-            },
-        ],
-        [
-            'PageUp',
-            () => {
+            /^PageUp|PageDown$/,
+            (evt) => {
                 if (!expanded) {
                     return false;
                 }
                 const currentIndex = options.findIndex(
                     (opt) => opt.value === focused
                 );
-                const newIndex = Math.max(
-                    0,
-                    currentIndex - makeKeydownSelect.pageSize
-                );
-                const option = options[newIndex];
-                option && setFocused(option.value);
-
-                const { current: comboMenu } = comboMenuRef;
-                if (comboMenu) {
-                    setTimeout(() => {
-                        triggerScrollTo(optionListRef, comboMenu, newIndex);
-                    }, 50);
-                }
-                return true;
-            },
-        ],
-        [
-            'PageDown',
-            () => {
-                if (!expanded) {
-                    return false;
-                }
-                const currentIndex = options.findIndex(
-                    (opt) => opt.value === focused
-                );
-                const newIndex = Math.min(
-                    options.length - 1,
-                    currentIndex + makeKeydownSelect.pageSize
+                const newIndex = definePageIndex(
+                    evt,
+                    currentIndex,
+                    options.length
                 );
                 const option = options[newIndex];
                 option && setFocused(option.value);
