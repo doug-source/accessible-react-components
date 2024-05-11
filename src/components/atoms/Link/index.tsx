@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, createElement } from 'react';
 import styles from './Link.module.scss';
-import { makeGoHandler, makeKeyDownHandler } from './lib';
+import { makeGoHandler, makeLinkKeyDownHandler } from './lib';
 
 type W = 'span' | 'img';
 
@@ -32,6 +32,6 @@ export const Link = <T extends W>({
         role: 'link',
         tabIndex: 0,
         onClick: go,
-        onKeyDown: makeKeyDownHandler(go),
+        onKeyDown: makeLinkKeyDownHandler(go),
     });
 };

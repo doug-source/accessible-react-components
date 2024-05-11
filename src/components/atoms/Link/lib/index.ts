@@ -17,7 +17,7 @@ export const makeGoHandler: MakeGoEventFn = (location, href) => {
     };
 };
 
-export const makeKeyDownHandler = (
+export const makeLinkKeyDownHandler = (
     goHandler: ReturnType<typeof makeGoHandler>
 ) => {
     return (evt: GoEvent) => evt.key === 'Enter' && goHandler(evt);

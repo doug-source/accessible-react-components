@@ -1,4 +1,4 @@
-import { makeGoHandler, makeKeyDownHandler } from '.';
+import { makeGoHandler, makeLinkKeyDownHandler } from '.';
 
 const makeEvent = (key?: string) => {
     return {
@@ -40,18 +40,18 @@ describe('makeGoHandler function', () => {
     });
 });
 
-describe('makeKeyDownHandler function', () => {
+describe('makeLinkKeyDownHandler function', () => {
     test('returns a function', () => {
         const { href, locationMocked } = makeParams();
         const goFn = makeGoHandler(locationMocked, href);
-        const outputFn = makeKeyDownHandler(goFn);
+        const outputFn = makeLinkKeyDownHandler(goFn);
         expect(typeof outputFn).toBe('function');
     });
     test('runs then event correctly', () => {
         const { href, locationMocked } = makeParams();
         const goFn = makeGoHandler(locationMocked, href);
         expect(locationMocked.href).toBe('http://localhost/');
-        const outputFn = makeKeyDownHandler(goFn);
+        const outputFn = makeLinkKeyDownHandler(goFn);
         let event = makeEvent('ArrowRight');
         outputFn(event);
         expect(locationMocked.href).toBe('http://localhost/');
