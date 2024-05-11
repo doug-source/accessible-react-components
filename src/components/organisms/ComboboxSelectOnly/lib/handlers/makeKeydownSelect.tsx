@@ -103,9 +103,6 @@ const makeKeydownSelect = <T,>(
                 if (index > 0 && comboMenu) {
                     const newIndex = index - 1;
                     const option = options[newIndex];
-                    if (!option) {
-                        return false;
-                    }
                     setFocused(option.value);
                     scrollTo(optionListRef, comboMenu, newIndex);
                 }
@@ -122,12 +119,9 @@ const makeKeydownSelect = <T,>(
                     (opt) => opt && opt.value === focused
                 );
                 const { current: comboMenu } = comboMenuRef;
-                if (index < options.length && comboMenu) {
+                if (index < options.length - 1 && comboMenu) {
                     const newIndex = index + 1;
                     const option = options[newIndex];
-                    if (!option) {
-                        return false;
-                    }
                     setFocused(option.value);
                     scrollTo(optionListRef, comboMenu, newIndex);
                 }
