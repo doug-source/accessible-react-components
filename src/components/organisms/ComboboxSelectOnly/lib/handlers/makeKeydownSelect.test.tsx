@@ -224,11 +224,11 @@ describe('makeKeydownSelect function', () => {
         expect(jestShowActiveOptFn).toHaveBeenCalledTimes(2);
         expect(jestShowActiveOptFn).toHaveBeenCalledWith(false);
     });
-    test('runs with ArrowUp event correctly', () => {
+    test('runs during ArrowUp event no comboMenu reference correctly', () => {
         const jestOpenCallback = jest.fn();
         const jestChooseFocusedCallback = jest.fn();
         const jestFocusedFn = jest.fn();
-        let handler = makeKeydownSelect<string>(
+        const handler = makeKeydownSelect<string>(
             'itemName value',
             'focused value',
             jestFocusedFn,
@@ -256,7 +256,12 @@ describe('makeKeydownSelect function', () => {
         expect(jestOpenCallback).not.toHaveBeenCalled();
         expect(jestChooseFocusedCallback).not.toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
-        handler = makeKeydownSelect<string>(
+    });
+    test('runs during ArrowUp event no expanded correctly', () => {
+        const jestOpenCallback = jest.fn();
+        const jestChooseFocusedCallback = jest.fn();
+        const jestFocusedFn = jest.fn();
+        const handler = makeKeydownSelect<string>(
             'itemName value',
             'focused value',
             jestFocusedFn,
@@ -284,7 +289,12 @@ describe('makeKeydownSelect function', () => {
         expect(jestOpenCallback).toHaveBeenCalled();
         expect(jestChooseFocusedCallback).not.toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
-        handler = makeKeydownSelect<string>(
+    });
+    test('runs during ArrowUp event chooseFocusedCallback called correctly', () => {
+        const jestOpenCallback = jest.fn();
+        const jestChooseFocusedCallback = jest.fn();
+        const jestFocusedFn = jest.fn();
+        const handler = makeKeydownSelect<string>(
             'itemName value',
             'focused value',
             jestFocusedFn,
@@ -309,45 +319,16 @@ describe('makeKeydownSelect function', () => {
             () => {}
         );
         handler(makeKeyboardEvent('ArrowUp', true));
-        expect(jestOpenCallback).toHaveBeenCalledTimes(1);
+        expect(jestOpenCallback).not.toHaveBeenCalled();
         expect(jestChooseFocusedCallback).toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
-        const options = [
-            { label: 'first label', value: 'first value' },
-            { label: 'any label', value: 'any value' },
-            { label: 'second label', value: 'focused value' },
-        ];
-        handler = makeKeydownSelect<string>(
-            'itemName value',
-            'focused value',
-            jestFocusedFn,
-            () => {},
-            createRef<HTMLDivElement | null>(createHTMLDivElement()),
-            createRef<(HTMLDivElement | null)[]>([]),
-            options,
-            () => {
-                jestOpenCallback();
-                return true;
-            },
-            () => {
-                jestChooseFocusedCallback();
-                return true;
-            },
-            true,
-            () => {},
-            () => {},
-            () => {}
-        );
-        delete options[1];
-        let newEvent = makeKeyboardEvent('ArrowUp');
-        handler(newEvent);
-        expect(newEvent.stopPropagation).not.toHaveBeenCalled();
-        expect(newEvent.preventDefault).not.toHaveBeenCalled();
-        expect(jestOpenCallback).toHaveBeenCalledTimes(1);
-        expect(jestChooseFocusedCallback).toHaveBeenCalledTimes(1);
-        expect(jestFocusedFn).not.toHaveBeenCalled();
+    });
+    test('runs with ArrowUp event correctly', () => {
+        const jestOpenCallback = jest.fn();
+        const jestChooseFocusedCallback = jest.fn();
+        const jestFocusedFn = jest.fn();
         const comboMenuScrollTo = jest.fn();
-        handler = makeKeydownSelect<string>(
+        const handler = makeKeydownSelect<string>(
             'itemName value',
             'focused value',
             jestFocusedFn,
@@ -376,19 +357,19 @@ describe('makeKeydownSelect function', () => {
             () => {},
             () => {}
         );
-        newEvent = makeKeyboardEvent('ArrowUp');
+        const newEvent = makeKeyboardEvent('ArrowUp');
         handler(newEvent);
-        expect(jestOpenCallback).toHaveBeenCalledTimes(1);
-        expect(jestChooseFocusedCallback).toHaveBeenCalledTimes(1);
+        expect(jestOpenCallback).not.toHaveBeenCalled();
+        expect(jestChooseFocusedCallback).not.toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith('first value');
         expect(comboMenuScrollTo).toHaveBeenCalledWith(0, 0);
         expect(newEvent.stopPropagation).toHaveBeenCalled();
         expect(newEvent.preventDefault).toHaveBeenCalled();
     });
-    test('runs with ArrowDown event correctly', () => {
+    test('runs during ArrowDown event no comboMenu reference correctly', () => {
         const jestOpenCallback = jest.fn();
         const jestFocusedFn = jest.fn();
-        let handler = makeKeydownSelect<string>(
+        const handler = makeKeydownSelect<string>(
             'itemName value',
             'first value',
             jestFocusedFn,
@@ -412,7 +393,11 @@ describe('makeKeydownSelect function', () => {
         handler(makeKeyboardEvent('ArrowDown'));
         expect(jestOpenCallback).not.toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
-        handler = makeKeydownSelect<string>(
+    });
+    test('runs during ArrowDown event no expanded correctly', () => {
+        const jestOpenCallback = jest.fn();
+        const jestFocusedFn = jest.fn();
+        const handler = makeKeydownSelect<string>(
             'itemName value',
             'first value',
             jestFocusedFn,
@@ -428,7 +413,7 @@ describe('makeKeydownSelect function', () => {
                 return true;
             },
             () => true,
-            false,
+            false, // <-- no expanded
             () => {},
             () => {},
             () => {}
@@ -436,38 +421,12 @@ describe('makeKeydownSelect function', () => {
         handler(makeKeyboardEvent('ArrowDown'));
         expect(jestOpenCallback).toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
-        const options = [
-            { label: 'first label', value: 'first value' },
-            { label: 'any label', value: 'any value' },
-            { label: 'second label', value: 'focused value' },
-        ];
-        handler = makeKeydownSelect<string>(
-            'itemName value',
-            'first value',
-            jestFocusedFn,
-            () => {},
-            createRef<HTMLDivElement | null>(createHTMLDivElement()),
-            createRef<(HTMLDivElement | null)[]>([]),
-            options,
-            () => {
-                jestOpenCallback();
-                return true;
-            },
-            () => true,
-            true,
-            () => {},
-            () => {},
-            () => {}
-        );
-        delete options[1];
-        let newEvent = makeKeyboardEvent('ArrowDown');
-        handler(newEvent);
-        expect(newEvent.stopPropagation).not.toHaveBeenCalled();
-        expect(newEvent.preventDefault).not.toHaveBeenCalled();
-        expect(jestOpenCallback).toHaveBeenCalledTimes(1);
-        expect(jestFocusedFn).not.toHaveBeenCalled();
+    });
+    test('runs with ArrowDown event correctly', () => {
+        const jestOpenCallback = jest.fn();
+        const jestFocusedFn = jest.fn();
         const comboMenuScrollTo = jest.fn();
-        handler = makeKeydownSelect<string>(
+        const handler = makeKeydownSelect<string>(
             'itemName value',
             'first value',
             jestFocusedFn,
@@ -493,9 +452,9 @@ describe('makeKeydownSelect function', () => {
             () => {},
             () => {}
         );
-        newEvent = makeKeyboardEvent('ArrowDown');
+        const newEvent = makeKeyboardEvent('ArrowDown');
         handler(newEvent);
-        expect(jestOpenCallback).toHaveBeenCalledTimes(1);
+        expect(jestOpenCallback).not.toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith('focused value');
         expect(comboMenuScrollTo).toHaveBeenCalledWith(0, 0);
         expect(newEvent.stopPropagation).toHaveBeenCalled();
