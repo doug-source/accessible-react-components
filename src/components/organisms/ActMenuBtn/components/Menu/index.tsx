@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { MenuItem } from '../MenuItem';
 import styles from './Menu.module.scss';
-import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydownHandler';
+import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useRowFocused } from './lib/hooks/useRowFocused';
 
 type MenuProps = ComponentPropsWithoutRef<'ul'> & {

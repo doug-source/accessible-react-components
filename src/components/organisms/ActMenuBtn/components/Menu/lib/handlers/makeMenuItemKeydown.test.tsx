@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { renderHook } from '@testing-library/react';
 import { KeyboardEvent, useRef } from 'react';
-import { makeMenuItemKeydownHandler } from './makeMenuItemKeydownHandler';
+import { makeMenuItemKeydownHandler } from './makeMenuItemKeydown';
 
 const makeEvent = (key: string, shiftKey = false) => {
     return {
