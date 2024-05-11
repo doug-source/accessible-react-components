@@ -8,8 +8,8 @@ import {
 } from 'react';
 import { MenuItem } from '../MenuItem';
 import styles from './Menu.module.scss';
+import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydownHandler';
 import { useRowFocused } from './lib/hooks/useRowFocused';
-import { makeMenuItemKeydownHandler } from './lib/makeMenuItemKeydownHandler';
 
 type MenuProps = ComponentPropsWithoutRef<'ul'> & {
     items: Array<

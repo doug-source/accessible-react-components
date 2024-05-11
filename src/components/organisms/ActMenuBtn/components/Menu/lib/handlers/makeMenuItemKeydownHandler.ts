@@ -4,9 +4,9 @@ import {
     MouseEvent,
     MutableRefObject,
 } from 'react';
-import { swapIndex } from '../../../../../../lib';
-import { makeKeydownHandler } from '../../../../../../lib/handlers/keyDown';
-import runtimeSearch from '../../../../../../utils/RuntimeSearch';
+import { swapIndex } from '../../../../../../../lib';
+import { makeKeydownHandler } from '../../../../../../../lib/handlers/keyDown';
+import runtimeSearch from '../../../../../../../utils/RuntimeSearch';
 
 type MenuItemList = Array<
     [
