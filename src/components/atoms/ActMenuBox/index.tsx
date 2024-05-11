@@ -17,7 +17,7 @@ export const ActMenuBox = ({
         role="menu"
         className={classNames(
             className,
-            styles.menu,
+            styles.actMenuBox,
             expanded ? styles.show : styles.hide
         )}
     >
