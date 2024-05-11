@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useId, useRef, useState } from 'react';
-import styles from './ActFocusMenuBtn.module.scss';
+import styles from './ActMenuBtn.module.scss';
 import { Menu } from './components/Menu';
 import { MenuBtn } from './components/MenuBtn';
 import { makeMenuBtnKeydownHandler } from './lib/handlers/makeMenuBtnKeydownHandler';
@@ -8,17 +8,17 @@ import { useMenuItemListRef } from './lib/hooks/useMenuItemListRef';
 
 type MenuProps = ComponentPropsWithoutRef<typeof Menu>;
 
-type ActFocusMenuBtnProps = ComponentPropsWithoutRef<'div'> & {
+type ActMenuBtnProps = ComponentPropsWithoutRef<'div'> & {
     btnLabel: string;
     items: MenuProps['items'];
 };
 
-export const ActFocusMenuBtn = ({
+export const ActMenuBtn = ({
     className,
     btnLabel,
     items,
     ...remain
-}: ActFocusMenuBtnProps) => {
+}: ActMenuBtnProps) => {
     const menuBtnId = useId();
     const menuId = useId();
     const [expanded, setExpanded] = useState(false);

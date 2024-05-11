@@ -3,9 +3,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef } from 'react';
 import stylesMenu from './components/Menu/Menu.module.scss';
-import { ActFocusMenuBtn } from './index';
+import { ActMenuBtn } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof ActFocusMenuBtn>;
+type ElementProps = ComponentPropsWithoutRef<typeof ActMenuBtn>;
 type keys = 'btnLabel' | 'items';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
@@ -13,14 +13,14 @@ const buildComponent = ({
     btnLabel = 'btn label content',
     items = [['keyA', 'contentA', () => {}]],
 }: Props = {}) => (
-    <ActFocusMenuBtn
+    <ActMenuBtn
         btnLabel={btnLabel}
         items={items}
         data-testid="testIdentifier"
     />
 );
 
-describe('<ActFocusMenuBtn /> component', () => {
+describe('<ActMenuBtn /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const $el = screen.getByTestId('testIdentifier');
