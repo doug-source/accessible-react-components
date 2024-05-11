@@ -6,7 +6,8 @@
     color: currentColor;
     border-radius: 0.3125rem;
 
-    &:focus {
+    &:focus,
+    &.focused {
         padding: 0.25rem;
         border: 0.125rem solid #034575;
         background: #034575;
