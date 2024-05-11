@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { MenuItem } from '../MenuItem';
 import styles from './Menu.module.scss';
+import { useRowFocused } from './lib/hooks/useRowFocused';
 import { makeMenuItemKeydownHandler } from './lib/makeMenuItemKeydownHandler';
 
 type MenuProps = ComponentPropsWithoutRef<'ul'> & {
@@ -38,44 +39,48 @@ export const Menu = ({
     setFocused,
     menuBtnRef,
     ...remain
-}: MenuProps) => (
-    <ul
-        {...remain}
-        role="menu"
-        className={classNames(
-            className,
-            styles.menu,
-            expanded ? styles.show : styles.hide
-        )}
-    >
-        {items.map(([key, option, callback], i) => (
-            <MenuItem
-                key={key}
-                onClick={(evt) => {
-                    callback(evt);
-                    setExpanded(false);
-                }}
-                tabIndex={focused === i ? 0 : -1}
-                listRefFn={(el) => {
-                    listRef.current[i] = el;
-                }}
-                onMouseOver={(evt) => {
-                    listRef.current[i]?.focus();
-                    evt.stopPropagation();
-                    evt.preventDefault();
-                }}
-                onKeyDown={makeMenuItemKeydownHandler(
-                    items,
-                    i,
-                    listRef,
-                    setFocused,
-                    callback,
-                    setExpanded,
-                    menuBtnRef
-                )}
-            >
-                {option}
-            </MenuItem>
-        ))}
-    </ul>
-);
+}: MenuProps) => {
+    useRowFocused(listRef, expanded, focused);
+
+    return (
+        <ul
+            {...remain}
+            role="menu"
+            className={classNames(
+                className,
+                styles.menu,
+                expanded ? styles.show : styles.hide
+            )}
+        >
+            {items.map(([key, option, callback], i) => (
+                <MenuItem
+                    key={key}
+                    onClick={(evt) => {
+                        callback(evt);
+                        setExpanded(false);
+                    }}
+                    tabIndex={focused === i ? 0 : -1}
+                    listRefFn={(el) => {
+                        listRef.current[i] = el;
+                    }}
+                    onMouseOver={(evt) => {
+                        listRef.current[i]?.focus();
+                        evt.stopPropagation();
+                        evt.preventDefault();
+                    }}
+                    onKeyDown={makeMenuItemKeydownHandler(
+                        items,
+                        i,
+                        listRef,
+                        setFocused,
+                        callback,
+                        setExpanded,
+                        menuBtnRef
+                    )}
+                >
+                    {option}
+                </MenuItem>
+            ))}
+        </ul>
+    );
+};

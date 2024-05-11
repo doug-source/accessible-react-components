@@ -23,7 +23,7 @@ export const ActFocusMenuBtn = ({
     const menuId = useId();
     const [expanded, setExpanded] = useState(false);
     const [focused, setFocused] = useState(-1);
-    const menuItemListRef = useMenuItemListRef(items, expanded, focused);
+    const menuItemListRef = useMenuItemListRef(items);
     const menuBtnRef = useRef<HTMLButtonElement | null>(null);
 
     return (
