@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { Arrow } from '../../../../atoms/Arrow';
-import styles from './MenuBtn.module.scss';
+import { Arrow } from '../../atoms/Arrow';
+import styles from './ActMenuBtn.module.scss';
 
 type BtnProps = ComponentPropsWithoutRef<'button'>;
 
@@ -14,8 +14,8 @@ type MenuBtnProps = Omit<
     children: BtnProps['children'];
 };
 
-export const MenuBtn = forwardRef<HTMLButtonElement, MenuBtnProps>(
-    function MenuBtnInner(
+export const ActMenuBtn = forwardRef<HTMLButtonElement, MenuBtnProps>(
+    function ActMenuBtnInner(
         {
             className,
             'aria-expanded': ariaExpanded,

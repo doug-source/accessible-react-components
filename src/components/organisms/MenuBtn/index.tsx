@@ -1,24 +1,24 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useId, useRef, useState } from 'react';
-import styles from './ActMenuBtn.module.scss';
-import { Menu } from './components/Menu';
-import { MenuBtn } from './components/MenuBtn';
+import { ActMenu as Menu } from '../../molecules/ActMenu';
+import { ActMenuBtn } from '../../molecules/ActMenuBtn';
+import styles from './MenuBtn.module.scss';
 import { makeMenuBtnKeydownHandler } from './lib/handlers/makeMenuBtnKeydownHandler';
 import { useMenuItemListRef } from './lib/hooks/useMenuItemListRef';
 
 type MenuProps = ComponentPropsWithoutRef<typeof Menu>;
 
-type ActMenuBtnProps = ComponentPropsWithoutRef<'div'> & {
+type MenuBtnProps = ComponentPropsWithoutRef<'div'> & {
     btnLabel: string;
     items: MenuProps['items'];
 };
 
-export const ActMenuBtn = ({
+export const MenuBtn = ({
     className,
     btnLabel,
     items,
     ...remain
-}: ActMenuBtnProps) => {
+}: MenuBtnProps) => {
     const menuBtnId = useId();
     const menuId = useId();
     const [expanded, setExpanded] = useState(false);
@@ -28,7 +28,7 @@ export const ActMenuBtn = ({
 
     return (
         <div {...remain} className={classNames(className, styles.box)}>
-            <MenuBtn
+            <ActMenuBtn
                 id={menuBtnId}
                 aria-expanded={expanded}
                 ref={menuBtnRef}
@@ -48,7 +48,7 @@ export const ActMenuBtn = ({
                 )}
             >
                 {btnLabel}
-            </MenuBtn>
+            </ActMenuBtn>
             <Menu
                 id={menuId}
                 aria-labelledby={menuBtnId}

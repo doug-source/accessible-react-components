@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import { ComponentPropsWithoutRef } from 'react';
-import { Arrow } from '../../../../atoms/Arrow';
-import styles from './MenuBtn.module.scss';
-import { MenuBtn } from './index';
+import { Arrow } from '../../atoms/Arrow';
+import styles from './ActMenuBtn.module.scss';
+import { ActMenuBtn } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof MenuBtn>;
+type ElementProps = ComponentPropsWithoutRef<typeof ActMenuBtn>;
 type keys = 'aria-expanded' | 'aria-controls' | 'children';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
@@ -15,16 +15,16 @@ const buildComponent = ({
     children = 'btn content',
     ...remain
 }: Props = {}) => (
-    <MenuBtn
+    <ActMenuBtn
         {...remain}
         aria-expanded={ariaExpanded}
         aria-controls={ariaControls}
     >
         {children}
-    </MenuBtn>
+    </ActMenuBtn>
 );
 
-describe('<MenuBtn /> component', () => {
+describe('<ActMenuBtn /> component', () => {
     test('renders correctly', () => {
         const { rerender } = render(buildComponent());
         const $el = screen.getByRole('button');

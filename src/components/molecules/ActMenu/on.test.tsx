@@ -2,7 +2,8 @@ import '@testing-library/jest-dom';
 import { render, renderHook, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef, useRef } from 'react';
-import { Menu } from './index';
+import styles from './ActMenu.module.scss';
+import { ActMenu } from './index';
 
 const makeMutableRefObjectList = (list: (HTMLLIElement | null)[] = []) => {
     return renderHook(() => useRef<typeof list>(list)).result.current;
@@ -13,7 +14,7 @@ const makeMutableRefObjectBtn = () => {
         .current;
 };
 
-type ElementProps = ComponentPropsWithoutRef<typeof Menu>;
+type ElementProps = ComponentPropsWithoutRef<typeof ActMenu>;
 type keys =
     | 'items'
     | 'listRef'
@@ -33,7 +34,7 @@ const buildComponent = ({
     setFocused = () => {},
     menuBtnRef = makeMutableRefObjectBtn(),
 }: Props = {}) => (
-    <Menu
+    <ActMenu
         items={items}
         listRef={listRef}
         expanded={expanded}
@@ -44,7 +45,7 @@ const buildComponent = ({
     />
 );
 
-describe('<Menu /> component', () => {
+describe('<ActMenu /> component', () => {
     test('renders correctly', () => {
         const { rerender } = render(
             buildComponent({
@@ -56,6 +57,8 @@ describe('<Menu /> component', () => {
         );
         const $el = screen.getByRole('menu');
         expect($el).toBeInTheDocument();
+        expect($el).toHaveClass(styles.menu);
+
         const menuitems = within($el).getAllByRole('menuitem');
         menuitems.forEach(($menuitem) =>
             expect($menuitem).toHaveAttribute('tabIndex', '-1')

@@ -6,12 +6,12 @@ import {
     MouseEvent,
     MutableRefObject,
 } from 'react';
-import { ActMenuItem as MenuItem } from '../../../../molecules/ActMenuItem';
+import { ActMenuItem as MenuItem } from '../ActMenuItem';
 import styles from './Menu.module.scss';
 import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useRowFocused } from './lib/hooks/useRowFocused';
 
-type MenuProps = ComponentPropsWithoutRef<'ul'> & {
+type ActMenuProps = ComponentPropsWithoutRef<'ul'> & {
     items: Array<
         [
             key: string,
@@ -29,7 +29,7 @@ type MenuProps = ComponentPropsWithoutRef<'ul'> & {
     menuBtnRef: MutableRefObject<HTMLButtonElement | null>;
 };
 
-export const Menu = ({
+export const ActMenu = ({
     className,
     items,
     listRef,
@@ -39,7 +39,7 @@ export const Menu = ({
     setFocused,
     menuBtnRef,
     ...remain
-}: MenuProps) => {
+}: ActMenuProps) => {
     useRowFocused(listRef, expanded, focused);
 
     return (
