@@ -66,6 +66,7 @@ describe('makeKeydownSelect function', () => {
             false,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         expect(typeof output).toBe('function');
@@ -90,6 +91,7 @@ describe('makeKeydownSelect function', () => {
             () => true,
             () => true,
             false,
+            () => {},
             () => {},
             () => {},
             () => {}
@@ -126,6 +128,7 @@ describe('makeKeydownSelect function', () => {
             false,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         handler(makeKeyboardEvent(' '));
@@ -154,6 +157,7 @@ describe('makeKeydownSelect function', () => {
                 return true;
             },
             true,
+            () => {},
             () => {},
             () => {},
             () => {}
@@ -187,7 +191,8 @@ describe('makeKeydownSelect function', () => {
             true,
             jestExpandedFn,
             jestShowActiveOptFn,
-            jestLabelSelectedFn
+            jestLabelSelectedFn,
+            () => {}
         );
         handler(makeKeyboardEvent('Escape'));
         expect(jestLabelSelectedFn).not.toHaveBeenCalled();
@@ -213,7 +218,8 @@ describe('makeKeydownSelect function', () => {
             false,
             jestExpandedFn,
             jestShowActiveOptFn,
-            jestLabelSelectedFn
+            jestLabelSelectedFn,
+            () => {}
         );
         handler(makeKeyboardEvent('Escape'));
         expect(jestLabelSelectedFn).toHaveBeenCalled();
@@ -250,6 +256,7 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         handler(makeKeyboardEvent('ArrowUp'));
@@ -281,6 +288,7 @@ describe('makeKeydownSelect function', () => {
                 return true;
             },
             false,
+            () => {},
             () => {},
             () => {},
             () => {}
@@ -316,6 +324,7 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         handler(makeKeyboardEvent('ArrowUp', true));
@@ -328,6 +337,7 @@ describe('makeKeydownSelect function', () => {
         const jestChooseFocusedCallback = jest.fn();
         const jestFocusedFn = jest.fn();
         const comboMenuScrollTo = jest.fn();
+        const jestActiveOptFn = jest.fn();
         const handler = makeKeydownSelect<string>(
             'itemName value',
             'focused value',
@@ -355,7 +365,8 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
-            () => {}
+            () => {},
+            jestActiveOptFn
         );
         const newEvent = makeKeyboardEvent('ArrowUp');
         handler(newEvent);
@@ -363,6 +374,7 @@ describe('makeKeydownSelect function', () => {
         expect(jestChooseFocusedCallback).not.toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith('first value');
         expect(comboMenuScrollTo).toHaveBeenCalledWith(0, 0);
+        expect(jestActiveOptFn).toHaveBeenCalled();
         expect(newEvent.stopPropagation).toHaveBeenCalled();
         expect(newEvent.preventDefault).toHaveBeenCalled();
     });
@@ -386,6 +398,7 @@ describe('makeKeydownSelect function', () => {
             },
             () => true,
             true,
+            () => {},
             () => {},
             () => {},
             () => {}
@@ -416,6 +429,7 @@ describe('makeKeydownSelect function', () => {
             false, // <-- no expanded
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         handler(makeKeyboardEvent('ArrowDown'));
@@ -426,6 +440,7 @@ describe('makeKeydownSelect function', () => {
         const jestOpenCallback = jest.fn();
         const jestFocusedFn = jest.fn();
         const comboMenuScrollTo = jest.fn();
+        const jestActiveOptFn = jest.fn();
         const handler = makeKeydownSelect<string>(
             'itemName value',
             'first value',
@@ -450,13 +465,15 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
-            () => {}
+            () => {},
+            jestActiveOptFn
         );
         const newEvent = makeKeyboardEvent('ArrowDown');
         handler(newEvent);
         expect(jestOpenCallback).not.toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith('focused value');
         expect(comboMenuScrollTo).toHaveBeenCalledWith(0, 0);
+        expect(jestActiveOptFn).toHaveBeenCalled();
         expect(newEvent.stopPropagation).toHaveBeenCalled();
         expect(newEvent.preventDefault).toHaveBeenCalled();
     });
@@ -479,6 +496,7 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         handler(makeKeyboardEvent('Home'));
@@ -498,6 +516,7 @@ describe('makeKeydownSelect function', () => {
             },
             () => true,
             false,
+            () => {},
             () => {},
             () => {},
             () => {}
@@ -524,6 +543,7 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         handler(makeKeyboardEvent('Home'));
@@ -531,6 +551,7 @@ describe('makeKeydownSelect function', () => {
         expect(jestFocusedFn).toHaveBeenCalledWith('first value');
 
         const optScrollIntoView = jest.fn();
+        const jestActiveOptFn = jest.fn();
         handler = makeKeydownSelect<string>(
             'itemName value',
             'focused value',
@@ -553,12 +574,14 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
-            () => {}
+            () => {},
+            jestActiveOptFn
         );
         const newEvent = makeKeyboardEvent('Home');
         handler(newEvent);
         expect(jestOpenCallback).toHaveBeenCalledTimes(1);
         expect(jestFocusedFn).toHaveBeenCalledTimes(2);
+        expect(jestActiveOptFn).toHaveBeenCalled();
         await waitFor(() => {
             expect(optScrollIntoView).toHaveBeenCalled();
             expect(newEvent.stopPropagation).toHaveBeenCalled();
@@ -584,6 +607,7 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         handler(makeKeyboardEvent('End'));
@@ -603,6 +627,7 @@ describe('makeKeydownSelect function', () => {
             },
             () => true,
             false,
+            () => {},
             () => {},
             () => {},
             () => {}
@@ -629,6 +654,7 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         handler(makeKeyboardEvent('End'));
@@ -636,6 +662,7 @@ describe('makeKeydownSelect function', () => {
         expect(jestFocusedFn).toHaveBeenCalledWith('focused value');
 
         const optScrollIntoView = jest.fn();
+        const jestActiveOptFn = jest.fn();
         handler = makeKeydownSelect<string>(
             'itemName value',
             'first value',
@@ -658,12 +685,14 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
-            () => {}
+            () => {},
+            jestActiveOptFn
         );
         const newEvent = makeKeyboardEvent('End');
         handler(newEvent);
         expect(jestOpenCallback).toHaveBeenCalledTimes(1);
         expect(jestFocusedFn).toHaveBeenCalledTimes(2);
+        expect(jestActiveOptFn).toHaveBeenCalled();
         await waitFor(() => {
             expect(optScrollIntoView).toHaveBeenCalled();
             expect(newEvent.stopPropagation).toHaveBeenCalled();
@@ -685,6 +714,7 @@ describe('makeKeydownSelect function', () => {
             false,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         let newEvent = makeKeyboardEvent('PageUp');
@@ -693,6 +723,7 @@ describe('makeKeydownSelect function', () => {
         expect(newEvent.preventDefault).not.toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
         const optScrollIntoView = jest.fn();
+        const jestActiveOptFn = jest.fn();
         handler = makeKeydownSelect<string>(
             'itemName value',
             'seventh value',
@@ -722,11 +753,13 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
-            () => {}
+            () => {},
+            jestActiveOptFn
         );
         newEvent = makeKeyboardEvent('PageUp');
         handler(newEvent);
         expect(jestFocusedFn).toHaveBeenCalledWith('first value');
+        expect(jestActiveOptFn).toHaveBeenCalled();
         await waitFor(() => {
             expect(optScrollIntoView).toHaveBeenCalled();
             expect(newEvent.stopPropagation).toHaveBeenCalled();
@@ -748,6 +781,7 @@ describe('makeKeydownSelect function', () => {
             false,
             () => {},
             () => {},
+            () => {},
             () => {}
         );
         let newEvent = makeKeyboardEvent('PageDown');
@@ -756,6 +790,7 @@ describe('makeKeydownSelect function', () => {
         expect(newEvent.preventDefault).not.toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
         const optScrollIntoView = jest.fn();
+        const jestActiveOptFn = jest.fn();
         handler = makeKeydownSelect<string>(
             'itemName value',
             'first value',
@@ -785,11 +820,13 @@ describe('makeKeydownSelect function', () => {
             true,
             () => {},
             () => {},
-            () => {}
+            () => {},
+            jestActiveOptFn
         );
         newEvent = makeKeyboardEvent('PageDown');
         handler(newEvent);
         expect(jestFocusedFn).toHaveBeenCalledWith('seventh value');
+        expect(jestActiveOptFn).toHaveBeenCalled();
         await waitFor(() => {
             expect(optScrollIntoView).toHaveBeenCalled();
             expect(newEvent.stopPropagation).toHaveBeenCalled();

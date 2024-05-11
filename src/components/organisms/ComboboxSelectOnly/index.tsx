@@ -83,7 +83,8 @@ export const ComboboxSelectOnly = <T,>({
                     expanded,
                     setExpanded,
                     setShowActiveOpt,
-                    setLabelSelected
+                    setLabelSelected,
+                    setActiveOpt
                 )}
             >
                 {labelSelected}

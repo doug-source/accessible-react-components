@@ -31,7 +31,8 @@ const makeKeydownSelect = <T,>(
     expanded: boolean,
     setExpanded: (value: boolean) => void,
     setShowActiveOpt: (value: boolean) => void,
-    setLabelSelected: (value: ReactNode) => void
+    setLabelSelected: (value: ReactNode) => void,
+    setActiveOpt: (value: string | null) => void
 ) => {
     return makeKeydownHandler([
         [
@@ -105,6 +106,7 @@ const makeKeydownSelect = <T,>(
                     const option = options[newIndex];
                     setFocused(option.value);
                     scrollTo(optionListRef, comboMenu, newIndex);
+                    setActiveOpt(optionListRef.current?.[newIndex]?.id ?? null);
                 }
                 return true;
             },
@@ -124,6 +126,7 @@ const makeKeydownSelect = <T,>(
                     const option = options[newIndex];
                     setFocused(option.value);
                     scrollTo(optionListRef, comboMenu, newIndex);
+                    setActiveOpt(optionListRef.current?.[newIndex]?.id ?? null);
                 }
                 return true;
             },
@@ -140,6 +143,7 @@ const makeKeydownSelect = <T,>(
 
                 const { current: comboMenu } = comboMenuRef;
                 if (comboMenu) {
+                    setActiveOpt(optionListRef.current?.[newIndex]?.id ?? null);
                     setTimeout(() => {
                         triggerScrollTo(optionListRef, comboMenu, newIndex);
                     }, 50);
@@ -166,6 +170,7 @@ const makeKeydownSelect = <T,>(
 
                 const { current: comboMenu } = comboMenuRef;
                 if (comboMenu) {
+                    setActiveOpt(optionListRef.current?.[newIndex]?.id ?? null);
                     setTimeout(() => {
                         triggerScrollTo(optionListRef, comboMenu, newIndex);
                     }, 50);
