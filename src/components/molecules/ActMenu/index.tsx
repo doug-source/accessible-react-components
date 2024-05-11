@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import {
     ComponentPropsWithoutRef,
     EventHandler,
@@ -6,8 +5,8 @@ import {
     MouseEvent,
     MutableRefObject,
 } from 'react';
+import { ActMenuBox } from '../../atoms/ActMenuBox';
 import { ActMenuItem as MenuItem } from '../ActMenuItem';
-import styles from './Menu.module.scss';
 import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useRowFocused } from './lib/hooks/useRowFocused';
 
@@ -30,7 +29,6 @@ type ActMenuProps = ComponentPropsWithoutRef<'ul'> & {
 };
 
 export const ActMenu = ({
-    className,
     items,
     listRef,
     expanded,
@@ -43,15 +41,7 @@ export const ActMenu = ({
     useRowFocused(listRef, expanded, focused);
 
     return (
-        <ul
-            {...remain}
-            role="menu"
-            className={classNames(
-                className,
-                styles.menu,
-                expanded ? styles.show : styles.hide
-            )}
-        >
+        <ActMenuBox {...remain} expanded={expanded}>
             {items.map(([key, option, callback], i) => (
                 <MenuItem
                     key={key}
@@ -81,6 +71,6 @@ export const ActMenu = ({
                     {option}
                 </MenuItem>
             ))}
-        </ul>
+        </ActMenuBox>
     );
 };

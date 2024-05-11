@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 import { render, renderHook, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef, useRef } from 'react';
-import styles from './ActMenu.module.scss';
 import { ActMenu } from './index';
 
 const makeMutableRefObjectList = (list: (HTMLLIElement | null)[] = []) => {
@@ -56,9 +55,6 @@ describe('<ActMenu /> component', () => {
             })
         );
         const $el = screen.getByRole('menu');
-        expect($el).toBeInTheDocument();
-        expect($el).toHaveClass(styles.menu);
-
         const menuitems = within($el).getAllByRole('menuitem');
         menuitems.forEach(($menuitem) =>
             expect($menuitem).toHaveAttribute('tabIndex', '-1')
