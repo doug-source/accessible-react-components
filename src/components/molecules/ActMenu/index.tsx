@@ -6,7 +6,7 @@ import {
     MutableRefObject,
 } from 'react';
 import { ActMenuBox } from '../../atoms/ActMenuBox';
-import { ActMenuItem as MenuItem } from '../ActMenuItem';
+import { ActMenuItem as MenuItem } from '../../atoms/ActMenuItem';
 import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useRowFocused } from './lib/hooks/useRowFocused';
 

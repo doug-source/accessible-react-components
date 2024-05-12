@@ -7,7 +7,7 @@ import {
     useState,
 } from 'react';
 import { ActMenuBox } from '../../atoms/ActMenuBox';
-import { ActMenuItem as MenuItem } from '../ActMenuItem';
+import { ActMenuItem as MenuItem } from '../../atoms/ActMenuItem';
 import { makeMenuKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useBoxFocused } from './lib/hooks/useBoxFocused';
 import { useRowFocused } from './lib/hooks/useRowFocused';
