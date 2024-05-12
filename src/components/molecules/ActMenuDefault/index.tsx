@@ -10,7 +10,7 @@ import { ActMenuItem } from '../../atoms/ActMenuItem';
 import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useRowFocused } from './lib/hooks/useRowFocused';
 
-type ActMenuProps = ComponentPropsWithoutRef<'ul'> & {
+type ActMenuDefaultProps = ComponentPropsWithoutRef<'ul'> & {
     show: boolean;
     items: Array<
         [
@@ -29,7 +29,7 @@ type ActMenuProps = ComponentPropsWithoutRef<'ul'> & {
     menuBtnRef: MutableRefObject<HTMLButtonElement | null>;
 };
 
-export const ActMenu = ({
+export const ActMenuDefault = ({
     show,
     items,
     listRef,
@@ -39,7 +39,7 @@ export const ActMenu = ({
     setFocused,
     menuBtnRef,
     ...remain
-}: ActMenuProps) => {
+}: ActMenuDefaultProps) => {
     useRowFocused(listRef, expanded, focused, show);
     if (!show) {
         return null;

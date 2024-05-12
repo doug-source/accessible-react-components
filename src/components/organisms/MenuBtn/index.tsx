@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useId, useRef, useState } from 'react';
-import { ActMenu } from '../../molecules/ActMenu';
 import { ActMenuBtn } from '../../molecules/ActMenuBtn';
 import { ActMenuComposite } from '../../molecules/ActMenuComposite';
+import { ActMenuDefault } from '../../molecules/ActMenuDefault';
 import styles from './MenuBtn.module.scss';
 import { makeMenuBtnKeydownHandler } from './lib/handlers/makeMenuBtnKeydownHandler';
 import { useMenuItemListRef } from './lib/hooks/useMenuItemListRef';
 
-type MenuProps = ComponentPropsWithoutRef<typeof ActMenu>;
+type MenuProps = ComponentPropsWithoutRef<typeof ActMenuDefault>;
 
 type MenuBtnProps = ComponentPropsWithoutRef<'div'> & {
     btnLabel: string;
@@ -54,7 +54,7 @@ export const MenuBtn = ({
                 {btnLabel}
             </ActMenuBtn>
 
-            <ActMenu
+            <ActMenuDefault
                 show={!composite}
                 id={menuId}
                 aria-labelledby={menuBtnId}

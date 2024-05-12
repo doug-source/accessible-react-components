@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, renderHook, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef, useRef } from 'react';
-import { ActMenu } from './index';
+import { ActMenuDefault } from './index';
 
 const makeMutableRefObjectList = (list: (HTMLLIElement | null)[] = []) => {
     return renderHook(() => useRef<typeof list>(list)).result.current;
@@ -13,7 +13,7 @@ const makeMutableRefObjectBtn = () => {
         .current;
 };
 
-type ElementProps = ComponentPropsWithoutRef<typeof ActMenu>;
+type ElementProps = ComponentPropsWithoutRef<typeof ActMenuDefault>;
 type keys =
     | 'show'
     | 'items'
@@ -35,7 +35,7 @@ const buildComponent = ({
     setFocused = () => {},
     menuBtnRef = makeMutableRefObjectBtn(),
 }: Props = {}) => (
-    <ActMenu
+    <ActMenuDefault
         show={show}
         items={items}
         listRef={listRef}
@@ -47,7 +47,7 @@ const buildComponent = ({
     />
 );
 
-describe('<ActMenu /> component', () => {
+describe('<ActMenuDefault /> component', () => {
     test('renders correctly', () => {
         const { rerender } = render(
             buildComponent({
