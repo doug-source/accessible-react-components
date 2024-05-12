@@ -1,22 +1,25 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useId, useRef, useState } from 'react';
-import { ActMenu as Menu } from '../../molecules/ActMenu';
+import { ActMenu } from '../../molecules/ActMenu';
 import { ActMenuBtn } from '../../molecules/ActMenuBtn';
+import { ActMenuComposite } from '../../molecules/ActMenuComposite';
 import styles from './MenuBtn.module.scss';
 import { makeMenuBtnKeydownHandler } from './lib/handlers/makeMenuBtnKeydownHandler';
 import { useMenuItemListRef } from './lib/hooks/useMenuItemListRef';
 
-type MenuProps = ComponentPropsWithoutRef<typeof Menu>;
+type MenuProps = ComponentPropsWithoutRef<typeof ActMenu>;
 
 type MenuBtnProps = ComponentPropsWithoutRef<'div'> & {
     btnLabel: string;
     items: MenuProps['items'];
+    composite?: boolean;
 };
 
 export const MenuBtn = ({
     className,
     btnLabel,
     items,
+    composite = false,
     ...remain
 }: MenuBtnProps) => {
     const menuBtnId = useId();
@@ -25,6 +28,7 @@ export const MenuBtn = ({
     const [focused, setFocused] = useState(-1);
     const menuItemListRef = useMenuItemListRef(items);
     const menuBtnRef = useRef<HTMLButtonElement | null>(null);
+    const ulRef = useRef<HTMLUListElement | null>(null);
 
     return (
         <div {...remain} className={classNames(className, styles.box)}>
@@ -49,16 +53,32 @@ export const MenuBtn = ({
             >
                 {btnLabel}
             </ActMenuBtn>
-            <Menu
+
+            <ActMenu
+                show={!composite}
                 id={menuId}
                 aria-labelledby={menuBtnId}
                 items={items}
                 listRef={menuItemListRef}
-                setExpanded={setExpanded}
                 expanded={expanded}
+                setExpanded={setExpanded}
                 focused={focused}
                 setFocused={setFocused}
                 menuBtnRef={menuBtnRef}
+            />
+            <ActMenuComposite
+                show={composite}
+                tabIndex={-1}
+                id={menuId}
+                aria-labelledby={menuBtnId}
+                items={items}
+                listRef={menuItemListRef}
+                expanded={expanded}
+                setExpanded={setExpanded}
+                focused={focused}
+                setFocused={setFocused}
+                menuBtnRef={menuBtnRef}
+                menuBoxRef={ulRef}
             />
         </div>
     );
