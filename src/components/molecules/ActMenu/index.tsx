@@ -11,6 +11,7 @@ import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useRowFocused } from './lib/hooks/useRowFocused';
 
 type ActMenuProps = ComponentPropsWithoutRef<'ul'> & {
+    show: boolean;
     items: Array<
         [
             key: string,
@@ -29,6 +30,7 @@ type ActMenuProps = ComponentPropsWithoutRef<'ul'> & {
 };
 
 export const ActMenu = ({
+    show,
     items,
     listRef,
     expanded,
@@ -38,8 +40,10 @@ export const ActMenu = ({
     menuBtnRef,
     ...remain
 }: ActMenuProps) => {
-    useRowFocused(listRef, expanded, focused);
-
+    useRowFocused(listRef, expanded, focused, show);
+    if (!show) {
+        return null;
+    }
     return (
         <ActMenuBox {...remain} expanded={expanded}>
             {items.map(([key, option, callback], i) => (

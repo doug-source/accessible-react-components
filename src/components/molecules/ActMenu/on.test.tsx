@@ -15,6 +15,7 @@ const makeMutableRefObjectBtn = () => {
 
 type ElementProps = ComponentPropsWithoutRef<typeof ActMenu>;
 type keys =
+    | 'show'
     | 'items'
     | 'listRef'
     | 'expanded'
@@ -25,6 +26,7 @@ type keys =
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
 const buildComponent = ({
+    show = true,
     items = [['keyA', 'contentA', () => {}]],
     listRef = makeMutableRefObjectList(),
     expanded = false,
@@ -34,6 +36,7 @@ const buildComponent = ({
     menuBtnRef = makeMutableRefObjectBtn(),
 }: Props = {}) => (
     <ActMenu
+        show={show}
         items={items}
         listRef={listRef}
         expanded={expanded}

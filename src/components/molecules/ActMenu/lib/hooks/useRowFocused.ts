@@ -3,11 +3,12 @@ import { MutableRefObject, useEffect } from 'react';
 export const useRowFocused = (
     menuItemListRef: MutableRefObject<(HTMLLIElement | null)[]>,
     expanded: boolean,
-    focused: number
+    focused: number,
+    allow: boolean
 ) => {
     useEffect(() => {
-        if (expanded) {
+        if (allow && expanded) {
             menuItemListRef.current[focused]?.focus();
         }
-    }, [menuItemListRef, expanded, focused]);
+    }, [menuItemListRef, expanded, focused, allow]);
 };
