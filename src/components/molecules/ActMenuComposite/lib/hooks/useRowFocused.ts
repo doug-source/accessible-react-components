@@ -9,7 +9,7 @@ export const useRowFocused = (
 ) => {
     useEffect(() => {
         if (allow && expanded) {
-            const id = menuItemListRef.current[focused]?.id ?? '';
+            const id = menuItemListRef.current[focused]?.id ?? null;
             setActiveOpt(id);
         }
     }, [menuItemListRef, setActiveOpt, expanded, focused, allow]);
