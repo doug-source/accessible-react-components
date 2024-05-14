@@ -48,6 +48,28 @@ const buildComponent = ({
 );
 
 describe('<ActMenuDefault /> component', () => {
+    test('renders changing the show property correctly', () => {
+        const { rerender } = render(
+            buildComponent({
+                items: [
+                    ['keyA', 'contentA', () => {}],
+                    ['keyB', 'contentB', () => {}],
+                ],
+            })
+        );
+        const $el = screen.getByRole('menu');
+        expect($el).toBeInTheDocument();
+        rerender(
+            buildComponent({
+                items: [
+                    ['keyA', 'contentA', () => {}],
+                    ['keyB', 'contentB', () => {}],
+                ],
+                show: false,
+            })
+        );
+        expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    });
     test('renders correctly', () => {
         const { rerender } = render(
             buildComponent({
