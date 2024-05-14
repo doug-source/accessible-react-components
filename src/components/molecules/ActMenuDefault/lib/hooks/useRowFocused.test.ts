@@ -27,10 +27,11 @@ const runUseRowFocusedHook = (
         menuItemListRef,
         expanded: false,
         focused: -1,
+        allow: false,
     };
     return renderHook(
-        ({ menuItemListRef, expanded, focused }) => {
-            useRowFocused(menuItemListRef, expanded, focused);
+        ({ menuItemListRef, expanded, focused, allow }) => {
+            useRowFocused(menuItemListRef, expanded, focused, allow);
         },
         { initialProps }
     );
@@ -46,23 +47,43 @@ describe('useRowFocused hook', () => {
             makeLiElement(ref),
             makeLiElement(ref),
         ];
-        rerender({ menuItemListRef: ref, expanded: true, focused: -1 });
+        rerender({
+            menuItemListRef: ref,
+            expanded: true,
+            focused: -1,
+            allow: false,
+        });
         ref.current.forEach((li) => expect(li?.focus).not.toHaveBeenCalled());
-        rerender({ menuItemListRef: ref, expanded: true, focused: 0 });
+        rerender({
+            menuItemListRef: ref,
+            expanded: true,
+            focused: 0,
+            allow: true,
+        });
         await waitFor(() => {
             expect(ref.current[0]?.focus).toHaveBeenCalled();
             expect(ref.current[1]?.focus).not.toHaveBeenCalled();
             expect(ref.current[2]?.focus).not.toHaveBeenCalled();
         });
         ref.current[0]?.replaceWith(makeLiElement(ref));
-        rerender({ menuItemListRef: ref, expanded: true, focused: 1 });
+        rerender({
+            menuItemListRef: ref,
+            expanded: true,
+            focused: 1,
+            allow: true,
+        });
         await waitFor(() => {
             expect(ref.current[0]?.focus).not.toHaveBeenCalled();
             expect(ref.current[1]?.focus).toHaveBeenCalled();
             expect(ref.current[2]?.focus).not.toHaveBeenCalled();
         });
         ref.current[1]?.replaceWith(makeLiElement(ref));
-        rerender({ menuItemListRef: ref, expanded: true, focused: 2 });
+        rerender({
+            menuItemListRef: ref,
+            expanded: true,
+            focused: 2,
+            allow: true,
+        });
         await waitFor(() => {
             expect(ref.current[0]?.focus).not.toHaveBeenCalled();
             expect(ref.current[1]?.focus).not.toHaveBeenCalled();
