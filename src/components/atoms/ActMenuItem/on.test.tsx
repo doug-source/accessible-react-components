@@ -27,4 +27,11 @@ describe('<MenuItem /> component', () => {
         expect($el).toBeInTheDocument();
         expect($el).toHaveClass(styles.menuItem);
     });
+    test('renders with and no identifier correctly', () => {
+        const { rerender } = render(buildComponent());
+        const $el = screen.getByText('list item content');
+        expect($el).not.toHaveAttribute('id');
+        rerender(buildComponent({ identified: true }));
+        expect($el).toHaveAttribute('id');
+    });
 });
