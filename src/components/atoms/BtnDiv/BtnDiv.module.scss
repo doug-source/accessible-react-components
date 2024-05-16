@@ -1,0 +1,42 @@
+.btnDiv {
+    $borderWidth: 0.0625rem;
+    $borderRadius: 0.3125rem;
+
+    display: inline-block;
+    position: relative;
+    padding: 0.4rem 0.7rem;
+    border: $borderWidth solid #2474d6;
+    border-radius: $borderRadius;
+    box-shadow: 0 0.0625rem 0.125rem #6d86ab;
+    color: #fff;
+    text-shadow: 0 -0.0625rem 0.0625rem #2f3c51;
+    background-color: #1c6ee9;
+    background-image: linear-gradient(to bottom, #2573e9, #1664da);
+
+    cursor: pointer;
+
+    &:hover {
+        border-color: #15457e;
+        background-color: #0e4290;
+        background-image: linear-gradient(to bottom, #0f4699, #0c3a7d);
+    }
+    &:focus {
+        outline: none;
+        &::before {
+            $outlineWidth: 0.1875rem;
+            $offset: 0.1875rem;
+
+            $distance: calc(-#{$borderWidth} - #{$outlineWidth} - #{$offset});
+            position: absolute;
+            top: $distance;
+            right: $distance;
+            bottom: $distance;
+            left: $distance;
+            border: 0.1875rem solid #2474d6;
+            border-radius: calc(
+                #{$borderRadius} + #{$outlineWidth} + #{$offset}
+            );
+            content: '';
+        }
+    }
+}
