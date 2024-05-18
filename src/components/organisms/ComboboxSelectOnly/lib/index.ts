@@ -1,12 +1,5 @@
 import { MutableRefObject } from 'react';
-
-export const isReducedMotion = (windowObject = window) => {
-    const output = windowObject.matchMedia('(prefers-reduced-motion: reduce)');
-    if (output && !Object.hasOwnProperty.call(output, 'matches')) {
-        return true;
-    }
-    return Boolean(output.matches);
-};
+import { isReducedMotion } from '../../../../lib';
 
 export const defineScrollTop = (
     comboMenu: HTMLDivElement,

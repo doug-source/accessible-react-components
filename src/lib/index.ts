@@ -23,3 +23,11 @@ export const firstUpperCase = (str: string) => {
 export const swapIndex = <T>(list: T[], index: number) => {
     return ((index % list.length) + list.length) % list.length;
 };
+
+export const isReducedMotion = (windowObject = window) => {
+    const output = windowObject.matchMedia('(prefers-reduced-motion: reduce)');
+    if (output && !Object.hasOwnProperty.call(output, 'matches')) {
+        return true;
+    }
+    return Boolean(output.matches);
+};

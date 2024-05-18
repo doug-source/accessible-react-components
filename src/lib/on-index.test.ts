@@ -1,10 +1,38 @@
 import {
     firstUpperCase,
     isBooleanishFalsy,
+    isReducedMotion,
     makeBooleanHandle,
     parseBooleanish,
     swapIndex,
 } from '.';
+
+const defineWindowMatchMedia = () => {
+    Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockImplementation((query) => ({
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: jest.fn(), // Deprecated
+            removeListener: jest.fn(), // Deprecated
+            addEventListener: jest.fn(),
+            removeEventListener: jest.fn(),
+            dispatchEvent: jest.fn(),
+        })),
+    });
+};
+
+const makeWindowObject = (withMatches = false) => {
+    return {
+        matchMedia(): { matches: boolean } | boolean {
+            if (withMatches) {
+                return { matches: true };
+            }
+            return true;
+        },
+    } as unknown as Window & typeof globalThis;
+};
 
 describe('isBooleanishFalsy function', () => {
     test('returns as output the true value correctly', () => {
@@ -81,5 +109,17 @@ describe('swapIndex function', () => {
         expect(output).toBe(1);
         output = swapIndex(list, -3);
         expect(output).toBe(0);
+    });
+});
+
+describe('isReducedMotion function', () => {
+    test('runs correctly', () => {
+        defineWindowMatchMedia();
+        let output = isReducedMotion();
+        expect(output).toBe(false);
+        output = isReducedMotion(makeWindowObject());
+        expect(output).toBe(true);
+        output = isReducedMotion(makeWindowObject(true));
+        expect(output).toBe(true);
     });
 });

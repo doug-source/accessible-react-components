@@ -1,13 +1,7 @@
 import '@testing-library/jest-dom';
 import { renderHook } from '@testing-library/react';
 import { useRef } from 'react';
-import {
-    defineScrollTop,
-    isReducedMotion,
-    makeCallbacks,
-    scrollTo,
-    triggerScrollTo,
-} from '.';
+import { defineScrollTop, makeCallbacks, scrollTo, triggerScrollTo } from '.';
 
 const makeHTMLDivElement = (
     offsetTop: number,
@@ -53,18 +47,6 @@ const defineWindowMatchMedia = () => {
 };
 
 const runHook = () => renderHook(() => useRef<(HTMLDivElement | null)[]>([]));
-
-describe('isReducedMotion function', () => {
-    test('runs correctly', () => {
-        defineWindowMatchMedia();
-        let output = isReducedMotion();
-        expect(output).toBe(false);
-        output = isReducedMotion(makeWindowObject());
-        expect(output).toBe(true);
-        output = isReducedMotion(makeWindowObject(true));
-        expect(output).toBe(true);
-    });
-});
 
 describe('defineScrollTop function', () => {
     test('runs correctly', () => {
