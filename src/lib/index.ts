@@ -26,7 +26,7 @@ export const swapIndex = <T>(list: T[], index: number) => {
 
 export const isReducedMotion = (windowObject = window) => {
     const output = windowObject.matchMedia('(prefers-reduced-motion: reduce)');
-    if (output && !Object.hasOwnProperty.call(output, 'matches')) {
+    if (output && typeof output?.matches === 'undefined') {
         return true;
     }
     return Boolean(output.matches);
