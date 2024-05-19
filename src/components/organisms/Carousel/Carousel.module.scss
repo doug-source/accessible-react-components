@@ -1,0 +1,25 @@
+@use '../../../lib/measures.module' as measures;
+
+.box {
+    position: relative;
+    width: 55rem;
+    padding: measures.$slideSpacing;
+}
+
+.controls {
+    &.controlOut {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    $spacing: calc(#{measures.$slideSpacing} * 2);
+    position: absolute;
+    top: $spacing;
+    left: $spacing;
+    right: $spacing;
+    bottom: auto;
+    margin: auto;
+    padding-bottom: 0.25rem;
+}
