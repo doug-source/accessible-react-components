@@ -1,0 +1,9 @@
+.slideItemBox {
+    position: relative;
+    justify-content: center;
+    display: none;
+
+    &.show {
+        display: flex;
+    }
+}
