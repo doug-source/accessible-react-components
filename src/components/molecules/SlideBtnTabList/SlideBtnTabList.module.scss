@@ -1,0 +1,21 @@
+.box {
+    flex: 1 1 auto;
+    text-align: center;
+
+    &.focused [role='tablist'] {
+        padding-top: 0;
+        border-width: 0.125rem;
+        border-color: #fff;
+        background-color: #005a9c;
+    }
+
+    [role='tablist'] {
+        display: inline-flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        border: 0 transparent solid;
+        border-radius: 0.75rem;
+        padding-top: 0.125rem;
+        background-color: rgba(0, 0, 0, 0.651);
+    }
+}
