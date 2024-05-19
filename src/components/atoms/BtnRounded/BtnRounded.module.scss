@@ -1,0 +1,121 @@
+@mixin before-style($outline, $bg: #000) {
+    position: absolute;
+    left: #{$outline};
+    right: #{$outline};
+    top: #{$outline};
+    bottom: #{$outline};
+    content: '';
+    background-color: $bg;
+    border-radius: 100%;
+    z-index: 1;
+}
+
+@mixin after-style($outline, $bg: #fff) {
+    position: absolute;
+    left: #{$outline};
+    right: #{$outline};
+    top: #{$outline};
+    bottom: #{$outline};
+    content: '';
+    background-color: $bg;
+    border-radius: 100%;
+    z-index: 0;
+}
+
+$size: 1.125rem;
+$outsideWidth: 0.25rem;
+
+.btnRounded {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0.5rem 0.75rem;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .markout {
+        position: absolute;
+
+        width: calc($size + #{$outsideWidth} / 2);
+        height: calc($size + #{$outsideWidth} / 2);
+
+        background-color: #fff;
+        top: calc(-#{$outsideWidth} / 4);
+        left: calc(-#{$outsideWidth} / 4);
+        right: 0;
+        bottom: 0;
+        border-radius: 100%;
+        display: none;
+    }
+
+    &:not([tabindex], :hover).parentFocused .markout {
+        display: block;
+        transform: scale(1.1);
+    }
+    &[tabindex='-1']:hover .markout {
+        display: block;
+        transform: scale(0.9);
+    }
+}
+
+.back {
+    $outlineAfter: 0.125rem;
+    $outlineBefore: 0.25rem;
+
+    display: inline-block;
+    width: $size;
+    height: $size;
+    border-radius: 100%;
+    background-color: #000;
+    position: relative;
+    z-index: 1;
+
+    .btnRounded:not([tabindex]):hover > & {
+        background-color: #fff;
+        &::before {
+            @include before-style($outlineBefore, #fff);
+        }
+        &::after {
+            @include after-style($outlineAfter, #005a9c);
+        }
+    }
+    .btnRounded:not([tabindex]).parentFocused > & {
+        background-color: #005a9c;
+    }
+    .btnRounded:not([tabindex]).parentFocused:hover > & {
+        background-color: #fff;
+        &::after {
+            @include after-style(calc(#{$outlineAfter} * 1), #005a9c);
+        }
+    }
+    .btnRounded[tabindex='-1'] > & {
+        &::before {
+            @include before-style($outlineBefore);
+        }
+    }
+    .btnRounded[tabindex='-1']:hover > & {
+        background-color: #005a9c;
+        transform: scale(0.8);
+        &::before {
+            @include before-style(calc($outlineBefore), #005a9c);
+        }
+        &::after {
+            display: none;
+        }
+    }
+    .btnRounded[tabindex='-1'].parentFocused > &,
+    .btnRounded[tabindex='-1'].parentFocused:hover > & {
+        background-color: #005a9c;
+        &::before {
+            @include before-style($outlineBefore, #005a9c);
+        }
+    }
+
+    &::after {
+        @include after-style($outlineAfter);
+    }
+}
