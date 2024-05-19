@@ -6,14 +6,14 @@ import { BtnPlayPause } from './index';
 
 describe('<BtnPlayPause /> component', () => {
     test('renders correctly', () => {
-        render(<BtnPlayPause />);
+        render(<BtnPlayPause initial={false} />);
         const $btn = screen.getByRole('button');
         expect($btn).toBeInTheDocument();
         expect($btn).toHaveClass(styles.btnPlayPause);
     });
     test('renders clicking at button correctly', async () => {
         const onChange = jest.fn();
-        render(<BtnPlayPause onChange={onChange} />);
+        render(<BtnPlayPause initial={false} onChange={onChange} />);
         const $btn = screen.getByRole('button');
         const [$rectBack, $playSvg, $pauseSvg] = Array.from(
             $btn.children,
