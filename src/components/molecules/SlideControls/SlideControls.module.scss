@@ -1,0 +1,16 @@
+@use '../../../lib/measures.module' as measures;
+
+.controls {
+    z-index: 1;
+    .btnPlayPause {
+        &:not(.controlOut) {
+            padding: calc(#{measures.$slideSpacing} * 2);
+        }
+        &.controlOut {
+            align-self: center;
+        }
+    }
+
+    display: flex;
+    align-items: flex-start;
+}
