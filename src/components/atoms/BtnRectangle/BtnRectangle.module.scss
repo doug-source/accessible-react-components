@@ -1,0 +1,51 @@
+.btnRectangle {
+    $size: 3.5rem;
+
+    min-width: $size;
+    width: $size;
+    height: calc($size * 0.55);
+
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    vertical-align: top;
+    outline: none;
+}
+
+.rectBack {
+    $borderRadius: 0.55rem;
+
+    background-color: #000;
+    opacity: 0.6;
+    border-radius: $borderRadius;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    .btnRectangle:hover & {
+        background-color: #005a9c;
+        opacity: 1;
+    }
+    .btnRectangle:focus & {
+        background-color: #005a9c;
+        opacity: 1;
+        &::after {
+            $outline: 0.125rem;
+            position: absolute;
+            background-color: transparent;
+            border: 0.125rem solid currentColor;
+            content: '';
+            top: $outline;
+            bottom: $outline;
+            left: $outline;
+            right: $outline;
+            border-radius: $borderRadius;
+        }
+    }
+}
