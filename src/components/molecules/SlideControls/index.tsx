@@ -1,18 +1,19 @@
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef } from 'react';
-import { BtnPlayPause } from '../../atoms/BtnPlayPause';
+import { ComponentPropsWithoutRef, useState } from 'react';
+import PauseSvg from '../../../assets/pause.svg?react';
+import PlaySvg from '../../../assets/play.svg?react';
+import { makeBooleanHandle } from '../../../lib';
+import { BtnRectangle } from '../../atoms/BtnRectangle';
 import styles from './SlideControls.module.scss';
-
-type BtnPlayPauseProps = ComponentPropsWithoutRef<typeof BtnPlayPause>;
 
 type DivProps = ComponentPropsWithoutRef<'div'>;
 
 type SlideControlsProps = Omit<DivProps, 'children'> & {
     children: NonNullable<DivProps['children']>;
     controlOut: boolean;
-    onPlayChange: BtnPlayPauseProps['onChange'];
+    onPlayChange: (value: boolean) => void;
     denyAuto: boolean;
-    initialPlay: BtnPlayPauseProps['initial'];
+    initialPlay: boolean;
     autoPlay: boolean;
 };
 
@@ -25,24 +26,42 @@ const SlideControls = ({
     initialPlay,
     autoPlay,
     ...remain
-}: SlideControlsProps) => (
-    <div {...remain} className={classNames(className, styles.controls)}>
-        {!denyAuto && (
-            <BtnPlayPause
-                className={classNames(
-                    styles.btnPlayPause,
-                    controlOut && styles.controlOut
-                )}
-                aria-label={`${
-                    autoPlay ? 'Stop' : 'Start'
-                } automatic slide show`}
-                onChange={onPlayChange}
-                initial={initialPlay}
-            />
-        )}
-        {children}
-    </div>
-);
+}: SlideControlsProps) => {
+    const [pause, setPause] = useState(initialPlay);
+    return (
+        <div {...remain} className={classNames(className, styles.controls)}>
+            {!denyAuto && (
+                <BtnRectangle
+                    className={classNames(
+                        styles.btnPlayPause,
+                        controlOut && styles.controlOut
+                    )}
+                    aria-label={`${
+                        autoPlay ? 'Stop' : 'Start'
+                    } automatic slide show`}
+                    onClick={makeBooleanHandle(pause, (newValue: boolean) => {
+                        setPause(newValue);
+                        onPlayChange && onPlayChange(newValue);
+                    })}
+                >
+                    <PlaySvg
+                        className={classNames(
+                            styles.playOrPause,
+                            pause && 'hidden'
+                        )}
+                    />
+                    <PauseSvg
+                        className={classNames(
+                            styles.playOrPause,
+                            !pause && 'hidden'
+                        )}
+                    />
+                </BtnRectangle>
+            )}
+            {children}
+        </div>
+    );
+};
 
 SlideControls.styles = styles;
 

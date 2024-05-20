@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef } from 'react';
+import { BtnRectangle } from '../../atoms/BtnRectangle';
 import styles from './SlideControls.module.scss';
 import { SlideControls } from './index';
 
@@ -60,5 +62,27 @@ describe('<SlideControls /> component', () => {
             'aria-label',
             'Stop automatic slide show'
         );
+    });
+    test('renders clicking at button correctly', async () => {
+        const onPlayChange = jest.fn();
+        render(buildComponent({ onPlayChange }));
+        const $el = screen.getByTestId('test-element');
+        const $btnStartPause = within($el).getByRole('button', {
+            name: 'Start automatic slide show',
+        });
+        const [$rectBack, $playSvg, $pauseSvg] = Array.from(
+            $btnStartPause.children,
+            (el) => el as HTMLElement
+        );
+        expect($rectBack).toHaveClass(BtnRectangle.styles.rectBack);
+        expect($playSvg).toHaveClass(styles.playOrPause);
+        expect($pauseSvg).toHaveClass(styles.playOrPause);
+        expect($playSvg).not.toHaveClass('hidden');
+        expect($pauseSvg).toHaveClass('hidden');
+        const user = userEvent.setup();
+        await user.click($btnStartPause);
+        expect($playSvg).toHaveClass('hidden');
+        expect($pauseSvg).not.toHaveClass('hidden');
+        expect(onPlayChange).toHaveBeenCalledWith(true);
     });
 });
