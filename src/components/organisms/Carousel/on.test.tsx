@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen, waitFor, within } from '@testing-library/react';
+import { SlideBtnArrows } from '../../molecules/SlideBtnArrows';
+import { SlideBtnTabList } from '../../molecules/SlideBtnTabList';
 import styles from './Carousel.module.scss';
 import { Carousel } from './index';
 
@@ -35,6 +37,7 @@ describe('<Carousel /> component', () => {
                 items={[]}
                 aria-label="foo-label"
                 data-testid="test-element"
+                tabbed
             />
         );
         const $el = screen.getByTestId('test-element');
@@ -48,6 +51,7 @@ describe('<Carousel /> component', () => {
                 aria-label="foo-label"
                 controlOut
                 data-testid="test-element"
+                tabbed
             />
         );
         const $el = screen.getByTestId('test-element');
@@ -62,6 +66,7 @@ describe('<Carousel /> component', () => {
                 timer={1000}
                 initialPlay
                 data-testid="test-element"
+                tabbed
             />
         );
         const $el = screen.getByTestId('test-element');
@@ -75,6 +80,7 @@ describe('<Carousel /> component', () => {
                 items={[]}
                 aria-label="foo-label"
                 data-testid="test-element"
+                tabbed
             />
         );
     });
@@ -84,6 +90,7 @@ describe('<Carousel /> component', () => {
                 items={[]}
                 aria-label="foo-label"
                 data-testid="test-element"
+                tabbed
             />
         );
         const $el = screen.getByTestId('test-element');
@@ -94,8 +101,44 @@ describe('<Carousel /> component', () => {
                 aria-label="foo-label"
                 denyAuto
                 data-testid="test-element"
+                tabbed
             />
         );
         expect($el.firstChild?.childNodes).toHaveLength(1);
     });
+    test('renders carousel tabbed or not tabbed correctly', () => {
+        const { rerender } = render(
+            <Carousel
+                items={[]}
+                aria-label="foo-label"
+                data-testid="test-element"
+                denyAuto
+            />
+        );
+        let [$controlsBox] = Array.from(
+            screen.getByTestId('test-element').children
+        );
+        let [$slideBtns] = Array.from($controlsBox.children);
+        expect($slideBtns).toHaveClass(SlideBtnArrows.styles.boxArrows);
+        expect($slideBtns).not.toHaveClass(SlideBtnTabList.styles.boxTabs);
+        rerender(
+            <Carousel
+                items={[]}
+                aria-label="foo-label"
+                data-testid="test-element"
+                denyAuto
+                tabbed
+            />
+        );
+        [$controlsBox] = Array.from(
+            screen.getByTestId('test-element').children
+        );
+        [$slideBtns] = Array.from($controlsBox.children);
+        expect($slideBtns).not.toHaveClass(SlideBtnArrows.styles.boxArrows);
+        expect($slideBtns).toHaveClass(SlideBtnTabList.styles.boxTabs);
+    });
 });
+
+123;
+456;
+789;
