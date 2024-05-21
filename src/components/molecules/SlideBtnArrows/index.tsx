@@ -14,7 +14,7 @@ type SlideBtnArrowsProps<T> = Omit<DivProps, 'aria-controls'> & {
     setSelected: (value: number) => void;
 };
 
-export const SlideBtnArrows = <T,>({
+const SlideBtnArrows = <T,>({
     className,
     'aria-controls': ariaControls,
     list,
@@ -23,7 +23,7 @@ export const SlideBtnArrows = <T,>({
     ...remain
 }: SlideBtnArrowsProps<T>) => {
     return (
-        <div {...remain} className={classNames(className, styles.box)}>
+        <div {...remain} className={classNames(className, styles.boxArrows)}>
             <BtnRectangle
                 aria-controls={ariaControls}
                 aria-label="Previous Slide"
@@ -43,3 +43,7 @@ export const SlideBtnArrows = <T,>({
         </div>
     );
 };
+
+SlideBtnArrows.styles = styles;
+
+export { SlideBtnArrows };
