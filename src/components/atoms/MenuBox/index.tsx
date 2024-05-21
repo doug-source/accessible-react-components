@@ -2,13 +2,13 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import styles from './ActMenuBox.module.scss';
 
-type ActMenuBoxProps = ComponentPropsWithoutRef<'ul'> & {
+type MenuBoxProps = ComponentPropsWithoutRef<'ul'> & {
     expanded: boolean;
 };
 
-export const ActMenuBox = forwardRef<HTMLUListElement, ActMenuBoxProps>(
-    function ActMenuBoxInner(
-        { className, expanded, children, ...remain }: ActMenuBoxProps,
+export const MenuBox = forwardRef<HTMLUListElement, MenuBoxProps>(
+    function MenuBoxInner(
+        { className, expanded, children, ...remain }: MenuBoxProps,
         ref
     ) {
         return (
@@ -18,7 +18,7 @@ export const ActMenuBox = forwardRef<HTMLUListElement, ActMenuBoxProps>(
                 role="menu"
                 className={classNames(
                     className,
-                    styles.actMenuBox,
+                    styles.menuBox,
                     expanded ? styles.show : styles.hide
                 )}
             >

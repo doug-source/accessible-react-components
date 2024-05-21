@@ -5,8 +5,8 @@ import {
     MouseEvent,
     MutableRefObject,
 } from 'react';
-import { ActMenuBox } from '../../atoms/ActMenuBox';
 import { ActMenuItem } from '../../atoms/ActMenuItem';
+import { MenuBox } from '../../atoms/MenuBox';
 import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useRowFocused } from './lib/hooks/useRowFocused';
 
@@ -45,7 +45,7 @@ export const ActMenuDefault = ({
         return null;
     }
     return (
-        <ActMenuBox {...remain} expanded={expanded}>
+        <MenuBox {...remain} expanded={expanded}>
             {items.map(([key, option, callback], i) => (
                 <ActMenuItem
                     key={key}
@@ -75,6 +75,6 @@ export const ActMenuDefault = ({
                     {option}
                 </ActMenuItem>
             ))}
-        </ActMenuBox>
+        </MenuBox>
     );
 };

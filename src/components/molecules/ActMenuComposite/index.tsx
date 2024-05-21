@@ -6,8 +6,8 @@ import {
     MutableRefObject,
     useState,
 } from 'react';
-import { ActMenuBox } from '../../atoms/ActMenuBox';
 import { ActMenuItem as MenuItem } from '../../atoms/ActMenuItem';
+import { MenuBox } from '../../atoms/MenuBox';
 import { makeMenuKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useBoxFocused } from './lib/hooks/useBoxFocused';
 import { useRowFocused } from './lib/hooks/useRowFocused';
@@ -51,7 +51,7 @@ export const ActMenuComposite = ({
         return null;
     }
     return (
-        <ActMenuBox
+        <MenuBox
             {...remain}
             ref={menuBoxRef}
             expanded={expanded}
@@ -93,6 +93,6 @@ export const ActMenuComposite = ({
                     {option}
                 </MenuItem>
             ))}
-        </ActMenuBox>
+        </MenuBox>
     );
 };
