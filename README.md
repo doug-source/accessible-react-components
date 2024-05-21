@@ -47,7 +47,7 @@ Components list:
         -   [Actions Menu Button example using element.focus()](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions/)
         -   [Action Menu Button Example Using aria-activedescendant](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/examples/menu-button-actions-active-descendant/)
 -   Carousel
-    -   status: WIP
+    -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/carousel/](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/)
 
 <div align="center">
