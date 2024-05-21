@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef, useRef, useState } from 'react';
+import { ComponentPropsWithoutRef, useId, useRef, useState } from 'react';
 import { isReducedMotion } from '../../../lib';
+import { SlideBtnArrows } from '../../molecules/SlideBtnArrows';
 import { SlideBtnTabList } from '../../molecules/SlideBtnTabList';
 import { SlideControls } from '../../molecules/SlideControls';
 import { SlideItems } from '../../molecules/SlideItems';
@@ -21,6 +22,7 @@ type CarouselProps = Omit<SectionProps, 'aria-label'> & {
     timer?: number;
     denyAuto?: SlideControlsProps['denyAuto'];
     initialPlay?: SlideControlsProps['initialPlay'];
+    tabbed?: boolean;
 };
 
 const Carousel = ({
@@ -31,6 +33,7 @@ const Carousel = ({
     timer = 3000, // miliseconds
     denyAuto = false,
     initialPlay = false,
+    tabbed = false,
     ...remain
 }: CarouselProps) => {
     const [selected, setSelected] = useState(0);
@@ -40,6 +43,7 @@ const Carousel = ({
     const itemBoxListRef = useRef<Array<HTMLDivElement | null>>([]);
     useAutomaticSlide(automatic, selected, setSelected, items, timer);
 
+    const slideItemsId = useId();
     return (
         <section
             {...remain}
@@ -58,14 +62,25 @@ const Carousel = ({
                 initialPlay={initialPlay && !isReducedMotion()}
                 autoPlay={automatic}
             >
-                <SlideBtnTabList
-                    list={items}
-                    selected={selected}
-                    setSelected={setSelected}
-                    itemBoxListRef={itemBoxListRef}
-                />
+                {tabbed && (
+                    <SlideBtnTabList
+                        list={items}
+                        selected={selected}
+                        setSelected={setSelected}
+                        itemBoxListRef={itemBoxListRef}
+                    />
+                )}
+                {!tabbed && (
+                    <SlideBtnArrows
+                        aria-controls={slideItemsId}
+                        list={items}
+                        selected={selected}
+                        setSelected={setSelected}
+                    />
+                )}
             </SlideControls>
             <SlideItems
+                id={slideItemsId}
                 items={items}
                 selected={selected}
                 aria-live={automatic ? 'off' : 'polite'}
