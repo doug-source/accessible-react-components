@@ -34,7 +34,7 @@ export const SlideBtnTabList = <T,>({
             {...remain}
             className={classNames(
                 className,
-                styles.box,
+                styles.boxTabs,
                 focused && styles.focused
             )}
             onFocus={() => setFocused(true)}
