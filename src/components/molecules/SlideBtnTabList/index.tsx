@@ -17,7 +17,7 @@ type SlideBtnTabListProps<T> = ComponentPropsWithoutRef<'div'> & {
     itemBoxListRef: MutableRefObject<(HTMLDivElement | null)[]>;
 };
 
-export const SlideBtnTabList = <T,>({
+const SlideBtnTabList = <T,>({
     className,
     list,
     selected,
@@ -72,3 +72,7 @@ export const SlideBtnTabList = <T,>({
         </div>
     );
 };
+
+SlideBtnTabList.styles = styles;
+
+export { SlideBtnTabList };
