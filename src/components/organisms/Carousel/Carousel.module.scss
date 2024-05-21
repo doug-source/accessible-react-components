@@ -4,6 +4,7 @@
     position: relative;
     width: 55rem;
     padding: measures.$slideSpacing;
+    max-width: calc(50rem + 2 * #{measures.$slideSpacing});
 }
 
 .controls {
