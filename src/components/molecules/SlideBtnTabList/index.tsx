@@ -8,15 +8,12 @@ import {
 import { BtnRounded } from '../../atoms/BtnRounded';
 import styles from './SlideBtnTabList.module.scss';
 import { makeBtnRoundedKeydownHandler } from './lib/handlers/makeBtnRoundedKeydown';
-import { useAutomaticSlide } from './lib/hooks/useAutomaticSlide';
 import { useItemBoxIdList } from './lib/hooks/useItemBoxIdList';
 
 type SlideBtnTabListProps<T> = ComponentPropsWithoutRef<'div'> & {
     list: Array<T>;
     selected: number;
     setSelected: (value: number) => void;
-    automatic: boolean;
-    timer: number;
     itemBoxListRef: MutableRefObject<(HTMLDivElement | null)[]>;
 };
 
@@ -25,14 +22,11 @@ export const SlideBtnTabList = <T,>({
     list,
     selected,
     setSelected,
-    automatic,
-    timer,
     itemBoxListRef,
     ...remain
 }: SlideBtnTabListProps<T>) => {
     const [focused, setFocused] = useState(false);
     const btnListRef = useRef<Array<HTMLButtonElement | null>>([]);
-    useAutomaticSlide(automatic, selected, setSelected, list, timer);
     const [idList] = useItemBoxIdList(itemBoxListRef);
 
     return (

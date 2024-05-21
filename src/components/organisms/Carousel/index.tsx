@@ -5,6 +5,7 @@ import { SlideBtnTabList } from '../../molecules/SlideBtnTabList';
 import { SlideControls } from '../../molecules/SlideControls';
 import { SlideItems } from '../../molecules/SlideItems';
 import styles from './Carousel.module.scss';
+import { useAutomaticSlide } from './lib/hooks/useAutomaticSlide';
 
 type SlideControlsProps = ComponentPropsWithoutRef<typeof SlideControls>;
 
@@ -37,6 +38,8 @@ const Carousel = ({
         initialPlay && !isReducedMotion()
     );
     const itemBoxListRef = useRef<Array<HTMLDivElement | null>>([]);
+    useAutomaticSlide(automatic, selected, setSelected, items, timer);
+
     return (
         <section
             {...remain}
@@ -59,8 +62,6 @@ const Carousel = ({
                     list={items}
                     selected={selected}
                     setSelected={setSelected}
-                    automatic={automatic}
-                    timer={timer}
                     itemBoxListRef={itemBoxListRef}
                 />
             </SlideControls>

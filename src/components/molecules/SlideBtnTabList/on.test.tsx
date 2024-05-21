@@ -17,29 +17,19 @@ const createListHookRef = <T,>(initial: T[] = []) => {
 };
 
 type ElementProps = ComponentPropsWithoutRef<typeof SlideBtnTabList>;
-type keys =
-    | 'list'
-    | 'selected'
-    | 'setSelected'
-    | 'automatic'
-    | 'timer'
-    | 'itemBoxListRef';
+type keys = 'list' | 'selected' | 'setSelected' | 'itemBoxListRef';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
 const buildComponent = ({
     list = createList(),
     selected = -1,
     setSelected = () => {},
-    automatic = false,
-    timer = -1,
     itemBoxListRef = createListHookRef<HTMLDivElement>().result.current,
 }: Props = {}) => (
     <SlideBtnTabList
         list={list}
         selected={selected}
         setSelected={setSelected}
-        automatic={automatic}
-        timer={timer}
         itemBoxListRef={itemBoxListRef}
         data-testid="test-element"
     />
