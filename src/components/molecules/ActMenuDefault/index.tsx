@@ -58,7 +58,7 @@ export const ActMenuDefault = ({
                         listRef.current[i] = el;
                     }}
                     onMouseOver={(evt) => {
-                        listRef.current[i]?.focus();
+                        setFocused(i);
                         evt.stopPropagation();
                         evt.preventDefault();
                     }}
