@@ -2,10 +2,10 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef } from 'react';
-import stylesMenu from './components/Menu/Menu.module.scss';
-import { MenuBtn } from './index';
+import stylesMenu from '../../atoms/MenuBox/MenuBox.module.scss';
+import { ActionMenuBtn } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof MenuBtn>;
+type ElementProps = ComponentPropsWithoutRef<typeof ActionMenuBtn>;
 type keys = 'btnLabel' | 'items';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
@@ -13,10 +13,14 @@ const buildComponent = ({
     btnLabel = 'btn label content',
     items = [['keyA', 'contentA', () => {}]],
 }: Props = {}) => (
-    <MenuBtn btnLabel={btnLabel} items={items} data-testid="testIdentifier" />
+    <ActionMenuBtn
+        btnLabel={btnLabel}
+        items={items}
+        data-testid="testIdentifier"
+    />
 );
 
-describe('<MenuBtn /> component', () => {
+describe('<ActionMenuBtn /> component', () => {
     test('renders correctly', () => {
         render(buildComponent());
         const $el = screen.getByTestId('testIdentifier');

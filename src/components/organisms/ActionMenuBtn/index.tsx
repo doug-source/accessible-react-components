@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useId, useRef, useState } from 'react';
-import { ActMenuBtn } from '../../molecules/ActMenuBtn';
 import { ActMenuComposite } from '../../molecules/ActMenuComposite';
 import { ActMenuDefault } from '../../molecules/ActMenuDefault';
-import styles from './MenuBtn.module.scss';
-import { makeMenuBtnKeydownHandler } from './lib/handlers/makeMenuBtnKeydownHandler';
+import { MenuBtn } from '../../molecules/MenuBtn';
+import styles from './ActionMenuBtn.module.scss';
 import { useMenuItemListRef } from './lib/hooks/useMenuItemListRef';
 
 type MenuProps = ComponentPropsWithoutRef<typeof ActMenuDefault>;
@@ -15,7 +14,7 @@ type MenuBtnProps = ComponentPropsWithoutRef<'div'> & {
     composite?: boolean;
 };
 
-export const MenuBtn = ({
+export const ActionMenuBtn = ({
     className,
     btnLabel,
     items,
@@ -32,27 +31,16 @@ export const MenuBtn = ({
 
     return (
         <div {...remain} className={classNames(className, styles.box)}>
-            <ActMenuBtn
-                id={menuBtnId}
-                aria-expanded={expanded}
-                ref={menuBtnRef}
+            <MenuBtn
                 aria-controls={menuId}
-                onClick={(evt) => {
-                    const newExpanded = !expanded;
-                    setExpanded(newExpanded);
-                    newExpanded && setFocused(0);
-                    evt.stopPropagation();
-                    evt.preventDefault();
-                }}
-                onKeyDown={makeMenuBtnKeydownHandler(
-                    expanded,
-                    setExpanded,
-                    setFocused,
-                    menuItemListRef
-                )}
+                menuBtnRef={menuBtnRef}
+                menuItemListRef={menuItemListRef}
+                expanded={expanded}
+                setExpanded={setExpanded}
+                setFocused={setFocused}
             >
                 {btnLabel}
-            </ActMenuBtn>
+            </MenuBtn>
 
             <ActMenuDefault
                 show={!composite}
