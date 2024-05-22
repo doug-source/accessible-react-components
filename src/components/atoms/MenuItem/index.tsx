@@ -30,4 +30,4 @@ const MenuItem = ({
 
 MenuItem.styles = styles;
 
-export { MenuItem as ActMenuItem };
+export { MenuItem };
