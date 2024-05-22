@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Arrow } from '../Arrow';
-import styles from './MenuBtn.module.scss';
+import styles from './MenuArrowBtn.module.scss';
 
 type BtnProps = ComponentPropsWithoutRef<'button'>;
 
