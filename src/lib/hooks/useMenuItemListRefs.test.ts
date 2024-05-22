@@ -21,9 +21,13 @@ describe('useMenuItemListRef hook', () => {
     test('runs correctly', async () => {
         const originList: string[] = [];
         const initialProps = { list: originList };
-        const hookRef = renderHook(({ list }) => useMenuItemListRefs(list), {
-            initialProps,
-        });
+        const hookRef = renderHook(
+            ({ list }) =>
+                useMenuItemListRefs<HTMLUListElement, HTMLLIElement>(list),
+            {
+                initialProps,
+            }
+        );
         const [ulRef, liListRef] = hookRef.result.current;
         expect(ulRef.current).toBeNull();
         expect(liListRef.current).toHaveLength(0);

@@ -26,7 +26,10 @@ export const ActionMenuBtn = ({
     const [expanded, setExpanded] = useState(false);
     const [focused, setFocused] = useState(-1);
     const menuBtnRef = useRef<HTMLButtonElement | null>(null);
-    const [ulRef, menuItemListRef] = useMenuItemListRefs(items);
+    const [ulRef, menuItemListRef] = useMenuItemListRefs<
+        HTMLUListElement,
+        HTMLLIElement
+    >(items);
 
     return (
         <div {...remain} className={classNames(className, styles.box)}>
