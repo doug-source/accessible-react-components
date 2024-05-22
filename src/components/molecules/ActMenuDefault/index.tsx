@@ -5,8 +5,8 @@ import {
     MouseEvent,
     MutableRefObject,
 } from 'react';
-import { ActMenuItem } from '../../atoms/ActMenuItem';
 import { MenuBox } from '../../atoms/MenuBox';
+import { ActMenuItem } from '../../atoms/MenuItem';
 import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useRowFocused } from './lib/hooks/useRowFocused';
 

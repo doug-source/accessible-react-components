@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { ComponentPropsWithoutRef } from 'react';
-import styles from './ActMenuItem.module.scss';
+import styles from './MenuItem.module.scss';
 import { ActMenuItem } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof ActMenuItem>;

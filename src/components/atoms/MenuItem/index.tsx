@@ -1,19 +1,19 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useId } from 'react';
-import styles from './ActMenuItem.module.scss';
+import styles from './MenuItem.module.scss';
 
-type ActMenuItemProps = ComponentPropsWithoutRef<'li'> & {
+type MenuItemProps = ComponentPropsWithoutRef<'li'> & {
     listRefFn: (el: HTMLLIElement | null) => void;
     identified?: boolean;
 };
 
-const ActMenuItem = ({
+const MenuItem = ({
     className,
     children,
     listRefFn,
     identified = false,
     ...remain
-}: ActMenuItemProps) => {
+}: MenuItemProps) => {
     const id = useId();
     return (
         <li
@@ -21,13 +21,13 @@ const ActMenuItem = ({
             id={identified ? id : undefined}
             ref={(el) => listRefFn(el)}
             role="menuitem"
-            className={classNames(ActMenuItem.styles.menuItem, className)}
+            className={classNames(MenuItem.styles.menuItem, className)}
         >
             {children}
         </li>
     );
 };
 
-ActMenuItem.styles = styles;
+MenuItem.styles = styles;
 
-export { ActMenuItem };
+export { MenuItem as ActMenuItem };

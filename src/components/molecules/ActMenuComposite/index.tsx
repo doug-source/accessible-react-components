@@ -6,8 +6,8 @@ import {
     MutableRefObject,
     useState,
 } from 'react';
-import { ActMenuItem as MenuItem } from '../../atoms/ActMenuItem';
 import { MenuBox } from '../../atoms/MenuBox';
+import { ActMenuItem as MenuItem } from '../../atoms/MenuItem';
 import { makeMenuKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
 import { useBoxFocused } from './lib/hooks/useBoxFocused';
 import { useRowFocused } from './lib/hooks/useRowFocused';
