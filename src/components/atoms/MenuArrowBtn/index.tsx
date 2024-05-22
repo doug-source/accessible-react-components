@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { Arrow } from '../../atoms/Arrow';
-import styles from './ActMenuBtn.module.scss';
+import { Arrow } from '../Arrow';
+import styles from './MenuBtn.module.scss';
 
 type BtnProps = ComponentPropsWithoutRef<'button'>;
 
-type MenuBtnProps = Omit<
+type MenuArrowBtnProps = Omit<
     BtnProps,
     'aria-expanded' | 'aria-controls' | 'children'
 > & {
@@ -14,15 +14,15 @@ type MenuBtnProps = Omit<
     children: BtnProps['children'];
 };
 
-export const ActMenuBtn = forwardRef<HTMLButtonElement, MenuBtnProps>(
-    function ActMenuBtnInner(
+export const MenuArrowBtn = forwardRef<HTMLButtonElement, MenuArrowBtnProps>(
+    function MenuArrowBtnInner(
         {
             className,
             'aria-expanded': ariaExpanded,
             'aria-controls': ariaControls,
             children,
             ...remain
-        }: MenuBtnProps,
+        }: MenuArrowBtnProps,
         ref
     ) {
         return (
@@ -31,7 +31,7 @@ export const ActMenuBtn = forwardRef<HTMLButtonElement, MenuBtnProps>(
                 aria-controls={ariaControls}
                 aria-haspopup="true"
                 aria-expanded={ariaExpanded}
-                className={classNames(className, styles.menuBtn)}
+                className={classNames(className, styles.menuArrowBtn)}
                 type="button"
                 ref={ref}
             >

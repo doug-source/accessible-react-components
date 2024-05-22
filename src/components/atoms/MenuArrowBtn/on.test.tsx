@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom';
 import { render, screen, within } from '@testing-library/react';
 import { ComponentPropsWithoutRef } from 'react';
-import { Arrow } from '../../atoms/Arrow';
-import styles from './ActMenuBtn.module.scss';
-import { ActMenuBtn } from './index';
+import { Arrow } from '../Arrow';
+import styles from './MenuArrowBtn.module.scss';
+import { MenuArrowBtn } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof ActMenuBtn>;
+type ElementProps = ComponentPropsWithoutRef<typeof MenuArrowBtn>;
 type keys = 'aria-expanded' | 'aria-controls' | 'children';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
@@ -15,21 +15,21 @@ const buildComponent = ({
     children = 'btn content',
     ...remain
 }: Props = {}) => (
-    <ActMenuBtn
+    <MenuArrowBtn
         {...remain}
         aria-expanded={ariaExpanded}
         aria-controls={ariaControls}
     >
         {children}
-    </ActMenuBtn>
+    </MenuArrowBtn>
 );
 
-describe('<ActMenuBtn /> component', () => {
+describe('<MenuBtn /> component', () => {
     test('renders correctly', () => {
         const { rerender } = render(buildComponent());
         const $el = screen.getByRole('button');
         expect($el).toBeInTheDocument();
-        expect($el).toHaveClass(styles.menuBtn);
+        expect($el).toHaveClass(styles.menuArrowBtn);
         expect($el).toHaveAttribute('aria-expanded', 'false');
         const $span = within($el).getByText('btn content');
         expect($span).toBeInTheDocument();
