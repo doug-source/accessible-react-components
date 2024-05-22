@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useId, useRef, useState } from 'react';
+import { useMenuItemListRefs } from '../../../lib/hooks/useMenuItemListRefs';
 import { ActMenuComposite } from '../../molecules/ActMenuComposite';
 import { ActMenuDefault } from '../../molecules/ActMenuDefault';
 import { MenuBtn } from '../../molecules/MenuBtn';
 import styles from './ActionMenuBtn.module.scss';
-import { useMenuItemListRef } from './lib/hooks/useMenuItemListRef';
 
 type MenuProps = ComponentPropsWithoutRef<typeof ActMenuDefault>;
 
@@ -25,9 +25,8 @@ export const ActionMenuBtn = ({
     const menuId = useId();
     const [expanded, setExpanded] = useState(false);
     const [focused, setFocused] = useState(-1);
-    const menuItemListRef = useMenuItemListRef(items);
     const menuBtnRef = useRef<HTMLButtonElement | null>(null);
-    const ulRef = useRef<HTMLUListElement | null>(null);
+    const [ulRef, menuItemListRef] = useMenuItemListRefs(items);
 
     return (
         <div {...remain} className={classNames(className, styles.box)}>

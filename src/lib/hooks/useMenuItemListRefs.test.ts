@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { renderHook, waitFor } from '@testing-library/react';
 import { MutableRefObject } from 'react';
-import { useMenuItemListRef } from './useMenuItemListRef';
+import { useMenuItemListRefs } from './useMenuItemListRefs';
 
 const makeLiElement = (
     ref: MutableRefObject<(HTMLLIElement | null)[]>,
@@ -21,32 +21,34 @@ describe('useMenuItemListRef hook', () => {
     test('runs correctly', async () => {
         const originList: string[] = [];
         const initialProps = { list: originList };
-        const hookRef = renderHook(({ list }) => useMenuItemListRef(list), {
+        const hookRef = renderHook(({ list }) => useMenuItemListRefs(list), {
             initialProps,
         });
-        expect(hookRef.result.current.current).toHaveLength(0);
+        const [ulRef, liListRef] = hookRef.result.current;
+        expect(ulRef.current).toBeNull();
+        expect(liListRef.current).toHaveLength(0);
         let dataList = ['aa', 'bb', 'cc'];
-        hookRef.result.current.current = [
-            makeLiElement(hookRef.result.current, dataList[0]),
-            makeLiElement(hookRef.result.current, dataList[1]),
-            makeLiElement(hookRef.result.current, dataList[2]),
+        liListRef.current = [
+            makeLiElement(liListRef, dataList[0]),
+            makeLiElement(liListRef, dataList[1]),
+            makeLiElement(liListRef, dataList[2]),
         ];
         hookRef.rerender({ list: dataList });
         await waitFor(() => {
-            expect(hookRef.result.current.current).toHaveLength(3);
+            expect(liListRef.current).toHaveLength(3);
             expect(dataList).toMatchObject(
-                hookRef.result.current.current.map((li) => li?.id ?? '')
+                liListRef.current.map((li) => li?.id ?? '')
             );
         });
         dataList = ['dd'];
-        if (hookRef.result.current.current[0]) {
-            hookRef.result.current.current[0].id = dataList[0];
+        if (liListRef.current[0]) {
+            liListRef.current[0].id = dataList[0];
         }
         hookRef.rerender({ list: dataList });
         await waitFor(() => {
-            expect(hookRef.result.current.current).toHaveLength(1);
+            expect(liListRef.current).toHaveLength(1);
             expect(dataList).toMatchObject(
-                hookRef.result.current.current.map((li) => li?.id ?? '')
+                liListRef.current.map((li) => li?.id ?? '')
             );
         });
     });
