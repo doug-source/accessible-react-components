@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import styles from './ActMenuBox.module.scss';
+import styles from './MenuBox.module.scss';
 
 type MenuBoxProps = ComponentPropsWithoutRef<'ul'> & {
     expanded: boolean;
