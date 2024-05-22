@@ -32,6 +32,7 @@ export const ActionMenuBtn = ({
     return (
         <div {...remain} className={classNames(className, styles.box)}>
             <MenuBtn
+                id={menuBtnId}
                 aria-controls={menuId}
                 menuBtnRef={menuBtnRef}
                 menuItemListRef={menuItemListRef}
