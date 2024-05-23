@@ -1,35 +1,35 @@
 import '@testing-library/jest-dom';
-import { render, screen, within } from '@testing-library/react';
-import { ComponentPropsWithoutRef } from 'react';
+import { render, renderHook, screen, within } from '@testing-library/react';
+import { useRef } from 'react';
 import { Arrow } from '../../atoms/Arrow';
 import styles from './ActMenuBtn.module.scss';
 import { MenuBtn } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof MenuBtn>;
-type keys = 'aria-expanded' | 'aria-controls' | 'children';
-type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
+const makeBtnRef = (btn: HTMLButtonElement | null = null) => {
+    return renderHook(() => useRef<HTMLButtonElement | null>(btn));
+};
 
-const buildComponent = ({
-    'aria-expanded': ariaExpanded = false,
-    'aria-controls': ariaControls = 'anyone',
-    children = 'btn content',
-    ...remain
-}: Props = {}) => (
-    <MenuBtn
-        {...remain}
-        aria-expanded={ariaExpanded}
-        aria-controls={ariaControls}
-    >
-        {children}
-    </MenuBtn>
-);
+const makeMenuItemListRef = <T,>(itemList: T[] = []) => {
+    return renderHook(() => useRef<T[]>(itemList));
+};
 
-describe('<ActMenuBtn /> component', () => {
+describe('<MenuBtn /> component', () => {
     test('renders correctly', () => {
-        const { rerender } = render(buildComponent());
+        const { rerender } = render(
+            <MenuBtn
+                expanded={false}
+                setExpanded={() => {}}
+                setFocused={() => {}}
+                aria-controls="anyone"
+                menuBtnRef={makeBtnRef().result.current}
+                menuItemListRef={makeMenuItemListRef().result.current}
+            >
+                btn content
+            </MenuBtn>
+        );
         const $el = screen.getByRole('button');
         expect($el).toBeInTheDocument();
-        expect($el).toHaveClass(styles.menuBtn);
+        expect($el).toHaveClass(styles.menuArrowBtn);
         expect($el).toHaveAttribute('aria-expanded', 'false');
         const $span = within($el).getByText('btn content');
         expect($span).toBeInTheDocument();
@@ -40,10 +40,16 @@ describe('<ActMenuBtn /> component', () => {
         expect($arrow).toHaveClass(Arrow.styles.complete);
         expect($arrow).toHaveClass(Arrow.styles.bottom);
         rerender(
-            buildComponent({
-                'aria-expanded': true,
-                'aria-controls': 'otherElement',
-            })
+            <MenuBtn
+                expanded={true}
+                setExpanded={() => {}}
+                setFocused={() => {}}
+                aria-controls="otherElement"
+                menuBtnRef={makeBtnRef().result.current}
+                menuItemListRef={makeMenuItemListRef().result.current}
+            >
+                btn content
+            </MenuBtn>
         );
         expect($el).toBeInTheDocument();
         expect($el).toHaveAttribute('aria-expanded', 'true');
