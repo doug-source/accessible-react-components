@@ -8,7 +8,7 @@ import {
     MouseEvent,
     useRef,
 } from 'react';
-import { ActMenuItem as MenuItem } from '../../atoms/MenuItem';
+import { MenuItem } from '../../atoms/MenuItem';
 import { ActMenuComposite } from './index';
 
 type ElementProps = ComponentPropsWithoutRef<typeof ActMenuComposite>;
