@@ -12,16 +12,8 @@ const makeEvent = (key: string, shiftKey = false) => {
     } as unknown as KeyboardEvent<HTMLLIElement>;
 };
 
-const makeLiElement = (id = Date.now().toString()) => {
-    return { id, focus: jest.fn() } as unknown as HTMLLIElement;
-};
-
 const makeButtonElement = (id = Date.now().toString()) => {
     return { id, focus: jest.fn() } as unknown as HTMLButtonElement;
-};
-
-const makeMutableRefObjectList = (list: (HTMLLIElement | null)[] = []) => {
-    return renderHook(() => useRef<typeof list>(list)).result.current;
 };
 
 const makeMutableRefObjectBtn = ($button: HTMLButtonElement | null = null) => {
@@ -41,7 +33,6 @@ describe('makeMenuItemKeydownHandler function', () => {
         const output = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            makeMutableRefObjectList(),
             () => {}, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -53,7 +44,6 @@ describe('makeMenuItemKeydownHandler function', () => {
         const output = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            makeMutableRefObjectList(),
             () => {}, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -62,16 +52,10 @@ describe('makeMenuItemKeydownHandler function', () => {
         expect(typeof output).toBe('function');
     });
     test('runs no ArrowDown/ArrowUp event correctly', () => {
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestFocusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
             jestFocusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -79,23 +63,13 @@ describe('makeMenuItemKeydownHandler function', () => {
         );
         const evt = makeEvent('a');
         handler(evt);
-        const newFocused = 1;
-        expect(
-            mutableRefObjectList.current[newFocused]?.focus
-        ).not.toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
     });
     test('runs with ArrowDown event correctly', () => {
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestFocusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
             jestFocusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -104,22 +78,13 @@ describe('makeMenuItemKeydownHandler function', () => {
         const evt = makeEvent('ArrowDown');
         handler(evt);
         const newFocused = 1;
-        expect(
-            mutableRefObjectList.current[newFocused]?.focus
-        ).toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith(newFocused);
     });
     test('runs with ArrowUp event correctly', () => {
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestFocusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             1,
-            mutableRefObjectList,
             jestFocusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -128,24 +93,15 @@ describe('makeMenuItemKeydownHandler function', () => {
         const evt = makeEvent('ArrowUp');
         handler(evt);
         const newFocused = 0;
-        expect(
-            mutableRefObjectList.current[newFocused]?.focus
-        ).toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith(newFocused);
     });
     test('runs no Enter/Space event correctly', () => {
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestExpandedFn = jest.fn();
         const jestCallbackFn = jest.fn();
         const $button = makeButtonElement();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
             () => {}, // setFocused
             jestCallbackFn, // callback
             jestExpandedFn, // setExpanded
@@ -160,18 +116,12 @@ describe('makeMenuItemKeydownHandler function', () => {
         expect(evt.preventDefault).not.toHaveBeenCalled();
     });
     test('runs with Enter event correctly', () => {
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestExpandedFn = jest.fn();
         const jestCallbackFn = jest.fn();
         const $button = makeButtonElement();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
             () => {}, // setFocused
             jestCallbackFn, // callback
             jestExpandedFn, // setExpanded
@@ -186,18 +136,12 @@ describe('makeMenuItemKeydownHandler function', () => {
         expect(evt.preventDefault).toHaveBeenCalled();
     });
     test('runs with Space event correctly', () => {
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestExpandedFn = jest.fn();
         const jestCallbackFn = jest.fn();
         const $button = makeButtonElement();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
             () => {}, // setFocused
             jestCallbackFn, // callback
             jestExpandedFn, // setExpanded
@@ -212,17 +156,11 @@ describe('makeMenuItemKeydownHandler function', () => {
         expect(evt.preventDefault).toHaveBeenCalled();
     });
     test('runs no Escape/Shift+Tab event correctly', () => {
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestExpandedFn = jest.fn();
         const $button = makeButtonElement();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
             () => {}, // setFocused
             () => {}, // callback
             jestExpandedFn, // setExpanded
@@ -236,17 +174,11 @@ describe('makeMenuItemKeydownHandler function', () => {
         expect(evt.preventDefault).not.toHaveBeenCalled();
     });
     test('runs Escape event correctly', () => {
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestExpandedFn = jest.fn();
         const $button = makeButtonElement();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
             () => {}, // setFocused
             () => {}, // callback
             jestExpandedFn, // setExpanded
@@ -260,17 +192,11 @@ describe('makeMenuItemKeydownHandler function', () => {
         expect(evt.preventDefault).toHaveBeenCalled();
     });
     test('runs Shift+Tab event correctly', () => {
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestExpandedFn = jest.fn();
         const $button = makeButtonElement();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
             () => {}, // setFocused
             () => {}, // callback
             jestExpandedFn, // setExpanded
@@ -284,17 +210,10 @@ describe('makeMenuItemKeydownHandler function', () => {
         expect(evt.preventDefault).toHaveBeenCalled();
     });
     test('runs no Home/PageUp event correctly', () => {
-        const $firstLisItem = makeLiElement();
-        const mutableRefObjectList = makeMutableRefObjectList([
-            $firstLisItem,
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestFocusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             1,
-            mutableRefObjectList,
             jestFocusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -302,23 +221,15 @@ describe('makeMenuItemKeydownHandler function', () => {
         );
         const evt = makeEvent('Tab');
         handler(evt);
-        expect($firstLisItem.focus).not.toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
         expect(evt.stopPropagation).not.toHaveBeenCalled();
         expect(evt.preventDefault).not.toHaveBeenCalled();
     });
     test('runs Home event correctly', () => {
-        const $firstLisItem = makeLiElement();
-        const mutableRefObjectList = makeMutableRefObjectList([
-            $firstLisItem,
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestFocusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             1,
-            mutableRefObjectList,
             jestFocusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -326,23 +237,15 @@ describe('makeMenuItemKeydownHandler function', () => {
         );
         const evt = makeEvent('Home');
         handler(evt);
-        expect($firstLisItem.focus).toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith(0);
         expect(evt.stopPropagation).toHaveBeenCalled();
         expect(evt.preventDefault).toHaveBeenCalled();
     });
     test('runs PageUp event correctly', () => {
-        const $firstLisItem = makeLiElement();
-        const mutableRefObjectList = makeMutableRefObjectList([
-            $firstLisItem,
-            makeLiElement(),
-            makeLiElement(),
-        ]);
         const jestFocusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             1,
-            mutableRefObjectList,
             jestFocusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -350,23 +253,15 @@ describe('makeMenuItemKeydownHandler function', () => {
         );
         const evt = makeEvent('PageUp');
         handler(evt);
-        expect($firstLisItem.focus).toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith(0);
         expect(evt.stopPropagation).toHaveBeenCalled();
         expect(evt.preventDefault).toHaveBeenCalled();
     });
     test('runs no End/PageDown event correctly', () => {
-        const $lastLisItem = makeLiElement();
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            $lastLisItem,
-        ]);
         const jestFocusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             1,
-            mutableRefObjectList,
             jestFocusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -374,23 +269,15 @@ describe('makeMenuItemKeydownHandler function', () => {
         );
         const evt = makeEvent('Tab');
         handler(evt);
-        expect($lastLisItem.focus).not.toHaveBeenCalled();
         expect(jestFocusedFn).not.toHaveBeenCalled();
         expect(evt.stopPropagation).not.toHaveBeenCalled();
         expect(evt.preventDefault).not.toHaveBeenCalled();
     });
     test('runs End event correctly', () => {
-        const $lastLisItem = makeLiElement();
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            $lastLisItem,
-        ]);
         const jestFocusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             1,
-            mutableRefObjectList,
             jestFocusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -398,23 +285,15 @@ describe('makeMenuItemKeydownHandler function', () => {
         );
         const evt = makeEvent('End');
         handler(evt);
-        expect($lastLisItem.focus).toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith(2);
         expect(evt.stopPropagation).toHaveBeenCalled();
         expect(evt.preventDefault).toHaveBeenCalled();
     });
     test('runs PageDown event correctly', () => {
-        const $lastLisItem = makeLiElement();
-        const mutableRefObjectList = makeMutableRefObjectList([
-            makeLiElement(),
-            makeLiElement(),
-            $lastLisItem,
-        ]);
         const jestFocusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             1,
-            mutableRefObjectList,
             jestFocusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -422,19 +301,16 @@ describe('makeMenuItemKeydownHandler function', () => {
         );
         const evt = makeEvent('PageDown');
         handler(evt);
-        expect($lastLisItem.focus).toHaveBeenCalled();
         expect(jestFocusedFn).toHaveBeenCalledWith(2);
         expect(evt.stopPropagation).toHaveBeenCalled();
         expect(evt.preventDefault).toHaveBeenCalled();
     });
     test('runs no {typing} event correctly', () => {
-        const itemList = [makeLiElement(), makeLiElement(), makeLiElement()];
-        const mutableRefObjectList = makeMutableRefObjectList(itemList);
+        const focusedFn = jest.fn();
         const handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
-            () => {}, // setFocused
+            focusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
             makeMutableRefObjectBtn()
@@ -443,16 +319,14 @@ describe('makeMenuItemKeydownHandler function', () => {
         handler(evt);
         expect(evt.stopPropagation).not.toHaveBeenCalled();
         expect(evt.preventDefault).not.toHaveBeenCalled();
-        itemList.forEach(($item) => expect($item.focus).not.toHaveBeenCalled());
+        expect(focusedFn).not.toHaveBeenCalled();
     });
     test('runs {typing} event correctly', async () => {
-        const itemList = [makeLiElement(), makeLiElement(), makeLiElement()];
-        const mutableRefObjectList = makeMutableRefObjectList(itemList);
+        const focusedFn = jest.fn();
         let handler = makeMenuItemKeydownHandler(
             makeitemList(),
             0,
-            mutableRefObjectList,
-            () => {}, // setFocused
+            focusedFn, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
             makeMutableRefObjectBtn()
@@ -461,23 +335,22 @@ describe('makeMenuItemKeydownHandler function', () => {
         handler(evt);
         expect(evt.stopPropagation).toHaveBeenCalled();
         expect(evt.preventDefault).toHaveBeenCalled();
-        expect(itemList[0].focus).toHaveBeenCalled();
+        expect(focusedFn).toHaveBeenCalledWith(0);
         await new Promise((r) => setTimeout(r, 505));
         evt = makeEvent('w');
         handler(evt);
         expect(evt.stopPropagation).toHaveBeenCalled();
         expect(evt.preventDefault).toHaveBeenCalled();
-        expect(itemList[1].focus).toHaveBeenCalled();
+        expect(focusedFn).toHaveBeenCalledWith(1);
         await new Promise((r) => setTimeout(r, 505));
         evt = makeEvent('y');
         handler(evt);
         expect(evt.stopPropagation).toHaveBeenCalled();
         expect(evt.preventDefault).toHaveBeenCalled();
-        expect(itemList[2].focus).toHaveBeenCalled();
+        expect(focusedFn).toHaveBeenCalledWith(2);
         handler = makeMenuItemKeydownHandler(
             makeitemList(),
             2,
-            mutableRefObjectList,
             () => {}, // setFocused
             () => {}, // callback
             () => {}, // setExpanded
@@ -486,6 +359,6 @@ describe('makeMenuItemKeydownHandler function', () => {
         handler(evt);
         expect(evt.stopPropagation).toHaveBeenCalled();
         expect(evt.preventDefault).toHaveBeenCalled();
-        expect(itemList[0].focus).toHaveBeenCalled();
+        expect(focusedFn).toHaveBeenCalledWith(0);
     });
 });

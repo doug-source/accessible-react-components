@@ -21,7 +21,6 @@ type MenuItemList = Array<
 export const makeMenuItemKeydownHandler = (
     items: MenuItemList,
     i: number,
-    listRef: MutableRefObject<(HTMLLIElement | null)[]>,
     setFocused: (val: number) => void,
     callback: MenuItemList[number][2],
     setExpanded: (val: boolean) => void,
@@ -35,7 +34,6 @@ export const makeMenuItemKeydownHandler = (
                     items,
                     evt.key === 'ArrowDown' ? i + 1 : i - 1
                 );
-                listRef.current[newFocused]?.focus();
                 setFocused(newFocused);
                 return true;
             },
@@ -64,7 +62,6 @@ export const makeMenuItemKeydownHandler = (
             /Home|PageUp/,
             () => {
                 const newFocused = 0;
-                listRef.current[newFocused]?.focus();
                 setFocused(newFocused);
                 return true;
             },
@@ -73,7 +70,6 @@ export const makeMenuItemKeydownHandler = (
             /End|PageDown/,
             () => {
                 const newFocused = items.length - 1;
-                listRef.current[newFocused]?.focus();
                 setFocused(newFocused);
                 return true;
             },
@@ -87,7 +83,7 @@ export const makeMenuItemKeydownHandler = (
                     i + 1 === items.length ? 0 : i + 1
                 );
                 if (searchIndex > -1) {
-                    listRef.current[searchIndex]?.focus();
+                    setFocused(searchIndex);
                 }
                 return true;
             },

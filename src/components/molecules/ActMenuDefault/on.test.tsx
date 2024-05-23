@@ -137,6 +137,7 @@ describe('<ActMenuDefault /> component', () => {
         expect($first).toHaveFocus();
     });
     test('renders triggering mouseover event correctly', async () => {
+        const setFocused = jest.fn();
         render(
             buildComponent({
                 items: [
@@ -144,6 +145,7 @@ describe('<ActMenuDefault /> component', () => {
                     ['keyB', 'contentB', () => {}],
                 ],
                 expanded: true,
+                setFocused,
             })
         );
         const user = userEvent.setup();
@@ -152,13 +154,9 @@ describe('<ActMenuDefault /> component', () => {
         expect($first).not.toHaveFocus();
         expect($second).not.toHaveFocus();
         await user.hover($second);
-        expect($first).not.toHaveFocus();
-        expect($second).toHaveFocus();
+        expect(setFocused).toHaveBeenCalledWith(1);
         await user.tab();
-        expect($first).not.toHaveFocus();
-        expect($second).not.toHaveFocus();
         await user.hover($first);
-        expect($first).toHaveFocus();
-        expect($second).not.toHaveFocus();
+        expect(setFocused).toHaveBeenCalledWith(0);
     });
 });

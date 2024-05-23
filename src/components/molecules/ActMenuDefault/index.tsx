@@ -65,7 +65,6 @@ export const ActMenuDefault = ({
                     onKeyDown={makeMenuItemKeydownHandler(
                         items,
                         i,
-                        listRef,
                         setFocused,
                         callback,
                         setExpanded,
