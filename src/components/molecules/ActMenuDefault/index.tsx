@@ -5,10 +5,10 @@ import {
     MouseEvent,
     MutableRefObject,
 } from 'react';
+import { useRowFocused } from '../../../lib/hooks/useRowFocused';
 import { MenuBox } from '../../atoms/MenuBox';
 import { MenuItem } from '../../atoms/MenuItem';
 import { makeMenuItemKeydownHandler } from './lib/handlers/makeMenuItemKeydown';
-import { useRowFocused } from './lib/hooks/useRowFocused';
 
 type ActMenuDefaultProps = ComponentPropsWithoutRef<'ul'> & {
     show: boolean;

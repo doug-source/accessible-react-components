@@ -2,18 +2,18 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { MutableRefObject, useRef } from 'react';
 import { useRowFocused } from './useRowFocused';
 
-const makeLiElement = (
-    ref: MutableRefObject<(HTMLLIElement | null)[]>,
+const makeElement = (
+    ref: MutableRefObject<(HTMLElement | null)[]>,
     id = Date.now().toString()
 ) => {
     return {
         id,
         focus: jest.fn(),
-        replaceWith(el: HTMLLIElement) {
+        replaceWith(el: HTMLElement) {
             const index = ref.current.findIndex((item) => item === this);
             ref.current[index] = el;
         },
-    } as unknown as HTMLLIElement;
+    } as unknown as HTMLElement;
 };
 
 const createMutableRefObjectList = <T>() => {
@@ -21,17 +21,17 @@ const createMutableRefObjectList = <T>() => {
 };
 
 const runUseRowFocusedHook = (
-    menuItemListRef: MutableRefObject<(HTMLLIElement | null)[]>
+    itemListRef: MutableRefObject<(HTMLElement | null)[]>
 ) => {
     const initialProps = {
-        menuItemListRef,
+        itemListRef,
         expanded: false,
         focused: -1,
         allow: false,
     };
     return renderHook(
-        ({ menuItemListRef, expanded, focused, allow }) => {
-            useRowFocused(menuItemListRef, expanded, focused, allow);
+        ({ itemListRef, expanded, focused, allow }) => {
+            useRowFocused(itemListRef, expanded, focused, allow);
         },
         { initialProps }
     );
@@ -39,23 +39,19 @@ const runUseRowFocusedHook = (
 
 describe('useRowFocused hook', () => {
     test('runs correctly', async () => {
-        const ref = createMutableRefObjectList<HTMLLIElement | null>();
+        const ref = createMutableRefObjectList<HTMLElement | null>();
         const { rerender } = runUseRowFocusedHook(ref);
         expect(ref.current).toHaveLength(0);
-        ref.current = [
-            makeLiElement(ref),
-            makeLiElement(ref),
-            makeLiElement(ref),
-        ];
+        ref.current = [makeElement(ref), makeElement(ref), makeElement(ref)];
         rerender({
-            menuItemListRef: ref,
+            itemListRef: ref,
             expanded: true,
             focused: -1,
             allow: false,
         });
         ref.current.forEach((li) => expect(li?.focus).not.toHaveBeenCalled());
         rerender({
-            menuItemListRef: ref,
+            itemListRef: ref,
             expanded: true,
             focused: 0,
             allow: true,
@@ -65,9 +61,9 @@ describe('useRowFocused hook', () => {
             expect(ref.current[1]?.focus).not.toHaveBeenCalled();
             expect(ref.current[2]?.focus).not.toHaveBeenCalled();
         });
-        ref.current[0]?.replaceWith(makeLiElement(ref));
+        ref.current[0]?.replaceWith(makeElement(ref));
         rerender({
-            menuItemListRef: ref,
+            itemListRef: ref,
             expanded: true,
             focused: 1,
             allow: true,
@@ -77,9 +73,9 @@ describe('useRowFocused hook', () => {
             expect(ref.current[1]?.focus).toHaveBeenCalled();
             expect(ref.current[2]?.focus).not.toHaveBeenCalled();
         });
-        ref.current[1]?.replaceWith(makeLiElement(ref));
+        ref.current[1]?.replaceWith(makeElement(ref));
         rerender({
-            menuItemListRef: ref,
+            itemListRef: ref,
             expanded: true,
             focused: 2,
             allow: true,
