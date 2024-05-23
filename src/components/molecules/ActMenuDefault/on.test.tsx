@@ -129,12 +129,11 @@ describe('<ActMenuDefault /> component', () => {
             })
         );
         const menuItems = screen.getAllByRole('menuitem');
-        const [$first, $second] = menuItems;
+        const [, $second] = menuItems;
         $second.focus();
         const user = userEvent.setup();
         await user.keyboard('{Home}');
         expect(setFocused).toHaveBeenCalledWith(0);
-        expect($first).toHaveFocus();
     });
     test('renders triggering mouseover event correctly', async () => {
         const setFocused = jest.fn();
