@@ -11,7 +11,7 @@ type MenuBtnProps = Omit<
     'aria-controls': NonNullable<MenuArrowBtnProps['aria-controls']>;
     children: NonNullable<MenuArrowBtnProps['children']>;
     menuBtnRef: MutableRefObject<HTMLButtonElement | null>;
-    menuItemListRef: MutableRefObject<(HTMLLIElement | null)[]>;
+    menuItemListRef: MutableRefObject<(unknown | null)[]>;
     expanded: boolean;
     setExpanded: (value: boolean) => void;
     setFocused: (value: number) => void;
