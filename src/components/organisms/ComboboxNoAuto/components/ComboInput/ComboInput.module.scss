@@ -1,0 +1,14 @@
+.combo {
+    background-color: #fff;
+    border: 0.0625rem solid #686868;
+    outline: none;
+    padding: 0.0625rem 0.1875rem;
+    cursor: pointer;
+    min-height: 1.875rem;
+    font-family: Arial, Helvetica, sans-serif;
+
+    &:hover,
+    &.focused {
+        background-color: #def;
+    }
+}

@@ -1,0 +1,21 @@
+.comboMenu {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    bottom: auto;
+    top: calc(100% - 0.125rem);
+    left: 0.25rem;
+    right: auto;
+    list-style: none;
+    background-color: #fff;
+
+    overflow: auto;
+    overflow-x: hidden;
+    cursor: pointer;
+    border: 0.125rem solid currentcolor;
+
+    *:hover > & {
+        left: 0.125rem;
+        top: 100%;
+    }
+}

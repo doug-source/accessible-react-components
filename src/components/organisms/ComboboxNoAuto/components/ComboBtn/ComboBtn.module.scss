@@ -1,0 +1,31 @@
+.comboBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    border: 0.0625rem solid #808080;
+    border-left: none;
+    border-top-right-radius: 0.3125rem;
+    border-bottom-right-radius: 0.3125rem;
+
+    &:hover {
+        background-color: #def;
+    }
+
+    .arrowBtn.arrowBtn {
+        *:hover > & {
+            opacity: 1;
+        }
+
+        opacity: 0.75;
+        &.arrowDown {
+            border-color: #005a9c transparent transparent transparent;
+            transform: translate(0, 0.25rem);
+        }
+        &.arrowUp {
+            border-color: transparent transparent #005a9c transparent;
+            transform: translate(0, -0.25rem);
+        }
+    }
+}

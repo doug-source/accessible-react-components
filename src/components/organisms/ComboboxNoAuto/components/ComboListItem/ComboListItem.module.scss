@@ -1,0 +1,44 @@
+@mixin stripe-top {
+    &:before {
+        position: absolute;
+        width: 100%;
+        height: 0.125rem;
+        background-color: currentcolor;
+        left: 0;
+        top: 0;
+        content: '';
+    }
+}
+
+@mixin stripe-bottom {
+    &:after {
+        position: absolute;
+        width: 100%;
+        height: 0.125rem;
+        background-color: currentcolor;
+        left: 0;
+        bottom: -0.125rem;
+        content: '';
+    }
+}
+
+.item {
+    padding: 0.25rem;
+    position: relative;
+
+    &[aria-selected='true'] {
+        background-color: #def;
+
+        &:first-child {
+            @include stripe-bottom();
+        }
+        &:last-child {
+            @include stripe-top();
+        }
+    }
+
+    & ~ &:not(:last-child, :first-child)[aria-selected='true'] {
+        @include stripe-top();
+        @include stripe-bottom();
+    }
+}
