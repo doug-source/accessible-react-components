@@ -31,7 +31,6 @@ export const makeInputKeydownHandler = (
                         return true;
                     }
                 }
-                console.log('FOOOOOOOOOOOOOOO');
 
                 setSelected(
                     swapIndex(
