@@ -5,7 +5,7 @@ import { makeInputKeydownHandler } from './lib/handlers/makeInputKeydownHandler'
 
 type InputProps = ComponentPropsWithoutRef<'input'>;
 
-type ComboInputProps = Omit<InputProps, 'onChange'> & {
+type ComboInputProps = Omit<InputProps, 'onChange' | 'aria-autocomplete'> & {
     expanded: boolean;
     setExpanded: (value: boolean) => void;
     selected: number;
@@ -13,6 +13,7 @@ type ComboInputProps = Omit<InputProps, 'onChange'> & {
     items: string[];
     value: string;
     onChange: (value: string) => void;
+    'aria-autocomplete'?: 'none' | 'list';
 };
 
 export const ComboInput = ({
@@ -23,12 +24,13 @@ export const ComboInput = ({
     setSelected,
     items,
     onChange,
+    'aria-autocomplete': ariaAutoComplete = 'none',
     ...remain
 }: ComboInputProps) => (
     <input
         {...remain}
         type="text"
-        aria-autocomplete="none"
+        aria-autocomplete={ariaAutoComplete}
         aria-expanded={expanded}
         tabIndex={0}
         className={classNames(

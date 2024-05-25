@@ -48,6 +48,7 @@ export const ComboboxAutocomplete = ({
                     expanded={expanded}
                     setExpanded={setExpanded}
                     aria-controls={listBoxId}
+                    aria-autocomplete={filter ? 'list' : 'none'}
                     items={listFiltered}
                     selected={selected}
                     setSelected={setSelected}
