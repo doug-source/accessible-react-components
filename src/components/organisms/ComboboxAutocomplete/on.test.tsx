@@ -9,8 +9,18 @@ type ElementProps = ComponentPropsWithoutRef<typeof ComboboxAutocomplete>;
 type keys = 'items' | 'label' | 'onChange';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
-const buildComponent = ({ items = [], label, onChange }: Props = {}) => (
-    <ComboboxAutocomplete items={items} label={label} onChange={onChange} />
+const buildComponent = ({
+    items = [],
+    label,
+    onChange,
+    ...remain
+}: Props = {}) => (
+    <ComboboxAutocomplete
+        {...remain}
+        items={items}
+        label={label}
+        onChange={onChange}
+    />
 );
 
 describe('<ComboboxAutocomplete /> component', () => {
@@ -44,5 +54,22 @@ describe('<ComboboxAutocomplete /> component', () => {
         await user.click(options[0]);
         expect(onChange).toHaveBeenCalledWith('one');
         expect($input).toHaveValue('one');
+    });
+    test('renders with filtered list correctly', async () => {
+        const { rerender } = render(
+            buildComponent({ items: ['one', 'two', 'three'], filter: true })
+        );
+        const $input = screen.getByRole('textbox');
+        let options = screen.getAllByRole('option');
+        expect(options).toHaveLength(3);
+        const user = userEvent.setup();
+        await user.click($input);
+        await user.type($input, 'o');
+        rerender(
+            buildComponent({ items: ['one', 'two', 'three'], filter: true })
+        );
+        options = screen.getAllByRole('option');
+        expect(options).toHaveLength(1);
+        expect(options[0].textContent).toBe('one');
     });
 });

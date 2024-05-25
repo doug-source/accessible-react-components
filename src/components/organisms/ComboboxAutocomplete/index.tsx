@@ -7,11 +7,13 @@ import { ComboBtn } from './components/ComboBtn';
 import { ComboInput } from './components/ComboInput';
 import { ComboList } from './components/ComboList';
 import { ComboMenu } from './components/ComboMenu';
+import { filterByStart } from './lib';
 
 type ComboboxAutocompleteProps = ComponentPropsWithoutRef<'div'> & {
     items: string[];
     label?: string;
     onChange?: ComponentPropsWithoutRef<typeof ComboInput>['onChange'];
+    filter?: boolean;
 };
 
 export const ComboboxAutocomplete = ({
@@ -19,6 +21,7 @@ export const ComboboxAutocomplete = ({
     items,
     label,
     onChange,
+    filter = false,
     ...remain
 }: ComboboxAutocompleteProps) => {
     const [expanded, setExpanded] = useState(false);
@@ -27,6 +30,7 @@ export const ComboboxAutocomplete = ({
     const [selected, setSelected] = useState(-1);
     const [, itemsRef] = useMenuItemListRefs<unknown, HTMLLIElement>(items);
     const [value, setValue] = useState('');
+    const listFiltered = filter ? filterByStart(value, items) : items;
     return (
         <>
             {label && (
@@ -44,7 +48,7 @@ export const ComboboxAutocomplete = ({
                     expanded={expanded}
                     setExpanded={setExpanded}
                     aria-controls={listBoxId}
-                    items={items}
+                    items={listFiltered}
                     selected={selected}
                     setSelected={setSelected}
                     value={value}
@@ -57,7 +61,7 @@ export const ComboboxAutocomplete = ({
                 <ComboBtn expanded={expanded} aria-controls={listBoxId} />
                 <ComboMenu expanded={expanded} id={listBoxId}>
                     <ComboList
-                        items={items}
+                        items={listFiltered}
                         itemsRef={itemsRef}
                         selected={selected}
                         setSelected={setSelected}
