@@ -7,9 +7,10 @@ const makeParameters = () => {
     return [false, () => {}, -1, () => {}, () => {}, items] as const;
 };
 
-const makeEvent = (key: string) => {
+const makeEvent = (key: string, altKey = false) => {
     return {
         key,
+        altKey,
         stopPropagation: jest.fn(),
         preventDefault: jest.fn(),
     } as unknown as KeyboardEvent<HTMLInputElement>;
@@ -133,6 +134,22 @@ describe('makeInputKeydownHandler function', () => {
         handle(makeEvent('ArrowDown'));
         expect(expandedFn).not.toHaveBeenCalled();
         expect(selectedFn).toHaveBeenCalledWith(2);
+    });
+    test('runs with ArrowDown + altKey pressed correctly', () => {
+        const expandedFn = jest.fn();
+        const selectedFn = jest.fn();
+        const items = ['one', 'two', 'three'];
+        const handle = makeInputKeydownHandler(
+            false,
+            expandedFn,
+            1,
+            selectedFn,
+            () => {},
+            items
+        );
+        handle(makeEvent('ArrowDown', true));
+        expect(expandedFn).toHaveBeenCalledWith(true);
+        expect(selectedFn).not.toHaveBeenCalled();
     });
     test('runs with Escape correctly', () => {
         const expandedFn = jest.fn();

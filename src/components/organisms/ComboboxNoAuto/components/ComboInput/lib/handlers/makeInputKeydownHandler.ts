@@ -27,7 +27,11 @@ export const makeInputKeydownHandler = (
             (evt) => {
                 if (!expanded) {
                     setExpanded(true);
+                    if (evt.key === 'ArrowDown' && evt.altKey) {
+                        return true;
+                    }
                 }
+                console.log('FOOOOOOOOOOOOOOO');
 
                 setSelected(
                     swapIndex(
