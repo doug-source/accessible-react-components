@@ -2,18 +2,18 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ComponentPropsWithoutRef } from 'react';
-import styles from './ComboboxNoAuto.module.scss';
-import { ComboboxNoAuto } from './index';
+import styles from './ComboboxAutocomplete.module.scss';
+import { ComboboxAutocomplete } from './index';
 
-type ElementProps = ComponentPropsWithoutRef<typeof ComboboxNoAuto>;
+type ElementProps = ComponentPropsWithoutRef<typeof ComboboxAutocomplete>;
 type keys = 'items' | 'label' | 'onChange';
 type Props = Omit<ElementProps, keys> & Partial<Pick<ElementProps, keys>>;
 
 const buildComponent = ({ items = [], label, onChange }: Props = {}) => (
-    <ComboboxNoAuto items={items} label={label} onChange={onChange} />
+    <ComboboxAutocomplete items={items} label={label} onChange={onChange} />
 );
 
-describe('<ComboboxNoAuto /> component', () => {
+describe('<ComboboxAutocomplete /> component', () => {
     test('renders correctly', () => {
         render(buildComponent({ label: 'TheLabel:' }));
         const $label = screen.getByText('TheLabel:');

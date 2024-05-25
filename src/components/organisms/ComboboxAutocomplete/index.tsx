@@ -2,25 +2,25 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useId, useState } from 'react';
 import { makeBooleanHandle } from '../../../lib';
 import { useMenuItemListRefs } from '../../../lib/hooks/useMenuItemListRefs';
-import styles from './ComboboxNoAuto.module.scss';
+import styles from './ComboboxAutocomplete.module.scss';
 import { ComboBtn } from './components/ComboBtn';
 import { ComboInput } from './components/ComboInput';
 import { ComboList } from './components/ComboList';
 import { ComboMenu } from './components/ComboMenu';
 
-type ComboboxNoAutoProps = ComponentPropsWithoutRef<'div'> & {
+type ComboboxAutocompleteProps = ComponentPropsWithoutRef<'div'> & {
     items: string[];
     label?: string;
     onChange?: ComponentPropsWithoutRef<typeof ComboInput>['onChange'];
 };
 
-export const ComboboxNoAuto = ({
+export const ComboboxAutocomplete = ({
     className,
     items,
     label,
     onChange,
     ...remain
-}: ComboboxNoAutoProps) => {
+}: ComboboxAutocompleteProps) => {
     const [expanded, setExpanded] = useState(false);
     const inputId = useId();
     const listBoxId = useId();
