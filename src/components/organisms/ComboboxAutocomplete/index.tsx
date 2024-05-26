@@ -7,13 +7,15 @@ import { ComboBtn } from './components/ComboBtn';
 import { ComboInput } from './components/ComboInput';
 import { ComboList } from './components/ComboList';
 import { ComboMenu } from './components/ComboMenu';
-import { filterByStart } from './lib';
+import { defineItems } from './lib';
+import { useInputFiltering } from './lib/hooks/useInputFiltering';
+import { ComboboxType } from './types';
 
 type ComboboxAutocompleteProps = ComponentPropsWithoutRef<'div'> & {
     items: string[];
     label?: string;
     onChange?: ComponentPropsWithoutRef<typeof ComboInput>['onChange'];
-    filter?: boolean;
+    type?: ComboboxType;
 };
 
 export const ComboboxAutocomplete = ({
@@ -21,16 +23,23 @@ export const ComboboxAutocomplete = ({
     items,
     label,
     onChange,
-    filter = false,
+    type = 'none',
     ...remain
 }: ComboboxAutocompleteProps) => {
     const [expanded, setExpanded] = useState(false);
     const inputId = useId();
     const listBoxId = useId();
+    const [value, setValue] = useState('');
     const [selected, setSelected] = useState(-1);
     const [, itemsRef] = useMenuItemListRefs<unknown, HTMLLIElement>(items);
-    const [value, setValue] = useState('');
-    const listFiltered = filter ? filterByStart(value, items) : items;
+    const listFiltered = defineItems(type, items, value);
+    const inputRef = useInputFiltering(
+        value,
+        listFiltered,
+        selected,
+        type === 'both'
+    );
+
     return (
         <>
             {label && (
@@ -44,11 +53,12 @@ export const ComboboxAutocomplete = ({
                 onClick={makeBooleanHandle(expanded, setExpanded)}
             >
                 <ComboInput
+                    ref={inputRef}
                     id={inputId}
                     expanded={expanded}
                     setExpanded={setExpanded}
                     aria-controls={listBoxId}
-                    aria-autocomplete={filter ? 'list' : 'none'}
+                    aria-autocomplete={type}
                     items={listFiltered}
                     selected={selected}
                     setSelected={setSelected}
@@ -60,7 +70,11 @@ export const ComboboxAutocomplete = ({
                     aria-activedescendant={itemsRef.current[selected]?.id || ''}
                 />
                 <ComboBtn expanded={expanded} aria-controls={listBoxId} />
-                <ComboMenu expanded={expanded} id={listBoxId}>
+                <ComboMenu
+                    expanded={expanded}
+                    id={listBoxId}
+                    show={listFiltered.length > 0}
+                >
                     <ComboList
                         items={listFiltered}
                         itemsRef={itemsRef}

@@ -57,7 +57,7 @@ describe('<ComboboxAutocomplete /> component', () => {
     });
     test('renders with filtered list correctly', async () => {
         const { rerender } = render(
-            buildComponent({ items: ['one', 'two', 'three'], filter: true })
+            buildComponent({ items: ['one', 'two', 'three'], type: 'list' })
         );
         const $input = screen.getByRole('textbox');
         let options = screen.getAllByRole('option');
@@ -66,7 +66,7 @@ describe('<ComboboxAutocomplete /> component', () => {
         await user.click($input);
         await user.type($input, 'o');
         rerender(
-            buildComponent({ items: ['one', 'two', 'three'], filter: true })
+            buildComponent({ items: ['one', 'two', 'three'], type: 'list' })
         );
         options = screen.getAllByRole('option');
         expect(options).toHaveLength(1);
