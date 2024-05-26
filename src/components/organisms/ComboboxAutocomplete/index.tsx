@@ -70,11 +70,7 @@ export const ComboboxAutocomplete = ({
                     aria-activedescendant={itemsRef.current[selected]?.id || ''}
                 />
                 <ComboBtn expanded={expanded} aria-controls={listBoxId} />
-                <ComboMenu
-                    expanded={expanded}
-                    id={listBoxId}
-                    show={listFiltered.length > 0}
-                >
+                <ComboMenu expanded={expanded} id={listBoxId}>
                     <ComboList
                         items={listFiltered}
                         itemsRef={itemsRef}

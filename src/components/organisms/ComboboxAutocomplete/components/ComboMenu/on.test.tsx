@@ -6,7 +6,7 @@ import { ComboMenu } from './index';
 describe('<ComboMenu /> component', () => {
     test('renders correctly', () => {
         const { rerender } = render(
-            <ComboMenu expanded={true} show>
+            <ComboMenu expanded={true}>
                 <li>Item</li>
             </ComboMenu>
         );
@@ -15,17 +15,10 @@ describe('<ComboMenu /> component', () => {
         expect($el).toHaveClass(styles.comboMenu);
         expect($el).not.toHaveClass('hidden');
         rerender(
-            <ComboMenu expanded={false} show>
+            <ComboMenu expanded={false}>
                 <li>Item</li>
             </ComboMenu>
         );
         expect($el).toHaveClass('hidden');
-    });
-    test('renders with show equal false correctly', () => {
-        render(
-            <ComboMenu expanded={true} show={false}>
-                <li>Item</li>
-            </ComboMenu>
-        );
     });
 });

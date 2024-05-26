@@ -4,14 +4,12 @@ import styles from './ComboMenu.module.scss';
 
 type ComboMenuProps = ComponentPropsWithoutRef<'ul'> & {
     expanded: boolean;
-    show: boolean;
 };
 
 const ComboMenu = ({
     className,
     expanded,
     children,
-    show,
     ...remain
 }: ComboMenuProps) => {
     return (
@@ -20,7 +18,7 @@ const ComboMenu = ({
             className={classNames(
                 className,
                 styles.comboMenu,
-                (!expanded || !show) && 'hidden'
+                !expanded && 'hidden'
             )}
             role="listbox"
             aria-label="Previous Searches"
