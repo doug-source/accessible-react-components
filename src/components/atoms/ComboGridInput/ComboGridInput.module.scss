@@ -1,0 +1,14 @@
+.comboInput {
+    border: 0.0625rem solid #aaa;
+    border-radius: 0.125rem;
+    line-height: 1.5rem;
+
+    &:hover {
+        border-color: #036;
+    }
+    &:focus {
+        outline-color: currentColor;
+        outline-offset: 0.125rem;
+        outline: 0.125rem solid;
+    }
+}
