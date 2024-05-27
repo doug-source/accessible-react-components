@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, useId, useState } from 'react';
 import { makeBooleanHandle } from '../../../lib';
 import { useMenuItemListRefs } from '../../../lib/hooks/useMenuItemListRefs';
+import { Label } from '../../atoms/Label';
 import styles from './ComboboxAutocomplete.module.scss';
 import { ComboBtn } from './components/ComboBtn';
 import { ComboInput } from './components/ComboInput';
@@ -42,11 +43,9 @@ export const ComboboxAutocomplete = ({
 
     return (
         <>
-            {label && (
-                <label className={styles.boxLabel} htmlFor={inputId}>
-                    {label}
-                </label>
-            )}
+            <Label className={styles.boxLabel} htmlFor={inputId}>
+                {label}
+            </Label>
             <div
                 {...remain}
                 className={classNames(className, styles.box)}
