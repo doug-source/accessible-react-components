@@ -32,8 +32,12 @@ export const isReducedMotion = (windowObject = window) => {
     return Boolean(output.matches);
 };
 
-export const filterByStart = (haystack: string[], needle: string) => {
+export const filterByStart = <T>(
+    haystack: T[],
+    pointer: (item: T) => string,
+    needle: string
+) => {
     return haystack.filter((item) =>
-        item.toLocaleLowerCase().startsWith(needle.toLocaleLowerCase())
+        pointer(item).toLocaleLowerCase().startsWith(needle.toLocaleLowerCase())
     );
 };

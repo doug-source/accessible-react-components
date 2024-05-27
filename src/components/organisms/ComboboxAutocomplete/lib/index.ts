@@ -7,7 +7,7 @@ export const defineItems = (
     needle: string
 ) => {
     if (type === 'list' || type === 'both') {
-        return filterByStart(haystack, needle);
+        return filterByStart(haystack, (item) => item, needle);
     }
     return haystack;
 };

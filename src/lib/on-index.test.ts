@@ -127,7 +127,7 @@ describe('isReducedMotion function', () => {
 
 describe('filterByStart function', () => {
     test('runs with output correctly', () => {
-        const outputList = filterByStart(['one', 'two'], 'o');
+        const outputList = filterByStart(['one', 'two'], (item) => item, 'o');
         expect(outputList).toMatchObject(['one']);
     });
 });
