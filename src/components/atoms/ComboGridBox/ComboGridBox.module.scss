@@ -1,0 +1,21 @@
+.grid {
+    display: inline-flex;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 100%;
+    bottom: auto;
+    left: 0;
+    right: auto;
+
+    min-width: 230px;
+    background: white;
+    border: 0.0625rem solid #ccc;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    font-family: Arial, Helvetica, sans-serif;
+
+    &:empty {
+        display: none;
+    }
+}
