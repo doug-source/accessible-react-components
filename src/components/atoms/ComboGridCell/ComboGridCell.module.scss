@@ -1,0 +1,18 @@
+.cell {
+    cursor: default;
+    margin: 0;
+    flex: 1 0 50%;
+    display: inline-flex;
+    align-items: center;
+
+    &:last-child {
+        justify-content: flex-end;
+        span {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 200;
+            color: #333;
+            text-align: right;
+        }
+    }
+}
