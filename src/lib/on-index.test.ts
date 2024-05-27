@@ -1,4 +1,5 @@
 import {
+    filterByStart,
     firstUpperCase,
     isBooleanishFalsy,
     isReducedMotion,
@@ -121,5 +122,12 @@ describe('isReducedMotion function', () => {
         expect(output).toBe(true);
         output = isReducedMotion(makeWindowObject(true));
         expect(output).toBe(true);
+    });
+});
+
+describe('filterByStart function', () => {
+    test('runs with output correctly', () => {
+        const outputList = filterByStart(['one', 'two'], 'o');
+        expect(outputList).toMatchObject(['one']);
     });
 });

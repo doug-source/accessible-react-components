@@ -1,10 +1,5 @@
+import { filterByStart } from '../../../../lib';
 import { ComboboxType } from '../types';
-
-export const filterByStart = (haystack: string[], needle: string) => {
-    return haystack.filter((item) =>
-        item.toLocaleLowerCase().startsWith(needle.toLocaleLowerCase())
-    );
-};
 
 export const defineItems = (
     type: ComboboxType,
