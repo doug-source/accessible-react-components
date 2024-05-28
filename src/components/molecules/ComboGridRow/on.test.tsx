@@ -44,5 +44,17 @@ describe('<ComboGridRow /> component', () => {
         const $row = screen.getByRole('row');
         expect($row).toBeInTheDocument();
         expect($row).toHaveClass(styles.row);
+        expect($row.firstElementChild).not.toHaveAttribute('aria-selected');
+    });
+    test('renders correctly', () => {
+        const { rerender } = render(buildComponent({ focused: 0 }));
+        const $row = screen.getByRole('row');
+        const [$first, $second] = Array.from($row.children);
+        expect($first).toHaveAttribute('aria-selected', 'true');
+        expect($first.firstChild).toHaveClass(styles.marked);
+        expect($second.firstChild).not.toHaveClass(styles.marked);
+        rerender(buildComponent({ focused: 0, cellBoolean: true }));
+        expect($first.firstChild).not.toHaveClass(styles.marked);
+        expect($second.firstChild).toHaveClass(styles.marked);
     });
 });
