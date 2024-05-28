@@ -49,7 +49,7 @@ const ComboGridRowInner = (
                 <span
                     className={classNames(
                         styles.text,
-                        focused === index && !cellBoolean && styles.marked
+                        index === focused && !cellBoolean && styles.marked
                     )}
                 >
                     {text}
@@ -63,7 +63,7 @@ const ComboGridRowInner = (
                 <span
                     className={classNames(
                         styles.text,
-                        focused === index && cellBoolean && styles.marked
+                        index === focused && cellBoolean && styles.marked
                     )}
                 >
                     {desc}
