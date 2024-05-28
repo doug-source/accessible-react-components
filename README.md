@@ -35,13 +35,14 @@ Components list:
     -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/accordion/](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)
 -   Combobox
-    -   status: WIP
+    -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/combobox/](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)
     -   code bases:
         -   [Select-only Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/)
         -   [Editable Combobox without Autocomplete](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-none/)
         -   [Editable Combobox with List Autocomplete](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/)
         -   [Editable Combobox With Both List and Inline Autocomplete](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-both/)
+        -   [Editable Combobox with Grid Popup](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/grid-combo/)
 -   Button
     -   status: done
     -   source: [https://www.w3.org/WAI/ARIA/apg/patterns/button/](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
