@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, renderHook, screen } from '@testing-library/react';
 import { ComponentPropsWithoutRef, useRef } from 'react';
+import styles from './ComboGridList.module.scss';
 import { ComboGridList } from './index';
 
 const runHook = (list: (HTMLDivElement | null)[] = []) => {
@@ -29,8 +30,12 @@ const buildComponent = ({
 
 describe('<ComboGridList /> component', () => {
     test('renders correctly', () => {
-        render(buildComponent());
-        const rowList = screen.getAllByRole('row');
-        rowList.forEach((row) => expect(row).toBeInTheDocument());
+        const { rerender } = render(buildComponent());
+        let rowList = screen.getAllByRole('row');
+        expect(rowList[0]).toBeInTheDocument();
+        expect(rowList[0]).not.toHaveClass(styles.focused);
+        rerender(buildComponent({ focused: 0 }));
+        rowList = screen.getAllByRole('row');
+        expect(rowList[0]).toHaveClass(styles.focused);
     });
 });
