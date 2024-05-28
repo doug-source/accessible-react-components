@@ -1,0 +1,23 @@
+.row {
+    padding: 0.125rem;
+    cursor: default;
+    margin: 0;
+    display: inline-flex;
+    justify-content: space-evenly;
+    flex: 1 1 100%;
+
+    &:hover {
+        background-color: #8bbde1;
+    }
+}
+
+.marked {
+    outline-style: dotted;
+    outline-color: #008000;
+}
+
+.text {
+    $padding: 0.5rem;
+    padding-left: $padding;
+    padding-right: $padding;
+}
